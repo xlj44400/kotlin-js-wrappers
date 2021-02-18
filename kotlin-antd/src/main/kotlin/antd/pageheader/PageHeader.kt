@@ -1,14 +1,12 @@
 @file:JsModule("antd/lib/page-header")
+@file:JsNonModule
 
 package antd.pageheader
 
-import antd.MouseEvent
-import antd.breadcrumb.BreadcrumbProps
-import org.w3c.dom.HTMLDivElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import antd.breadcrumb.*
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object PageHeaderComponent : Component<PageHeaderProps, RState> {
@@ -16,7 +14,7 @@ external object PageHeaderComponent : Component<PageHeaderProps, RState> {
 }
 
 external interface PageHeaderProps : RProps {
-    var backIcon: ReactElement?
+    var backIcon: Any? /* String | ReactElement */
     var prefixCls: String?
     var title: Any /* String | ReactElement */
     var subTitle: Any? /* String | ReactElement */
@@ -27,4 +25,5 @@ external interface PageHeaderProps : RProps {
     var extra: Any? /* String | ReactElement */
     var onBack: ((e: MouseEvent<HTMLDivElement>) -> Unit)?
     var className: String?
+    var ghost: Boolean?
 }

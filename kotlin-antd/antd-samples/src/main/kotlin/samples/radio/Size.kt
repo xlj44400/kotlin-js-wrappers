@@ -1,15 +1,14 @@
 package samples.radio
 
-import antd.radio.radioButton
-import antd.radio.radioGroup
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.radio.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.size() {
-    div("radio-container") {
-        attrs.id = "radio-size"
+    styledDiv {
+        css { +RadioStyles.size }
         div {
             div {
                 radioGroup {

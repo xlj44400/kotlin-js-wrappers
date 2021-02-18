@@ -1,18 +1,19 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import kotlinext.js.js
-import kotlinx.html.classes
-import kotlinx.html.id
+import kotlinext.js.*
+import kotlinx.html.*
+import moment.Moment
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.dateRender() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-date-render"
+    styledDiv {
+        css { +DatePickerStyles.dateRender }
         div {
             datePicker {
-                attrs.dateRender = { current, _ ->
+                attrs.dateRender = { current: Moment ->
                     val style = js {}
 
                     if (current.date() == 1) {
@@ -31,7 +32,7 @@ fun RBuilder.dateRender() {
             }
             br {}
             rangePicker {
-                attrs.dateRender = { current, _ ->
+                attrs.dateRender = { current: Moment ->
                     val style = js {}
 
                     if (current.date() == 1) {

@@ -2,18 +2,18 @@ package samples.button
 
 import antd.button.button
 import antd.button.buttonGroup
-import antd.icon.icon
+import antd.icon.*
 import antd.radio.*
-import kotlinx.html.id
 import react.*
 import react.dom.*
+import styled.*
 
 interface ButtonSizeState : RState {
     var size: String
 }
 
 class ButtonSize : RComponent<RProps, ButtonSizeState>() {
-    private val handleSizeChange = fun (event: RadioChangeEvent) {
+    private val handleSizeChange = fun(event: RadioChangeEvent) {
         setState {
             size = event.target.value as String
         }
@@ -82,7 +82,9 @@ class ButtonSize : RComponent<RProps, ButtonSizeState>() {
                 attrs {
                     type = "primary"
                     shape = "circle"
-                    icon = "download"
+                    icon = buildElement {
+                        downloadOutlined {}
+                    }
                     size = state.size
                 }
             }
@@ -90,7 +92,9 @@ class ButtonSize : RComponent<RProps, ButtonSizeState>() {
                 attrs {
                     type = "primary"
                     shape = "round"
-                    icon = "download"
+                    icon = buildElement {
+                        downloadOutlined {}
+                    }
                     size = state.size
                 }
                 +"Download"
@@ -98,7 +102,9 @@ class ButtonSize : RComponent<RProps, ButtonSizeState>() {
             button {
                 attrs {
                     type = "primary"
-                    icon = "download"
+                    icon = buildElement {
+                        downloadOutlined {}
+                    }
                     size = state.size
                 }
                 +"Download"
@@ -108,17 +114,13 @@ class ButtonSize : RComponent<RProps, ButtonSizeState>() {
                 attrs.size = state.size
                 button {
                     attrs.type = "primary"
-                    icon {
-                        attrs.type = "left"
-                    }
+                    leftOutlined {}
                     +"Backward"
                 }
                 button {
                     attrs.type = "primary"
                     +"Forward"
-                    icon {
-                        attrs.type = "right"
-                    }
+                    rightOutlined {}
                 }
             }
         }
@@ -128,8 +130,8 @@ class ButtonSize : RComponent<RProps, ButtonSizeState>() {
 fun RBuilder.buttonSize() = child(ButtonSize::class) {}
 
 fun RBuilder.size() {
-    div("button-container") {
-        attrs { id = "button-size" }
+    styledDiv {
+        css { +ButtonStyles.size }
         buttonSize()
     }
 }

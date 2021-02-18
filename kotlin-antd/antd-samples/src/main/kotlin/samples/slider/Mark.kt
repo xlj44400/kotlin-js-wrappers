@@ -1,11 +1,10 @@
 package samples.slider
 
-import antd.slider.SliderMarks
-import antd.slider.slider
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.slider.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 class MarkDemo : RComponent<RProps, RState>() {
     private val sliderMarks = js {}
@@ -71,8 +70,8 @@ class MarkDemo : RComponent<RProps, RState>() {
 fun RBuilder.markDemo() = child(MarkDemo::class) {}
 
 fun RBuilder.mark() {
-    div("slider-container") {
-        attrs.id = "slider-mark"
+    styledDiv {
+        css { +SliderStyles.mark }
         markDemo()
     }
 }

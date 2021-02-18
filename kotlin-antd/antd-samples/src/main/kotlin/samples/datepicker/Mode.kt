@@ -1,17 +1,17 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import kotlinx.html.id
-import moment.Moment
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface ControlledDatePickerState : RState {
-    var mode: DatePickerMode
+    var mode: PanelMode
 }
 
 class ControlledDatePicker : RComponent<RProps, ControlledDatePickerState>() {
-    private val handleOpenChange = fun (open: Boolean) {
+    private val handleOpenChange = fun(open: Boolean) {
         if (open) {
             setState {
                 mode = "time"
@@ -19,7 +19,7 @@ class ControlledDatePicker : RComponent<RProps, ControlledDatePickerState>() {
         }
     }
 
-    private val handlePanelChange = fun (_: Moment?, newMode: DatePickerMode?) {
+    private val handlePanelChange = fun(_: Moment?, newMode: PanelMode?) {
         setState {
             mode = newMode!!
         }
@@ -45,23 +45,23 @@ fun RBuilder.controlledDatePicker() = child(ControlledDatePicker::class) {}
 
 interface ControlledRangePickerState : RState {
     var mode: Any
-    var value: RangePickerValue
+    var value: RangeValue<Moment>
 }
 
 class ControlledRangePicker : RComponent<RProps, ControlledRangePickerState>() {
-    private val handlePanelChange = fun (newValue: RangePickerValue?, newMode: Any?) {
+    private val handlePanelChange = fun(newValue: RangeValue<Moment>?, newMode: Any?) {
         val currentMode = newMode.unsafeCast<Array<String>>()
 
         setState {
             value = newValue!!
             mode = arrayOf(
-                    if (currentMode[0] == "date") "month" else currentMode[0],
-                    if (currentMode[1] == "date") "month" else currentMode[1]
+                if (currentMode[0] == "date") "month" else currentMode[0],
+                if (currentMode[1] == "date") "month" else currentMode[1]
             )
         }
     }
 
-    private val handleChange = fun (newValue: RangePickerValue?, _: Any?) {
+    private val handleChange = fun(newValue: RangeValue<Moment>?, _: Any?) {
         setState {
             value = newValue!!
         }
@@ -69,7 +69,7 @@ class ControlledRangePicker : RComponent<RProps, ControlledRangePickerState>() {
 
     override fun ControlledRangePickerState.init() {
         mode = arrayOf("month", "month")
-        value = emptyArray<RangePickerValue>().unsafeCast<RangePickerValue>()
+        value = emptyArray<RangeValue<Moment>>().unsafeCast<RangeValue<Moment>>()
     }
 
     override fun RBuilder.render() {
@@ -89,8 +89,8 @@ class ControlledRangePicker : RComponent<RProps, ControlledRangePickerState>() {
 fun RBuilder.controlledRangePicker() = child(ControlledRangePicker::class) {}
 
 fun RBuilder.mode() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-mode"
+    styledDiv {
+        css { +DatePickerStyles.mode }
         div {
             controlledDatePicker()
             br {}

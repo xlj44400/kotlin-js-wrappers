@@ -1,10 +1,10 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import kotlinx.html.id
-import moment.moment
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val dateFormat = "YYYY/MM/DD"
 private val monthFormat = "YYYY/MM"
@@ -12,8 +12,8 @@ private val monthFormat = "YYYY/MM"
 private val dateFormatList = arrayOf("DD/MM/YYYY", "DD/MM/YY")
 
 fun RBuilder.format() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-format"
+    styledDiv {
+        css { +DatePickerStyles.format }
         div {
             datePicker {
                 attrs {
@@ -39,8 +39,8 @@ fun RBuilder.format() {
             rangePicker {
                 attrs {
                     defaultValue = arrayOf(
-                            moment("2015/01/01", dateFormat),
-                            moment("2015/01/01", dateFormat)
+                        moment("2015/01/01", dateFormat),
+                        moment("2015/01/01", dateFormat)
                     )
                     format = dateFormat
                 }

@@ -1,22 +1,19 @@
 package samples.layout
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import antd.icon.icon
-import antd.layout.layout
-import antd.layout.header
-import antd.layout.content
+import antd.breadcrumb.*
+import antd.icon.*
+import antd.layout.*
 import antd.layout.footer
-import antd.layout.sider
+import antd.layout.header
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.topSide() {
-    div("layout-container") {
-        attrs.id = "layout-top-side"
+    styledDiv {
+        css { +LayoutStyles.topSide }
         layout {
             header {
                 attrs.className = "header"
@@ -72,9 +69,7 @@ fun RBuilder.topSide() {
                                     key = "sub1"
                                     title = buildElement {
                                         span {
-                                            icon {
-                                                attrs.type = "user"
-                                            }
+                                            userOutlined {}
                                             +"subnav 1"
                                         }
                                     }
@@ -101,9 +96,7 @@ fun RBuilder.topSide() {
                                     key = "sub2"
                                     title = buildElement {
                                         span {
-                                            icon {
-                                                attrs.type = "laptop"
-                                            }
+                                            laptopOutlined {}
                                             +"subnav 2"
                                         }
                                     }
@@ -130,9 +123,7 @@ fun RBuilder.topSide() {
                                     key = "sub3"
                                     title = buildElement {
                                         span {
-                                            icon {
-                                                attrs.type = "notification"
-                                            }
+                                            notificationOutlined {}
                                             +"subnav 3"
                                         }
                                     }
@@ -161,7 +152,7 @@ fun RBuilder.topSide() {
                             padding = "0 24px"
                             minHeight = 280
                         }
-                        + "Content"
+                        +"Content"
                     }
                 }
             }

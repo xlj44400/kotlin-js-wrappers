@@ -1,12 +1,9 @@
 package samples.select
 
-import antd.select.SelectComponent
-import antd.select.select
-import antd.select.option
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.select.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 private val children = (10..36).map { i ->
     buildElement {
@@ -22,8 +19,8 @@ private fun handleChange(value: Array<String>, option: Any) {
 }
 
 fun RBuilder.multiple() {
-    div("select-container") {
-        attrs.id = "select-multiple"
+    styledDiv {
+        css { +SelectStyles.multiple }
         select<Array<String>, SelectComponent<Array<String>>> {
             attrs {
                 mode = "multiple"

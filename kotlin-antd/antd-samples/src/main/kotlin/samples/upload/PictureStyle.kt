@@ -1,34 +1,33 @@
 package samples.upload
 
 import antd.button.button
-import antd.icon.icon
-import antd.upload.UploadFile
-import antd.upload.upload
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.icon.*
+import antd.upload.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val fileList = arrayOf<UploadFile>(
-        jsObject {
-            uid = "-1"
-            name = "xxx.png"
-            status = "done"
-            url = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            thumbUrl = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        },
-        jsObject {
-            uid = "-2"
-            name = "yyy.png"
-            status = "done"
-            url = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-            thumbUrl = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-        }
+    jsObject {
+        uid = "-1"
+        name = "xxx.png"
+        status = "done"
+        url = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        thumbUrl = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+    },
+    jsObject {
+        uid = "-2"
+        name = "yyy.png"
+        status = "done"
+        url = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+        thumbUrl = "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+    }
 )
 
 fun RBuilder.pictureStyle() {
-    div("upload-container") {
-        attrs.id = "upload-picture-style"
+    styledDiv {
+        css { +UploadStyles.pictureStyle }
         div {
             upload {
                 attrs {
@@ -37,9 +36,7 @@ fun RBuilder.pictureStyle() {
                     defaultFileList = fileList
                 }
                 button {
-                    icon {
-                        attrs.type = "upload"
-                    }
+                    uploadOutlined {}
                     +"Upload"
                 }
             }
@@ -53,9 +50,7 @@ fun RBuilder.pictureStyle() {
                     className = "upload-list-inline"
                 }
                 button {
-                    icon {
-                        attrs.type = "upload"
-                    }
+                    uploadOutlined {}
                     +"Upload"
                 }
             }

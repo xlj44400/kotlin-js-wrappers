@@ -1,31 +1,27 @@
 package samples.pageheader
 
-import antd.breadcrumb.Route
-import antd.pageheader.pageHeader
-import antd.typography.paragraph
-import kotlinext.js.jsObject
-import kotlinx.html.classes
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.a
-import react.dom.div
-import react.dom.img
-import react.dom.p
+import antd.breadcrumb.*
+import antd.pageheader.*
+import antd.typography.*
+import kotlinext.js.*
+import kotlinx.html.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val breadcrumbRoutes = arrayOf<Route>(
-        jsObject {
-            path = "index"
-            breadcrumbName = "First-level Menu"
-        },
-        jsObject {
-            path = "first"
-            breadcrumbName = "Second-level Menu"
-        },
-        jsObject {
-            path = "second"
-            breadcrumbName = "Third-level Menu"
-        }
+    jsObject {
+        path = "index"
+        breadcrumbName = "First-level Menu"
+    },
+    jsObject {
+        path = "first"
+        breadcrumbName = "Second-level Menu"
+    },
+    jsObject {
+        path = "second"
+        breadcrumbName = "Third-level Menu"
+    }
 )
 
 private val content = buildElement {
@@ -87,8 +83,8 @@ private val extraContent = buildElement {
 }
 
 fun RBuilder.content() {
-    div("page-header-container") {
-        attrs.id = "page-header-content"
+    styledDiv {
+        css { +PageHeaderStyles.content }
         pageHeader {
             attrs {
                 title = "Title"

@@ -1,12 +1,10 @@
 package samples.table
 
 import antd.table.*
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.a
-import react.dom.div
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 private interface FixedColumnsTableDataItem {
     var key: String
@@ -16,94 +14,94 @@ private interface FixedColumnsTableDataItem {
 }
 
 private val tableColumns = arrayOf<ColumnProps<FixedColumnsTableDataItem>>(
-        jsObject {
-            title = "Full Name"
-            width = 100
-            dataIndex = "name"
-            key = "name"
-            fixed = "left"
-        },
-        jsObject {
-            title = "Age"
-            width = 100
-            dataIndex = "age"
-            key = "age"
-            fixed = "left"
-        },
-        jsObject {
-            title = "Column 1"
-            dataIndex = "address"
-            key = "1"
-        },
-        jsObject {
-            title = "Column 2"
-            dataIndex = "address"
-            key = "2"
-        },
-        jsObject {
-            title = "Column 3"
-            dataIndex = "address"
-            key = "3"
-        },
-        jsObject {
-            title = "Column 4"
-            dataIndex = "address"
-            key = "4"
-        },
-        jsObject {
-            title = "Column 5"
-            dataIndex = "address"
-            key = "5"
-        },
-        jsObject {
-            title = "Column 6"
-            dataIndex = "address"
-            key = "6"
-        },
-        jsObject {
-            title = "Column 7"
-            dataIndex = "address"
-            key = "7"
-        },
-        jsObject {
-            title = "Column 8"
-            dataIndex = "address"
-            key = "8"
-        },
-        jsObject {
-            title = "Action"
-            key = "operation"
-            fixed = "right"
-            width = 100
-            render = { _, _, _ ->
-                buildElement {
-                   a {
-                       attrs.href = "javascript:;"
-                       +"action"
-                   }
-                }!!
+    jsObject {
+        title = "Full Name"
+        width = 100
+        dataIndex = "name"
+        key = "name"
+        fixed = "left"
+    },
+    jsObject {
+        title = "Age"
+        width = 100
+        dataIndex = "age"
+        key = "age"
+        fixed = "left"
+    },
+    jsObject {
+        title = "Column 1"
+        dataIndex = "address"
+        key = "1"
+    },
+    jsObject {
+        title = "Column 2"
+        dataIndex = "address"
+        key = "2"
+    },
+    jsObject {
+        title = "Column 3"
+        dataIndex = "address"
+        key = "3"
+    },
+    jsObject {
+        title = "Column 4"
+        dataIndex = "address"
+        key = "4"
+    },
+    jsObject {
+        title = "Column 5"
+        dataIndex = "address"
+        key = "5"
+    },
+    jsObject {
+        title = "Column 6"
+        dataIndex = "address"
+        key = "6"
+    },
+    jsObject {
+        title = "Column 7"
+        dataIndex = "address"
+        key = "7"
+    },
+    jsObject {
+        title = "Column 8"
+        dataIndex = "address"
+        key = "8"
+    },
+    jsObject {
+        title = "Action"
+        key = "operation"
+        fixed = "right"
+        width = 100
+        render = { _, _, _ ->
+            buildElement {
+                a {
+                    attrs.href = "javascript:;"
+                    +"action"
+                }
             }
         }
+    }
 )
 
 private val data = arrayOf<FixedColumnsTableDataItem>(
-        jsObject {
-            key = "1"
-            name = "John Brown"
-            age = 32
-            address = "New York Park"
-        },
-        jsObject {
-            key = "2"
-            name = "Jim Green"
-            age = 40
-            address = "London Park"
-        }
+    jsObject {
+        key = "1"
+        name = "John Brown"
+        age = 32
+        address = "New York Park"
+    },
+    jsObject {
+        key = "2"
+        name = "Jim Green"
+        age = 40
+        address = "London Park"
+    }
 )
 
 fun RBuilder.fixedColumns() {
-    div("table-container") {
-        attrs.id = "table-fixed-columns"
+    styledDiv {
+        css { +TableStyles.fixedColumns }
         table<FixedColumnsTableDataItem, TableComponent<FixedColumnsTableDataItem>> {
             attrs {
                 columns = tableColumns

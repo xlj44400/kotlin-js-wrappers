@@ -1,45 +1,45 @@
 package samples.select
 
+import antd.*
 import antd.select.*
-import antd.select.option
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
-import react.dom.*
+import styled.*
 
-private fun handleChange(value: String, option: Any) {
+private val handleChange = { value: String, _: Any ->
     console.log("selected $value")
 }
 
-private fun handleBlur() {
+private val handleBlur: FocusEventHandler<HTMLElement> = {
     console.log("blur")
 }
 
-private fun handleFocus(value: String) {
+private val handleFocus: FocusEventHandler<HTMLElement> = {
     console.log("focus")
 }
 
-private fun handleSearch(value: String) {
+private val handleSearch = { value: String ->
     console.log("search:", value)
 }
 
-private val filter: SelectFilterOption = { inputValue, option ->
+private val filter: FilterFunc<Any> = { inputValue, option ->
     option.asDynamic().props.children.unsafeCast<String>().toLowerCase().contains(inputValue.toLowerCase())
 }
 
 fun RBuilder.search() {
-    div("select-container") {
-        attrs.id = "select-search"
+    styledDiv {
+        css { +SelectStyles.search }
         select<String, SelectComponent<String>> {
             attrs {
                 showSearch = true
                 style = js { width = 200 }
                 placeholder = "Select a person"
                 optionFilterProp = "children"
-                onChange = ::handleChange
-                onFocus = ::handleBlur
-                onBlur = ::handleFocus
-                onSearch = ::handleSearch
+                onChange = handleChange
+                onFocus = handleBlur
+                onBlur = handleFocus
+                onSearch = handleSearch
                 filterOption = filter
             }
             option {

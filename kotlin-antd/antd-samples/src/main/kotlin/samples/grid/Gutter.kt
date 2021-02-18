@@ -1,15 +1,17 @@
 package samples.grid
 
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import kotlinx.html.id
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.gutter() {
-    div("grid-container") {
-        attrs.id = "grid-gutter"
-        div("gutter-example") {
+    styledDiv {
+        css { +GridStyles.gutter }
+        div {
+            attrs.classes = setOf("gutter-example")
             row {
                 attrs.gutter = 16
                 col {
@@ -17,28 +19,40 @@ fun RBuilder.gutter() {
                         className = "gutter-row"
                         span = 6
                     }
-                    div("gutter-box") { +"col-6" }
+                    div {
+                        attrs.classes = setOf("gutter-box")
+                        +"col-6"
+                    }
                 }
                 col {
                     attrs {
                         className = "gutter-row"
                         span = 6
                     }
-                    div("gutter-box") { +"col-6" }
+                    div {
+                        attrs.classes = setOf("gutter-box")
+                        +"col-6"
+                    }
                 }
                 col {
                     attrs {
                         className = "gutter-row"
                         span = 6
                     }
-                    div("gutter-box") { +"col-6" }
+                    div {
+                        attrs.classes = setOf("gutter-box")
+                        +"col-6"
+                    }
                 }
                 col {
                     attrs {
                         className = "gutter-row"
                         span = 6
                     }
-                    div("gutter-box") { +"col-6" }
+                    div {
+                        attrs.classes = setOf("gutter-box")
+                        +"col-6"
+                    }
                 }
             }
         }

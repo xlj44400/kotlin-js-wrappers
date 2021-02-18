@@ -1,22 +1,20 @@
 package samples.rate
 
-import antd.icon.icon
-import antd.rate.rate
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.icon.*
+import antd.rate.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.character() {
-    div("rate-container") {
-        attrs.id = "rate-character"
+    styledDiv {
+        css { +RateStyles.character }
         div {
             rate {
                 attrs {
                     character = buildElement {
-                        icon {
-                            attrs.type = "heart"
-                        }
+                        heartOutlined {}
                     }
                     allowHalf = true
                 }

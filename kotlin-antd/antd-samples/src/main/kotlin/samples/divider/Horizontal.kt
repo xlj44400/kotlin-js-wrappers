@@ -1,14 +1,13 @@
 package samples.divider
 
-import antd.divider.divider
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.divider.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.horizontal() {
-    div("divider-container") {
-        attrs.id = "divider-horizontal"
+    styledDiv {
+        css { +DividerStyles.horizontal }
         div {
             p {
                 +"""

@@ -1,13 +1,11 @@
 package samples.collapse
 
-import antd.collapse.collapse
-import antd.collapse.collapsePanel
-import antd.icon.icon
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.collapse.*
+import antd.icon.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val text = """
     A dog is a type of domesticated animal. 
@@ -24,18 +22,15 @@ private val customPanelStyle = js {
 }
 
 fun RBuilder.custom() {
-    div("collapse-container") {
-        attrs.id = "collapse-custom"
+    styledDiv {
+        css { +CollapseStyles.custom }
         collapse {
             attrs {
                 bordered = false
                 defaultActiveKey = arrayOf("1")
-                expandIcon = {panelProps ->
-                    icon {
-                        attrs {
-                            type = "caret-right"
-                            rotate = if (panelProps.isActive!!) 90 else 0
-                        }
+                expandIcon = { panelProps ->
+                    caretRightOutlined {
+                        attrs.rotate = if (panelProps.isActive!!) 90 else 0
                     }
                 }
             }

@@ -1,14 +1,13 @@
 package samples.breadcrumb
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import kotlinx.html.id
+import antd.breadcrumb.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.separator() {
-    div("breadcrumb-container") {
-        attrs.id = "breadcrumb-separator"
+    styledDiv {
+        css { +BreadcrumbStyles.separator }
         breadcrumb {
             attrs.separator = ">"
             breadcrumbItem { +"Home" }

@@ -1,14 +1,14 @@
 package samples.grid
 
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import kotlinx.html.id
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.sort() {
-    div("grid-container") {
-        attrs.id = "grid-sort"
+    styledDiv {
+        css { +GridStyles.sort }
         div {
             row {
                 col {

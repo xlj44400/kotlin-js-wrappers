@@ -1,13 +1,13 @@
 package samples.progress
 
 import antd.progress.progress
-import kotlinx.html.id
-import react.RBuilder
+import react.*
 import react.dom.div
+import styled.*
 
 fun RBuilder.circleMini() {
-    div("progress-container") {
-        attrs.id = "progress-circle-mini"
+    styledDiv {
+        css { +ProgressStyles.circleMini }
         div {
             progress {
                 attrs {

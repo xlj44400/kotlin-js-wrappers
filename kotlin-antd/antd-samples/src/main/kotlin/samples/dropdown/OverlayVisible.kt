@@ -1,29 +1,27 @@
 package samples.dropdown
 
-import antd.dropdown.dropdown
-import antd.icon.icon
-import antd.menu.ClickParam
-import antd.menu.menu
-import antd.menu.menuItem
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.dropdown.*
+import antd.icon.*
+import antd.menu.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface OverlayVisibleAppState : RState {
     var visible: Boolean
 }
 
 class OverlayVisibleApp : RComponent<RProps, OverlayVisibleAppState>() {
-    private fun handleMenuClick(param: ClickParam) {
-        if (param.key == "3") {
+    private val handleMenuClick: MenuClickEventHandler = { info ->
+        if (info.key == "3") {
             setState {
                 visible = false
             }
         }
     }
 
-    private val handleVisibleChange = fun (visibleFlag: Boolean?) {
+    private val handleVisibleChange = fun(visibleFlag: Boolean?) {
         setState {
             visible = visibleFlag!!
         }
@@ -36,7 +34,7 @@ class OverlayVisibleApp : RComponent<RProps, OverlayVisibleAppState>() {
     override fun RBuilder.render() {
         val menu = buildElement {
             menu {
-                attrs.onClick = ::handleMenuClick
+                attrs.onClick = handleMenuClick
                 menuItem {
                     attrs.key = "1"
                     +"Clicking me will not close the menu"
@@ -50,7 +48,7 @@ class OverlayVisibleApp : RComponent<RProps, OverlayVisibleAppState>() {
                     +"Clicking me will close the menu"
                 }
             }
-        }!!
+        }
 
         dropdown {
             attrs {
@@ -64,9 +62,7 @@ class OverlayVisibleApp : RComponent<RProps, OverlayVisibleAppState>() {
                     href = "#"
                 }
                 +"Hover me "
-                icon {
-                    attrs.type = "down"
-                }
+                downOutlined {}
             }
         }
     }
@@ -75,8 +71,8 @@ class OverlayVisibleApp : RComponent<RProps, OverlayVisibleAppState>() {
 fun RBuilder.overlayVisibleApp() = child(OverlayVisibleApp::class) {}
 
 fun RBuilder.overlayVisible() {
-    div("dropdown-container") {
-        attrs.id = "dropdown-overlay-visible"
+    styledDiv {
+        css { +DropdownStyles.overlayVisible }
         overlayVisibleApp()
     }
 }

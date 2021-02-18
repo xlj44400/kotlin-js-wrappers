@@ -1,16 +1,13 @@
 package antd.collapse
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 external object CollapsePanelComponent : Component<CollapsePanelProps, RState> {
     override fun render(): ReactElement?
 }
 
 external interface CollapsePanelProps : RProps {
-    var key: String
+    var key: Any /* String | Number */
     var header: Any /* String | ReactElement */
     var disabled: Boolean?
     var className: String?

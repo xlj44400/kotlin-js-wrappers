@@ -1,14 +1,14 @@
 package samples.menu
 
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import antd.switch.switch
-import kotlinext.js.js
-import kotlinx.html.classes
-import kotlinx.html.id
-import org.w3c.dom.events.MouseEvent
+import antd.switch.*
+import kotlinext.js.*
+import kotlinx.html.*
+import org.w3c.dom.events.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface SwitchModeSiderState : RState {
     var mode: MenuMode
@@ -16,13 +16,13 @@ interface SwitchModeSiderState : RState {
 }
 
 class SwitchModeSider : RComponent<RProps, SwitchModeSiderState>() {
-    private val changeMode = fun (checked: Boolean, _: MouseEvent) {
+    private val changeMode = fun(checked: Boolean, _: MouseEvent) {
         setState {
             mode = if (checked) "vertical" else "inline"
         }
     }
 
-    private val changeTheme = fun (checked: Boolean, _: MouseEvent) {
+    private val changeTheme = fun(checked: Boolean, _: MouseEvent) {
         setState {
             theme = if (checked) "dark" else "light"
         }
@@ -61,16 +61,12 @@ class SwitchModeSider : RComponent<RProps, SwitchModeSiderState>() {
                 }
                 menuItem {
                     attrs.key = "1"
-                    icon {
-                        attrs.type = "mail"
-                    }
+                    mailOutlined {}
                     +"Navigation One"
                 }
                 menuItem {
                     attrs.key = "2"
-                    icon {
-                        attrs.type = "calendar"
-                    }
+                    calendarOutlined {}
                     +"Navigation Two"
                 }
                 subMenu {
@@ -78,9 +74,7 @@ class SwitchModeSider : RComponent<RProps, SwitchModeSiderState>() {
                         key = "sub1"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "appstore"
-                                }
+                                appstoreOutlined {}
                                 span { +"Navigation Three" }
                             }
                         }
@@ -113,9 +107,7 @@ class SwitchModeSider : RComponent<RProps, SwitchModeSiderState>() {
                         key = "sub2"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "setting"
-                                }
+                                settingOutlined {}
                                 span { +"Navigation Four" }
                             }
                         }
@@ -145,8 +137,8 @@ class SwitchModeSider : RComponent<RProps, SwitchModeSiderState>() {
 fun RBuilder.switchModeSider() = child(SwitchModeSider::class) {}
 
 fun RBuilder.switchMode() {
-    div("menu-container") {
-        attrs.id = "menu-switch-mode"
+    styledDiv {
+        css { +MenuStyles.switchMode }
         switchModeSider()
     }
 }

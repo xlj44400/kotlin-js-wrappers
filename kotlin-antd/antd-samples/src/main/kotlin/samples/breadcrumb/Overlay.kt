@@ -1,14 +1,10 @@
 package samples.breadcrumb
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import antd.menu.menu
-import antd.menu.menuItem
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.a
-import react.dom.div
+import antd.breadcrumb.*
+import antd.menu.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val menu = buildElement {
     menu {
@@ -46,8 +42,8 @@ private val menu = buildElement {
 }
 
 fun RBuilder.overlay() {
-    div("breadcrumb-container") {
-        attrs.id = "breadcrumb-overlay"
+    styledDiv {
+        css { +BreadcrumbStyles.overlay }
         breadcrumb {
             breadcrumbItem { +"Ant Design" }
             breadcrumbItem {

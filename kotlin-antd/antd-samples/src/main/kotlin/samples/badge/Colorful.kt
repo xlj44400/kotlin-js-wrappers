@@ -1,30 +1,30 @@
 package samples.badge
 
-import antd.badge.badge
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.badge.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val colors = arrayOf("" +
-        "pink",
-        "red",
-        "yellow",
-        "orange",
-        "cyan",
-        "green",
-        "blue",
-        "purple",
-        "geekblue",
-        "magenta",
-        "volcano",
-        "gold",
-        "lime"
+    "pink",
+    "red",
+    "yellow",
+    "orange",
+    "cyan",
+    "green",
+    "blue",
+    "purple",
+    "geekblue",
+    "magenta",
+    "volcano",
+    "gold",
+    "lime"
 )
 
 fun RBuilder.colorful() {
-    div("badge-container") {
-        attrs.id = "badge-colorful"
+    styledDiv {
+        css { +BadgeStyles.colorful }
         div {
             h4 {
                 attrs.jsStyle = js { marginBottom = 16 }

@@ -1,13 +1,12 @@
 package samples.mentions
 
-import antd.mentions.mentions
+import antd.mentions.*
 import antd.mentions.option
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
+import kotlinx.browser.*
 import react.*
 import react.dom.*
-import kotlin.browser.window
-import kotlin.js.Promise
+import styled.*
 
 interface AsyncMentionState : RState {
     var search: String
@@ -38,21 +37,20 @@ class AsyncMention : RComponent<RProps, AsyncMentionState>() {
         }
 
         window.fetch("https://api.github.com/search/users?q=$key")
-                .then { res -> res.json() }
-                .then { json ->
-                    val items = json.asDynamic()["items"]?.unsafeCast<Array<Any>>()?.let {
-                        it.slice(0..10).toTypedArray()
-                    } ?: emptyArray()
+            .then { res -> res.json() }
+            .then { json ->
+                val items = json.asDynamic()["items"]?.unsafeCast<Array<Any>>()?.slice(0..10)?.toTypedArray()
+                    ?: emptyArray()
 
-                    if (state.search != key) return@then
+                if (state.search != key) return@then
 
-                    console.log(items)
+                console.log(items)
 
-                    setState {
-                        users = items
-                        loading = false
-                    }
+                setState {
+                    users = items
+                    loading = false
                 }
+            }
     }
 
     override fun AsyncMentionState.init() {
@@ -96,8 +94,8 @@ class AsyncMention : RComponent<RProps, AsyncMentionState>() {
 fun RBuilder.asyncMention() = child(AsyncMention::class) {}
 
 fun RBuilder.async() {
-    div("mentions-container") {
-        attrs.id = "mentions-async"
+    styledDiv {
+        css { MentionsStyles.async }
         asyncMention()
     }
 }

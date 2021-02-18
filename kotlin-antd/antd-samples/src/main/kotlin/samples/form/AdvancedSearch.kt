@@ -1,139 +1,111 @@
 package samples.form
 
-import antd.FormEventHandler
-import antd.MouseEventHandler
 import antd.button.button
 import antd.form.*
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import antd.icon.icon
+import antd.icon.*
 import antd.input.input
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.classes
-import kotlinx.html.id
-import kotlinx.html.js.onClickFunction
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.events.Event
+import kotlinext.js.*
+import kotlinx.html.*
+import kotlinx.html.js.*
 import react.*
 import react.dom.a
 import react.dom.div
 import react.dom.jsStyle
+import styled.*
 
-interface AdvancedSearchFormState : RState {
-    var expand: Boolean
-}
+private val advancedSearchForm = functionalComponent<RProps> {
+    val (expand, setExpand) = useState(false)
+    val formInstance = FormComponent.useForm()[0]
 
-class AdvancedSearchForm : RComponent<FormComponentProps<Any>, AdvancedSearchFormState>() {
-    // To generate mock Form.Item
-    private fun getFields(): Array<ReactElement> {
-        val count = if (state.expand) 10 else 6
+    fun getFields(): Array<ReactElement> {
+        val count = if (expand) 10 else 6
 
-        return (0..9).map { i ->
+        return (0..count).map { i ->
             buildElement {
                 col {
                     attrs {
                         span = 8
                         key = i.toString()
-                        style = js { display = if (i < count) "block" else "none" }
                     }
                     formItem {
-                        attrs.label = "Field $i"
-                        childList.add(props.form.getFieldDecorator("field-$i", jsObject {
-                            rules = arrayOf(jsObject {
-                                required = true
-                                message = "Input something!"
-                            })
-                        })(buildElement {
-                            input {
-                                attrs.placeholder = "placeholder"
-                            }
-                        }!!))
+                        attrs {
+                            name = "field-$i"
+                            label = "Field $i"
+                            rules = arrayOf(
+                                jsObject<AggregationRule> {
+                                    required = true
+                                    message = "Input something!"
+                                }
+                            )
+                        }
+                        input {
+                            attrs.placeholder = "placeholder"
+                        }
                     }
                 }
-            }!!
+            }
         }.toTypedArray()
     }
 
-    private val handleSearch: FormEventHandler<HTMLElement> = { e ->
-        e.preventDefault()
+    val handleFinish = { values: Any ->
+        console.log("Received values of form: ", values)
+    }
 
-        props.form.validateFields { _, values ->
-            console.log("Received values of form: ", values)
+    form {
+        attrs {
+            form = formInstance
+            name = "advanced+search"
+            className = "ant-advanced-search-form"
+            onFinish = handleFinish
         }
-    }
-
-    private val handleReset: MouseEventHandler<Any> = {
-        props.form.resetFields()
-    }
-
-    private val toggle: (Event) -> Unit = {
-        setState {
-            expand = !state.expand
-        }
-    }
-
-    override fun AdvancedSearchFormState.init() {
-        expand = false
-    }
-
-    override fun RBuilder.render() {
-        form {
-            attrs {
-                className = "ant-advanced-search-form"
-                onSubmit = handleSearch
-            }
-            row {
-                attrs.gutter = 24
-                childList.add(getFields())
-                col {
+        row {
+            attrs.gutter = 24
+            childList.add(getFields())
+            col {
+                attrs {
+                    span = 24
+                    style = js { textAlign = "right" }
+                }
+                button {
                     attrs {
-                        span = 24
-                        style = js { textAlign = "right" }
+                        type = "primary"
+                        htmlType = "submit"
                     }
-                    button {
-                        attrs {
-                            type = "primary"
-                            htmlType = "submit"
-                        }
-                        +"Search"
+                    +"Search"
+                }
+                button {
+                    attrs {
+                        style = js { margin = "0 8px" }
+                        onClick = { formInstance.resetFields() }
                     }
-                    button {
-                        attrs {
-                            style = js { marginLeft = 8 }
-                            onClick = handleReset
-                        }
-                        +"Clear"
-                    }
-                    a {
-                        attrs {
-                            jsStyle = js {
-                                marginLeft = 8
-                                fontSize = 12
-                            }
-                            onClickFunction = toggle
-                        }
-                        +"Collapse "
-                        icon {
-                            attrs.type = if (state.expand) "up" else "down"
+                    +"Clear"
+                }
+                a {
+                    attrs {
+                        jsStyle = js { fontSize = 12 }
+                        onClickFunction = {
+                            setExpand(!expand)
                         }
                     }
+                    if (expand) {
+                        upOutlined {}
+                    } else downOutlined {}
+                    +" Collapse"
                 }
             }
         }
     }
 }
 
-private val wrappedAdvancedSearchForm = FormComponent.create<FormComponentProps<Any>, AdvancedSearchFormState>(
-        jsObject { name = "advanced_search" })(AdvancedSearchForm::class.js)
-
-fun RBuilder.wrappedAdvancedSearchForm(handler: RHandler<FormComponentProps<Any>>) = child(wrappedAdvancedSearchForm, jsObject {}, handler)
+fun RBuilder.advancedSearchForm() = child(advancedSearchForm) {}
 
 fun RBuilder.advancedSearch() {
-    div("form-container") {
-        attrs.id = "form-advanced-search"
+    styledDiv {
+        css { +FormStyles.advancedSearch }
         div {
-            wrappedAdvancedSearchForm {}
+            advancedSearchForm()
             div {
                 attrs.classes = setOf("search-result-list")
                 +"Search Result List"

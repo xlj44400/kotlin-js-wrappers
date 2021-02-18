@@ -1,14 +1,13 @@
 package samples.affix
 
-import antd.affix.affix
-import antd.button.button
-import kotlinx.html.id
+import antd.affix.*
+import antd.button.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.onChange() {
-    div("affix-container") {
-        attrs.id = "affix-on-change"
+    styledDiv {
+        css { +AffixStyles.onChange }
         affix {
             attrs {
                 offsetTop = 120

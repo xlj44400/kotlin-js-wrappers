@@ -1,14 +1,14 @@
 package samples.tooltip
 
 import antd.button.button
-import antd.tooltip.tooltip
-import kotlinx.html.id
+import antd.tooltip.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.arrowPointAtCenter() {
-    div("tooltip-container") {
-        attrs.id = "tooltip-arrow-point-at-center"
+    styledDiv {
+        css { +TooltipStyles.arrowPointAtCenter }
         div {
             tooltip {
                 attrs {

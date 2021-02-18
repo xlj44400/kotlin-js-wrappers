@@ -1,13 +1,12 @@
 package samples.pageheader
 
-import antd.pageheader.pageHeader
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.pageheader.*
+import react.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("page-header-container") {
-        attrs.id = "page-header-basic"
+    styledDiv {
+        css { +PageHeaderStyles.basic }
         pageHeader {
             attrs {
                 onBack = {}

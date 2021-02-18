@@ -1,14 +1,14 @@
 package samples.grid
 
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import kotlinx.html.id
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.offset() {
-    div("grid-container") {
-        attrs.id = "grid-offset"
+    styledDiv {
+        css { +GridStyles.offset }
         div {
             row {
                 col {

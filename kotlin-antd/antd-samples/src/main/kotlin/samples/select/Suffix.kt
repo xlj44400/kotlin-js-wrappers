@@ -1,24 +1,21 @@
 package samples.select
 
-import antd.icon.icon
-import antd.select.SelectComponent
+import antd.icon.*
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val smileIcon = buildElement {
     icon {
-        attrs.type = "smile"
+        //attrs.type = "smile"
     }
 }
 
 private val mehIcon = buildElement {
-    icon {
-        attrs.type = "meh"
-    }
+    mehOutlined {}
 }
 
 private fun handleChange(value: String, option: Any) {
@@ -26,8 +23,8 @@ private fun handleChange(value: String, option: Any) {
 }
 
 fun RBuilder.suffix() {
-    div("select-container") {
-        attrs.id = "select-suffix"
+    styledDiv {
+        css { +SelectStyles.suffix }
         div {
             select<String, SelectComponent<String>> {
                 attrs {

@@ -1,43 +1,53 @@
 package samples
 
 import react.*
-import react.dom.br
-import react.dom.p
-import reactintl.provider.intlProvider
-import reactintl.date.formattedDate
-import reactintl.time.formattedTime
-import kotlin.js.Date
+import react.dom.*
+import reactintl.datetime.*
+import reactintl.provider.*
+import kotlin.js.*
 
 interface TimeZoneProps : RProps {
     var currentTime: Any /* Date | Number */
 }
 
-class TimeZone : RComponent<TimeZoneProps, RState>() {
-    override fun RBuilder.render() {
-        intlProvider {
-            attrs {
-                locale = "en"
-                timeZone = "Asia/Tokyo"
+private val app = functionalComponent<TimeZoneProps> { props ->
+    intlProvider {
+        attrs {
+            locale = "en"
+            timeZone = "Asia/Tokyo"
+        }
+        p {
+            +"The date in Tokyo is: "
+            formattedDate {
+                attrs.value = props.currentTime
             }
-            p {
-                +"The date in Tokyo is: "
-                formattedDate {
-                    attrs.value = props.currentTime
+            br {}
+            +"The time in Tokyo is: "
+            formattedTime {
+                attrs.value = props.currentTime
+            }
+            br {}
+            formattedDateParts {
+                attrs {
+                    value = Date(1459832991883)
+                    year = "numeric"
+                    month = "long"
+                    day = "2-digit"
                 }
-                br {}
-                +"The time in Tokyo is: "
-                formattedTime {
-                    attrs.value = props.currentTime
-                }
+                childList.add(fun(parts: Array<IntlDateTimeFormatPart>): ReactElement {
+                    return span {
+                        b { +parts[0].value }
+                        +parts[1].value
+                        small { +parts[2].value }
+                    }
+                })
             }
         }
     }
 }
 
-fun RBuilder.timeZoneApp(handler: RHandler<TimeZoneProps>) = child(TimeZone::class, handler)
-
 fun RBuilder.timeZone() {
-    timeZoneApp {
+    child(app) {
         attrs.currentTime = Date()
     }
 }

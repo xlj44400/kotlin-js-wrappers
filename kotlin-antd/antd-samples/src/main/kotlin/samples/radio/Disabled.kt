@@ -1,12 +1,12 @@
 package samples.radio
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.radio.radio
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.radio.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface DisabledAppState : RState {
     var disabled: Boolean
@@ -57,8 +57,8 @@ class DisabledApp : RComponent<RProps, DisabledAppState>() {
 fun RBuilder.disabledApp() = child(DisabledApp::class) {}
 
 fun RBuilder.disabled() {
-    div("radio-container") {
-        attrs.id = "radio-disabled"
+    styledDiv {
+        css { +RadioStyles.disabled }
         disabledApp()
     }
 }

@@ -1,16 +1,14 @@
 package samples.tag
 
-import antd.tag.tag
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.h4
-import react.dom.jsStyle
+import antd.tag.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.colorful() {
-    div("tag-container") {
-        attrs.id = "tag-colorful"
+    styledDiv {
+        css { +TagStyles.colorful }
         div {
             h4 {
                 attrs.jsStyle = js { marginBttom = 16 }

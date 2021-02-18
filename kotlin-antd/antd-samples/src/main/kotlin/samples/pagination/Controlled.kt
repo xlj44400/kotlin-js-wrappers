@@ -1,16 +1,15 @@
 package samples.pagination
 
-import antd.pagination.pagination
-import kotlinx.html.id
+import antd.pagination.*
 import react.*
-import react.dom.*
+import styled.*
 
 interface ControlledAppState : RState {
     var current: Number
 }
 
 class ControlledApp : RComponent<RProps, ControlledAppState>() {
-    private val handleChange = fun (page: Number, _: Number?) {
+    private val handleChange = fun(page: Number, _: Number?) {
         console.log(page)
 
         setState {
@@ -36,8 +35,8 @@ class ControlledApp : RComponent<RProps, ControlledAppState>() {
 fun RBuilder.controlledApp() = child(ControlledApp::class) {}
 
 fun RBuilder.controlled() {
-    div("pagination-container") {
-        attrs.id = "pagination-controlled"
+    styledDiv {
+        css { +PaginationStyles.controlled }
         controlledApp()
     }
 }

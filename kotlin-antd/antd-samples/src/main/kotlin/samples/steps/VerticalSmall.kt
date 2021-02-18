@@ -1,13 +1,12 @@
 package samples.steps
 
 import antd.steps.*
-import kotlinx.html.id
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.verticalSmall() {
-    div("steps-container") {
-        attrs.id = "steps-vertical-small"
+    styledDiv {
+        css { +StepsStyles.verticalSmall }
         steps {
             attrs {
                 direction = "vertical"

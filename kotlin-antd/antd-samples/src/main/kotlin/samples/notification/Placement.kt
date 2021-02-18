@@ -1,16 +1,14 @@
 package samples.notification
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.notification.notification
-import antd.select.SelectComponent
+import antd.notification.*
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import kotlinext.js.*
 import react.RBuilder
 import react.dom.div
+import styled.*
 
 private val options = arrayOf("topLeft", "topRight", "bottomLeft", "bottomRight")
 
@@ -22,8 +20,8 @@ private val openNotification: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.placement() {
-    div("notification-container") {
-        attrs.id = "notification-placement"
+    styledDiv {
+        css { +NotificationStyles.placement }
         div {
             select<String, SelectComponent<String>> {
                 attrs {

@@ -1,19 +1,16 @@
 package samples.card
 
-import antd.avatar.avatar
-import antd.card.card
-import antd.card.cardMeta
-import antd.icon.icon
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
-import react.dom.img
+import antd.avatar.*
+import antd.card.*
+import antd.icon.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.meta() {
-    div("card-container") {
-        attrs.id = "card-meta"
+    styledDiv {
+        css { +CardStyles.meta }
         card {
             attrs {
                 style = js { width = 300 }
@@ -26,21 +23,15 @@ fun RBuilder.meta() {
                     }
                 }
                 actions = arrayOf(
-                        buildElement {
-                            icon {
-                                attrs.type = "setting"
-                            }
-                        }!!,
-                        buildElement {
-                            icon {
-                                attrs.type = "edit"
-                            }
-                        }!!,
-                        buildElement {
-                            icon {
-                                attrs.type = "ellipsis"
-                            }
-                        }!!
+                    buildElement {
+                        settingOutlined {}
+                    },
+                    buildElement {
+                        editOutlined {}
+                    },
+                    buildElement {
+                        ellipsisOutlined {}
+                    }
                 )
             }
             cardMeta {

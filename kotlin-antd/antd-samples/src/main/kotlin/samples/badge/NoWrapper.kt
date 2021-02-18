@@ -1,14 +1,14 @@
 package samples.badge
 
-import antd.badge.badge
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.badge.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.noWrapper() {
-    div("badge-container") {
-        attrs.id = "badge-no-wrapper"
+    styledDiv {
+        css { +BadgeStyles.noWrapper }
         div {
             badge {
                 attrs.count = 25

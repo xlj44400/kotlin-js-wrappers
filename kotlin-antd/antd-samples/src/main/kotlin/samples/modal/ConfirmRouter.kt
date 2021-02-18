@@ -1,15 +1,14 @@
 package samples.modal
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.modal.ModalComponent
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import kotlin.browser.window
+import antd.*
+import antd.button.*
+import antd.modal.*
+import kotlinext.js.*
+import kotlinx.browser.*
+import react.*
+import styled.*
 import kotlin.js.Promise
-import kotlin.random.Random
+import kotlin.random.*
 
 private val showConfirm: MouseEventHandler<Any> = {
     ModalComponent.confirm(jsObject {
@@ -26,9 +25,9 @@ private val showConfirm: MouseEventHandler<Any> = {
     })
 }
 
-fun RBuilder.confirmPromise() {
-    div("modal-container") {
-        attrs.id = "modal-confirm-promise"
+fun RBuilder.confirmRouter() {
+    styledDiv {
+        css { +ModalStyles.confirmRouter }
         button {
             attrs.onClick = showConfirm
             +"Confirm"

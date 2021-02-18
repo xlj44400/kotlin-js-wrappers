@@ -1,20 +1,19 @@
 package samples.select
 
-import antd.select.SelectComponent
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(value: String, option: Any) {
     console.log("selected $value")
 }
 
 fun RBuilder.basic() {
-    div("select-container") {
-        attrs.id = "select-basic"
+    styledDiv {
+        css { +SelectStyles.basic }
         div {
             select<String, SelectComponent<String>> {
                 attrs {

@@ -1,15 +1,11 @@
 package samples.transfer
 
-import antd.MouseEvent
-import antd.MouseEventHandler
-import antd.transfer.TransferItem
-import antd.transfer.transfer
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.*
+import antd.transfer.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
-import kotlin.random.Random
+import styled.*
+import kotlin.random.*
 
 interface LargeDataTransferItem : TransferItem {
     var chosen: Boolean
@@ -46,7 +42,7 @@ class LargeDataApp : RComponent<RProps, LargeDataAppState>() {
         }
     }
 
-    private val handleChange = fun (nextTargetKeys: Array<String>, direction: String, moveKeys: Any) {
+    private val handleChange = fun(nextTargetKeys: Array<String>, direction: String, moveKeys: Any) {
         console.log(nextTargetKeys, direction, moveKeys)
 
         setState {
@@ -78,8 +74,8 @@ class LargeDataApp : RComponent<RProps, LargeDataAppState>() {
 fun RBuilder.largeDataApp() = child(LargeDataApp::class) {}
 
 fun RBuilder.largeData() {
-    div("transfer-container") {
-        attrs.id = "transfer-large-data"
+    styledDiv {
+        css { +TransferStyles.largeData }
         largeDataApp()
     }
 }

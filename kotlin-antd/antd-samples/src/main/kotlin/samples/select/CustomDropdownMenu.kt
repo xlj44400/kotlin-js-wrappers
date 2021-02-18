@@ -1,26 +1,25 @@
 package samples.select
 
-import antd.divider.divider
-import antd.icon.icon
-import antd.select.SelectComponent
+import antd.divider.*
+import antd.icon.*
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.customDropdownMenu() {
-    div("select-container") {
-        attrs.id = "select-custom-dropdown-menu"
+    styledDiv {
+        css { +SelectStyles.customDropdownMenu }
         select<String, SelectComponent<String>> {
             attrs {
                 defaultValue = "lucy"
                 style = js { width = 120 }
-                dropdownRender = { menu, _ ->
+                dropdownRender = { menu ->
                     buildElement {
                         div {
-                            childList.add(menu!!)
+                            childList.add(menu)
                             divider {
                                 attrs.style = js { margin = "4px 0" }
                             }
@@ -29,13 +28,11 @@ fun RBuilder.customDropdownMenu() {
                                     padding = "8px"
                                     cursor = "pointer"
                                 }
-                                icon {
-                                    attrs.type = "plus"
-                                }
+                                plusOutlined {}
                                 +"Add item"
                             }
                         }
-                    }!!
+                    }
                 }
 
             }

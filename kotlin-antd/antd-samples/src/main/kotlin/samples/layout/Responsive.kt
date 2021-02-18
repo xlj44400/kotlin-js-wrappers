@@ -1,20 +1,18 @@
 package samples.layout
 
-import antd.icon.icon
-import antd.layout.layout
-import antd.layout.header
-import antd.layout.content
+import antd.icon.*
+import antd.layout.*
 import antd.layout.footer
-import antd.layout.sider
+import antd.layout.header
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.responsive() {
-    div("layout-container") {
-        attrs.id = "layout-responsive"
+    styledDiv {
+        css { +LayoutStyles.responsive }
         layout {
             sider {
                 attrs {
@@ -32,30 +30,22 @@ fun RBuilder.responsive() {
                     }
                     menuItem {
                         attrs.key = "1"
-                        icon {
-                            attrs.type = "user"
-                        }
+                        userOutlined {}
                         span("nav-text") { +"mav 1" }
                     }
                     menuItem {
                         attrs.key = "2"
-                        icon {
-                            attrs.type = "video-camera"
-                        }
+                        videoCameraOutlined {}
                         span("nav-text") { +"nav 2" }
                     }
                     menuItem {
                         attrs.key = "3"
-                        icon {
-                            attrs.type = "upload"
-                        }
+                        uploadOutlined {}
                         span("nav-text") { +"nav 3" }
                     }
                     menuItem {
                         attrs.key = "4"
-                        icon {
-                            attrs.type = "user"
-                        }
+                        userOutlined {}
                         span("nav-text") { +"nav 4" }
                     }
                 }

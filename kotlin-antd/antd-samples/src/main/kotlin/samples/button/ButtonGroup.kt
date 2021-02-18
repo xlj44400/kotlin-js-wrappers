@@ -1,15 +1,15 @@
 package samples.button
 
+import antd.button.*
 import antd.button.button
-import antd.button.buttonGroup
-import antd.icon.icon
-import kotlinx.html.id
+import antd.icon.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.buttonGroup() {
-    div("button-container") {
-        attrs.id = "button-button-group"
+    styledDiv {
+        css { +ButtonStyles.buttonGroup }
         div {
             h4 { +"Basic" }
             buttonGroup {
@@ -39,30 +39,30 @@ fun RBuilder.buttonGroup() {
             buttonGroup {
                 button {
                     attrs.type = "primary"
-                    icon {
-                        attrs.type = "left"
-                    }
+                    leftOutlined {}
                     +"Go back"
                 }
                 button {
                     attrs.type = "primary"
                     +"Go forward"
-                    icon {
-                        attrs.type = "right"
-                    }
+                    rightOutlined {}
                 }
             }
             buttonGroup {
                 button {
                     attrs {
                         type = "primary"
-                        icon = "cloud"
+                        icon = buildElement {
+                            cloudOutlined {}
+                        }
                     }
                 }
                 button {
                     attrs {
                         type = "primary"
-                        icon = "cloud-download"
+                        icon = buildElement {
+                            cloudDownloadOutlined {}
+                        }
                     }
                 }
             }

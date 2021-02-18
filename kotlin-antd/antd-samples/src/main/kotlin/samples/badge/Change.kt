@@ -1,17 +1,17 @@
 package samples.badge
 
-import antd.MouseEventHandler
-import antd.badge.badge
+import antd.*
+import antd.badge.*
+import antd.button.*
 import antd.button.button
-import antd.button.buttonGroup
-import antd.icon.icon
-import antd.switch.switch
-import kotlinext.js.js
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.icon.*
+import antd.switch.*
+import kotlinext.js.*
+import kotlinx.html.*
 import org.w3c.dom.events.MouseEvent
 import react.*
 import react.dom.*
+import styled.*
 
 interface ChangeDemoState : RState {
     var count: Any
@@ -39,7 +39,7 @@ class ChangeDemo : RComponent<RProps, ChangeDemoState>() {
         }
     }
 
-    private val handleChange = fun (checked: Boolean, _: MouseEvent) {
+    private val handleChange = fun(checked: Boolean, _: MouseEvent) {
         setState {
             show = checked
         }
@@ -57,23 +57,19 @@ class ChangeDemo : RComponent<RProps, ChangeDemoState>() {
                     attrs.count = state.count
                     a {
                         attrs {
-                            href = "#"
                             classes = setOf("head-example")
+                            href = "#"
                         }
                     }
                 }
                 buttonGroup {
                     button {
                         attrs.onClick = decline
-                        icon {
-                            attrs.type = "minus"
-                        }
+                        minusOutlined {}
                     }
                     button {
                         attrs.onClick = increase
-                        icon {
-                            attrs.type = "plus"
-                        }
+                        plusOutlined {}
                     }
                 }
             }
@@ -83,8 +79,8 @@ class ChangeDemo : RComponent<RProps, ChangeDemoState>() {
                     attrs.dot = state.show
                     a {
                         attrs {
-                            href = "#"
                             classes = setOf("head-example")
+                            href = "#"
                         }
                     }
                 }
@@ -102,8 +98,8 @@ class ChangeDemo : RComponent<RProps, ChangeDemoState>() {
 fun RBuilder.changeDemo() = child(ChangeDemo::class) {}
 
 fun RBuilder.change() {
-    div("badge-container") {
-        attrs.id = "badge-change"
+    styledDiv {
+        css { +BadgeStyles.change }
         changeDemo()
     }
 }

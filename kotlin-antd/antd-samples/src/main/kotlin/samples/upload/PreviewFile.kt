@@ -1,14 +1,13 @@
 package samples.upload
 
 import antd.button.button
-import antd.icon.icon
-import antd.upload.UploadProps
-import antd.upload.upload
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.icon.*
+import antd.upload.*
+import kotlinext.js.*
+import kotlinx.browser.*
 import react.*
 import react.dom.*
-import kotlin.browser.window
+import styled.*
 
 private val props = jsObject<UploadProps> {
     action = "//jsonplaceholder.typicode.com/posts/"
@@ -24,8 +23,8 @@ private val props = jsObject<UploadProps> {
 }
 
 fun RBuilder.previewFile() {
-    div("upload-container") {
-        attrs.id = "upload-preview-file"
+    styledDiv {
+        css { +UploadStyles.previewFile }
         div {
             upload {
                 attrs {
@@ -34,9 +33,7 @@ fun RBuilder.previewFile() {
                     previewFile = props.previewFile
                 }
                 button {
-                    icon {
-                        attrs.type = "upload"
-                    }
+                    uploadOutlined {}
                     +"Upload"
                 }
             }

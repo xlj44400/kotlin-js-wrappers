@@ -4,17 +4,17 @@ import antd.button.button
 import antd.form.*
 import antd.input.input
 import antd.radio.*
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.div
+import styled.*
 
-interface FormLayoutDemoState : RState {
+private interface FormLayoutDemoState : RState {
     var formLayout: String
 }
 
-class FormLayoutDemo : RComponent<FormComponentProps<Any>, FormLayoutDemoState>() {
-    private val handleFormLayoutChange = fun (event: RadioChangeEvent) {
+private class FormLayoutDemo : RComponent<FormProps<Any>, FormLayoutDemoState>() {
+    private val handleFormLayoutChange = fun(event: RadioChangeEvent) {
         setState {
             formLayout = event.target.value.unsafeCast<String>()
         }
@@ -26,14 +26,14 @@ class FormLayoutDemo : RComponent<FormComponentProps<Any>, FormLayoutDemoState>(
 
     override fun RBuilder.render() {
         val formItemLayout = if (state.formLayout == "horizontal") {
-            jsObject<FormItemProps> {
+            jsObject<FormItemProps<Any>> {
                 labelCol = jsObject { span = 4 }
                 wrapperCol = jsObject { span = 14 }
             }
         } else null
 
         val buttonItemLayout = if (state.formLayout == "horizontal") {
-            jsObject<FormItemProps> {
+            jsObject<FormItemProps<Any>> {
                 wrapperCol = jsObject {
                     span = 14
                     offset = 4
@@ -104,8 +104,8 @@ class FormLayoutDemo : RComponent<FormComponentProps<Any>, FormLayoutDemoState>(
 fun RBuilder.formLayoutDemo() = child(FormLayoutDemo::class) {}
 
 fun RBuilder.layout() {
-    div("form-container") {
-        attrs.id = "form-layout"
+    styledDiv {
+        css { +FormStyles.layout }
         formLayoutDemo()
     }
 }

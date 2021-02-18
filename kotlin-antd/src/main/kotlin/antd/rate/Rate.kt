@@ -1,4 +1,5 @@
 @file:JsModule("antd/lib/rate")
+@file:JsNonModule
 
 package antd.rate
 
@@ -23,8 +24,4 @@ external interface RateProps : RProps {
     var character: Any? /* String | ReactElement */
     var className: String?
     var style: dynamic
-}
-
-external interface RateNodeProps {
-    var index: Number
 }

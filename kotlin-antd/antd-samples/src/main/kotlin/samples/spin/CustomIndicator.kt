@@ -1,17 +1,14 @@
 package samples.spin
 
-import antd.icon.icon
-import antd.spin.spin
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.icon.*
+import antd.spin.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 private val antIcon = buildElement {
-    icon {
-        attrs {
-            type = "loading"
+    loadingOutlined {
+        attrs{
             style = js { fontSize = 24 }
             spin = true
         }
@@ -19,8 +16,8 @@ private val antIcon = buildElement {
 }
 
 fun RBuilder.customIndicator() {
-    div("spin-container") {
-        attrs.id = "spin-custom-indicator"
+    styledDiv {
+        css { +SpinStyles.customIndicator }
         spin {
             attrs.indicator = antIcon
         }

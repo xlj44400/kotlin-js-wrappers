@@ -1,103 +1,91 @@
 package samples.tree
 
 import antd.tree.*
-import kotlinext.js.jsObject
-import kotlinext.js.objectAssign
-import kotlinx.html.id
+import kotlinext.js.*
+import kotlinx.browser.*
 import react.*
-import react.dom.div
-import kotlin.browser.window
-import kotlin.js.Promise
+import styled.*
+import kotlin.js.*
 
-interface DynamicDemoState : RState {
-    var treeData: Array<TreeNodeNormal>
+private val initTreeData = arrayOf<DataNode>(
+    jsObject {
+        title = "Expand to load"
+        key = "0"
+    },
+    jsObject {
+        title = "Expand to load"
+        key = "1"
+    },
+    jsObject {
+        title = "Tree Node"
+        key = "2"
+        isLeaf = true
+    }
+)
+
+// It's just a simple demo. You can use tree map to optimize update perf.
+private fun updateTreeData(list: Array<DataNode>, nodeKey: Key, nodeChildren: Array<DataNode>): Array<DataNode> {
+    return list.map { node ->
+        if (node.key == nodeKey) {
+            return@map jsObject {
+                title = node.title
+                key = node.key
+                isLeaf = node.isLeaf
+                children = nodeChildren
+            }
+        } else if (node.children != null) {
+            return@map jsObject {
+                title = node.title
+                key = node.key
+                isLeaf = node.isLeaf
+                children = updateTreeData(node.children!!, key, nodeChildren)
+            }
+        }
+        node
+    }.toTypedArray()
 }
 
-class DynamicDemo : RComponent<RProps, DynamicDemoState>() {
-    private val onLoadData = fun (treeNode: TreeNodeComponent): Promise<Unit> {
-        return Promise { resolve, _ ->
-            if (treeNode.props.children != null) {
-                resolve(Unit)
+private val demo = functionalComponent<RProps> {
+    val (trData, setTreeData) = useState(initTreeData)
 
-                return@Promise
+    fun onLoadData(node: EventDataNode): Promise<Unit> {
+        return Promise { resolve, _ ->
+            if (node.children != null) {
+                resolve(Unit)
             }
 
             window.setTimeout({
-                treeNode.props.asDynamic().dataRef.children = arrayOf<TreeNodeNormal>(
+                setTreeData(
+                    updateTreeData(node.children!!, node.key, arrayOf(
                         jsObject {
                             title = "Child Node"
-                            key = "${treeNode.props.eventKey}-0"
+                            key = "${node.key}-0"
                         },
                         jsObject {
                             title = "Child Node"
-                            key = "${treeNode.props.eventKey}-1"
-                        }
+                            key = "${node.key}-1"
+                        })
+                    )
                 )
-
-                setState {
-                    treeData = state.treeData
-                }
 
                 resolve(Unit)
             }, 1000)
         }
     }
 
-    private fun renderTreeNodes(data: Array<TreeNodeNormal>): Array<ReactElement> {
-        return data.map { item ->
-            if (item.children != null) {
-                return@map buildElement {
-                    treeNode {
-                        attrs {
-                            title = item.title
-                            key = item.key
-                        }
-                        attrs.asDynamic()["dataRef"] = item
-                        childList.add(renderTreeNodes(item.children!!))
-                    }
-                }!!
-            }
-
-            return@map buildElement {
-               treeNode {
-                   objectAssign(attrs, item)
-                   attrs.asDynamic()["dataRef"] = item
-               }
-            }!!
-        }.toTypedArray()
-    }
-
-    override fun DynamicDemoState.init() {
-        treeData = arrayOf(
-                jsObject {
-                    title = "Expand to load"
-                    key = "0"
-                },
-                jsObject {
-                    title = "Expand to load"
-                    key = "1"
-                },
-                jsObject {
-                    title = "Tree Node"
-                    key = "2"
-                    isLeaf = true
-                }
-        )
-    }
-
-    override fun RBuilder.render() {
-        tree {
-            attrs.loadData = onLoadData
-            childList.add(renderTreeNodes(state.treeData))
+    tree {
+        attrs {
+            loadData = ::onLoadData
+            treeData = trData
         }
     }
 }
 
-fun RBuilder.dynamicDemo() = child(DynamicDemo::class) {}
+fun RBuilder.dynamicDemo() = child(demo) {}
 
 fun RBuilder.dynamic() {
-    div("tree-container") {
-        attrs.id = "tree-dynamic"
+    styledDiv {
+        css { +TreeStyles.dynamic }
         dynamicDemo()
     }
 }

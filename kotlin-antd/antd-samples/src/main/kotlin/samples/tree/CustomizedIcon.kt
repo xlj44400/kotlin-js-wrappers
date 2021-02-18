@@ -1,54 +1,47 @@
 package samples.tree
 
-import antd.icon.icon
+import antd.icon.*
 import antd.tree.*
-import kotlinx.html.id
 import react.*
-import react.dom.div
+import styled.*
 
 fun RBuilder.customizedIcon() {
-    div("tree-container") {
-        attrs.id = "tree-customized-icon"
+    styledDiv {
+        css { +TreeStyles.customizedIcon }
         tree {
             attrs {
                 showIcon = true
                 defaultExpandAll = true
                 defaultSelectedKeys = arrayOf("0-0-0")
                 switcherIcon = buildElement {
-                    icon {
-                        attrs.type = "down"
-                    }
+                    downOutlined {}
                 }
             }
             treeNode {
                 attrs {
                     icon = buildElement {
-                       icon {
-                           attrs.type = "smile-o"
-                       }
-                    }!!
+                        smileOutlined {}
+                    }
                     title = "parent 1"
                     key = "0-0"
                 }
                 treeNode {
                     attrs {
                         icon = buildElement {
-                            icon {
-                                attrs.type = "meh-o"
-                            }
-                        }!!
+                            mehOutlined {}
+                        }
                         title = "leaf"
                         key = "0-0-0"
                     }
                 }
                 treeNode {
                     attrs {
-                        icon = fun (treeNode: TreeNodeAttribute): ReactElement {
+                        icon = fun(treeNode: TreeNodeAttribute): ReactElement {
                             return buildElement {
-                                icon {
-                                    attrs.type = if (treeNode.selected) "frown" else "frown-o"
-                                }
-                            }!!
+                                if (treeNode.selected) {
+                                    frownFilled {}
+                                } else frownOutlined {}
+                            }
                         }
                         title = "leaf"
                         key = "0-0-1"

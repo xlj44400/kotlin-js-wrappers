@@ -1,16 +1,13 @@
 package samples.grid
 
-import antd.grid.ColSize
-import antd.grid.col
-import antd.grid.row
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.grid.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.responsiveMore() {
-    div("grid-container") {
-        attrs.id = "grid-responsive-more"
+    styledDiv {
+        css { +GridStyles.responsiveMore }
         row {
             col {
                 attrs {

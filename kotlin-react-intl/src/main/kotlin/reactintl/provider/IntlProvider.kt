@@ -1,10 +1,10 @@
 @file:JsModule("react-intl")
+@file:JsNonModule
 
 package reactintl.provider
 
 import react.*
-import reactintl.IntlCache
-import reactintl.IntlShape
+import reactintl.*
 
 @JsName("IntlProvider")
 external class IntlProviderComponent : Component<IntlProviderProps, IntlProviderState> {
@@ -18,6 +18,3 @@ external interface IntlProviderState : RState {
     var intl: IntlShape?
     var prevConfig: OptionalIntlConfig
 }
-
-@JsName("createIntl")
-external fun createIntl(config: OptionalIntlConfig, cache: IntlCache? = definedExternally): RProviderProps<IntlShape>

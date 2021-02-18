@@ -1,17 +1,14 @@
 package samples.timeline
 
-import antd.icon.icon
-import antd.timeline.timeline
-import antd.timeline.timelineItem
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.icon.*
+import antd.timeline.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 fun RBuilder.alternate() {
-    div("timeline-container") {
-        attrs.id = "timeline-alternate"
+    styledDiv {
+        css { +TimelineStyles.alternate }
         timeline {
             attrs.mode = "alternate"
             timelineItem { +"Create a services site 2015-09-01" }
@@ -22,9 +19,8 @@ fun RBuilder.alternate() {
             timelineItem {
                 attrs {
                     dot = buildElement {
-                        icon {
-                            attrs {
-                                type = "clock-circle-o"
+                        clockCircleOutlined {
+                            attrs{
                                 style = js { fontSize = "16px" }
                                 color = "red"
                             }
@@ -45,9 +41,8 @@ fun RBuilder.alternate() {
             timelineItem {
                 attrs {
                     dot = buildElement {
-                        icon {
-                            attrs {
-                                type = "clock-circle-o"
+                        clockCircleOutlined {
+                            attrs{
                                 style = js { fontSize = "16px" }
                                 color = "red"
                             }

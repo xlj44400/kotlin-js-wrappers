@@ -1,12 +1,9 @@
 package samples.static
 
-import kotlinext.js.jsObject
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
-import react.dom.div
-import reactresponsive.mediaQuery
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import reactresponsive.*
 
 class Static : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
@@ -31,7 +28,6 @@ class Static : RComponent<RProps, RState>() {
                 attrs.maxDeviceWidth = 1224
                 div { +"You are a tablet or mobile phone" }
             }
-
             mediaQuery {
                 attrs.orientation = "portrait"
                 div { +"You are portrait" }

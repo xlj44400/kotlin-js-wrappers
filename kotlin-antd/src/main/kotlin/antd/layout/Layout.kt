@@ -1,9 +1,10 @@
 @file:JsModule("antd/lib/layout")
+@file:JsNonModule
 
 package antd.layout
 
-import antd.HTMLAttributes
-import org.w3c.dom.HTMLDivElement
+import antd.*
+import org.w3c.dom.*
 import react.*
 
 @JsName("default")
@@ -16,16 +17,30 @@ external object LayoutComponent : Component<LayoutProps, RState> {
     override fun render(): ReactElement?
 }
 
+external object HeaderComponent : Component<LayoutProps, RState> {
+    override fun render(): ReactElement?
+}
+
+external object FooterComponent : Component<LayoutProps, RState> {
+    override fun render(): ReactElement?
+}
+
+external object ContentComponent : Component<LayoutProps, RState> {
+    override fun render(): ReactElement?
+}
+
+external val layoutContext: RContext<LayoutContextProps>
+
 external interface LayoutProps : HTMLAttributes<HTMLDivElement>, RProps {
     var prefixCls: String?
     var hasSider: Boolean?
 }
 
 external interface LayoutContextProps {
-    var siderHook: LayoutSiderHook
+    var siderHook: LayoutContextSiderHook
 }
 
-external interface LayoutSiderHook {
+external interface LayoutContextSiderHook {
     var addSider: (id: String) -> Unit
     var removeSider: (id: String) -> Unit
 }

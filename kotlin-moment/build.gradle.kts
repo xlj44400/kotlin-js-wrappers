@@ -1,12 +1,4 @@
-import org.jetbrains.kotlin.utils.addToStdlib.cast
+version = "2.27.0-pre.3"
 
-val kotlinVersion: String by project.extra
-
-val packageVersions = mapOf(
-    "kotlin_version" to kotlinVersion,
-    "kotlin_moment_version" to project.version as String
-)
-
-extra.get("configureKotlinJs").cast<() -> Unit>().invoke()
-extra.get("configureBintrayPublishing").cast<() -> Unit>().invoke()
-extra.get("configureNpmPublishing").cast<(Map<String, String>) -> Unit>().invoke(packageVersions)
+apply(plugin = "kotlin-js-wrapper")
+apply(plugin = "kotlin-js-wrapper-publish")

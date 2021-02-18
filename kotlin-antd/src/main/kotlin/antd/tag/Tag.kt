@@ -1,13 +1,11 @@
 @file:JsModule("antd/lib/tag")
+@file:JsNonModule
 
 package antd.tag
 
-import antd.HTMLAttributes
-import org.w3c.dom.HTMLDivElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object TagComponent : Component<TagProps, TagState> {

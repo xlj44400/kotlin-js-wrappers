@@ -1,17 +1,13 @@
 package samples.list
 
-import antd.avatar.avatar
-import antd.icon.icon
-import antd.list.ListComponent
-import antd.list.list
-import antd.list.listItem
-import antd.list.listItemMeta
-import antd.pagination.PaginationConfig
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.avatar.*
+import antd.icon.*
+import antd.list.*
+import antd.pagination.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private interface VerticalListDataItem {
     var href: String
@@ -31,30 +27,23 @@ private val listData = (0..23).mapIndexed { i, _ ->
     }
 }.toTypedArray()
 
-interface VerticalIconTextProps : RProps {
-    var type: String
+interface IconTextProps : RProps {
+    var icon: ReactElement
     var text: String
 }
 
-class VerticalIconText : RComponent<VerticalIconTextProps, RState>() {
-    override fun RBuilder.render() {
-        span {
-            icon {
-                attrs {
-                    type = props.type
-                    style = js { marginRight = 8 }
-                }
-            }
-            +props.text
-        }
+private val iconText = functionalComponent<IconTextProps> { props ->
+    span {
+        childList += props.icon
+        +" ${props.text}"
     }
 }
 
-fun RBuilder.iconText(handler: RHandler<VerticalIconTextProps>) = child(VerticalIconText::class, handler)
+fun RBuilder.iconText(handler: RHandler<IconTextProps>) = child(iconText, jsObject {}, handler)
 
 fun RBuilder.vertical() {
-    div("list-container") {
-        attrs.id = "list-vertical"
+    styledDiv {
+        css { +ListStyles.vertical }
         list<VerticalListDataItem, ListComponent<VerticalListDataItem>> {
             attrs {
                 itemLayout = "vertical"
@@ -78,30 +67,30 @@ fun RBuilder.vertical() {
                         attrs {
                             key = item.title
                             actions = arrayOf(
-                                    buildElement {
-                                        iconText {
-                                            attrs {
-                                                type = "star-o"
-                                                text = "156"
-                                            }
+                                buildElement {
+                                    iconText {
+                                        attrs {
+                                            icon = starOutlined {}
+                                            text = "156"
                                         }
-                                    }!!,
-                                    buildElement {
-                                        iconText {
-                                            attrs {
-                                                type = "like-o"
-                                                text = "156"
-                                            }
+                                    }
+                                },
+                                buildElement {
+                                    iconText {
+                                        attrs {
+                                            icon = likeOutlined {}
+                                            text = "156"
                                         }
-                                    }!!,
-                                    buildElement {
-                                        iconText {
-                                            attrs {
-                                                type = "message"
-                                                text = "2"
-                                            }
+                                    }
+                                },
+                                buildElement {
+                                    iconText {
+                                        attrs {
+                                            icon = messageOutlined {}
+                                            text = "2"
                                         }
-                                    }!!
+                                    }
+                                }
 
                             )
                             extra = buildElement {

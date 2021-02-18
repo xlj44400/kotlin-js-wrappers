@@ -1,19 +1,18 @@
 package samples.message
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.message.message
-import kotlinx.html.id
+import antd.*
+import antd.button.*
+import antd.message.*
 import react.*
-import react.dom.*
+import styled.*
 
 private val info: MouseEventHandler<Any> = {
     message.info("This is a normal message")
 }
 
 fun RBuilder.info() {
-    div("message-container") {
-        attrs.id = "message-info"
+    styledDiv {
+        css { +MessageStyles.info }
         button {
             attrs {
                 type = "primary"

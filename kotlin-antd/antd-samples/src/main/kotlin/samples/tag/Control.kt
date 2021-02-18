@@ -1,18 +1,15 @@
 package samples.tag
 
-import antd.ChangeEventHandler
-import antd.MouseEventHandler
-import antd.icon.icon
+import antd.*
+import antd.icon.*
 import antd.input.input
-import antd.tag.tag
-import antd.tooltip.tooltip
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.HTMLInputElement
+import antd.tag.*
+import antd.tooltip.*
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
 import react.dom.div
+import styled.*
 
 interface ControlEditableTagGroupState : RState {
     var tags: Array<String>
@@ -106,7 +103,7 @@ class ControlEditableTagGroup : RComponent<RProps, ControlEditableTagGroupState>
                         style = js { width = 78 }
                         value = state.inputValue
                         onChange = handleInputChange
-                        onBlur =  { handleInputConfirm() }
+                        onBlur = { handleInputConfirm() }
                         onPressEnter = { handleInputConfirm() }
                     }
                 }
@@ -119,9 +116,7 @@ class ControlEditableTagGroup : RComponent<RProps, ControlEditableTagGroupState>
                             borderStyle = "dashed"
                         }
                     }
-                    icon {
-                        attrs.type = "plus"
-                    }
+                    plusOutlined {}
                     +" New Tag "
                 }
             }
@@ -132,8 +127,8 @@ class ControlEditableTagGroup : RComponent<RProps, ControlEditableTagGroupState>
 fun RBuilder.controlEditableTagGroup() = child(ControlEditableTagGroup::class) {}
 
 fun RBuilder.control() {
-    div("tag-container") {
-        attrs.id = "tag-control"
+    styledDiv {
+        css { +TagStyles.control }
         controlEditableTagGroup()
     }
 }

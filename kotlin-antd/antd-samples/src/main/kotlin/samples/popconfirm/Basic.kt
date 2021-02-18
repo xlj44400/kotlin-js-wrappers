@@ -1,29 +1,28 @@
 package samples.popconfirm
 
-import antd.MouseEvent
-import antd.message.message
-import antd.popconfirm.popconfirm
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
-import react.RBuilder
-import react.dom.a
-import react.dom.div
+import antd.*
+import antd.message.*
+import antd.popconfirm.*
+import org.w3c.dom.*
+import react.*
+import react.dom.*
+import styled.*
 
-private val confirm: (e: MouseEvent<HTMLElement>) -> Unit = { e ->
+private val confirm: (e: MouseEvent<HTMLElement>?) -> Unit = { e ->
     console.log(e)
 
     message.success("Click on Yes")
 }
 
-private val cancel: (e: MouseEvent<HTMLElement>) -> Unit = { e ->
+private val cancel: (e: MouseEvent<HTMLElement>?) -> Unit = { e ->
     console.log(e)
 
     message.error("Click on No")
 }
 
 fun RBuilder.basic() {
-    div("popconfirm-container") {
-        attrs.id = "popconfirm-basic"
+    styledDiv {
+        css { +PopconfirmStyles.basic }
         popconfirm {
             attrs {
                 title = "Are you sure delete this task?"

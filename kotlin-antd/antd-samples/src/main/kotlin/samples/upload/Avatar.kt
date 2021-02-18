@@ -1,17 +1,13 @@
 package samples.upload
 
-import antd.icon.icon
-import antd.message.message
-import antd.upload.RcFile
-import antd.upload.UploadChangeParam
-import antd.upload.UploadFile
-import antd.upload.upload
-import kotlinx.html.classes
-import kotlinx.html.id
-import org.w3c.files.File
-import org.w3c.files.FileReader
+import antd.icon.*
+import antd.message.*
+import antd.upload.*
+import kotlinx.html.*
+import org.w3c.files.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun getBase64(img: File, callback: (imgUrl: String) -> Unit) {
     val reader = FileReader()
@@ -43,7 +39,7 @@ interface AvatarAppState : RState {
 }
 
 class AvatarApp : RComponent<RProps, AvatarAppState>() {
-    private val handleChange = fun (info: UploadChangeParam<UploadFile>) {
+    private val handleChange = fun(info: UploadChangeParam<UploadFile>) {
         if (info.file.status == "uploading") {
             setState {
                 loading = true
@@ -70,15 +66,15 @@ class AvatarApp : RComponent<RProps, AvatarAppState>() {
     override fun RBuilder.render() {
         val uploadButton = buildElement {
             div {
-                icon {
-                    attrs.type = if (state.loading) "loading" else "plus"
-                }
+                if (state.loading) {
+                    loadingOutlined {}
+                } else plusOutlined {}
                 div {
                     attrs.classes = setOf("ant-upload-text")
                     +"Upload"
                 }
             }
-        }!!
+        }
 
         upload {
             attrs {
@@ -105,8 +101,8 @@ class AvatarApp : RComponent<RProps, AvatarAppState>() {
 fun RBuilder.avatarApp() = child(AvatarApp::class) {}
 
 fun RBuilder.avatar() {
-    div("upload-container") {
-        attrs.id = "upload-avatar"
+    styledDiv {
+        css { +UploadStyles.avatar }
         avatarApp()
     }
 }

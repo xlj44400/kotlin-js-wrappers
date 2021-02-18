@@ -1,14 +1,13 @@
 package samples.timepicker
 
-import antd.timepicker.timePicker
-import kotlinx.html.id
-import moment.moment
+import antd.timepicker.*
+import moment.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.disabled() {
-    div("time-picker-container") {
-        attrs.id = "time-picker-disabled"
+    styledDiv {
+        css { +TimePickerStyles.disabled }
         timePicker {
             attrs {
                 defaultValue = moment("12:08:23", "HH:mm:ss")

@@ -1,17 +1,14 @@
 package samples.card
 
-import antd.card.card
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.a
-import react.dom.div
-import react.dom.p
+import antd.card.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("card-container") {
-        attrs.id = "card-basic"
+    styledDiv {
+        css { +CardStyles.basic }
         div {
             card {
                 attrs {

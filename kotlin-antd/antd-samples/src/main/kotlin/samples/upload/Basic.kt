@@ -1,18 +1,16 @@
 package samples.upload
 
-import antd.button.button
-import antd.icon.icon
-import antd.message.message
-import antd.upload.HttpRequestHeader
-import antd.upload.upload
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.button.*
+import antd.icon.*
+import antd.message.*
+import antd.upload.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("upload-container") {
-        attrs.id = "upload-basic"
+    styledDiv {
+        css { +UploadStyles.basic }
         upload {
             attrs {
                 name = "file"
@@ -32,9 +30,7 @@ fun RBuilder.basic() {
                 }
             }
             button {
-                icon {
-                    attrs.type = "upload"
-                }
+                uploadOutlined {}
                 +"Click to upload"
             }
         }

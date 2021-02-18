@@ -1,18 +1,14 @@
 package samples.autocomplete
 
-import antd.KeyboardEventHandler
-import antd.autocomplete.DataSourceItemType
-import antd.autocomplete.autoComplete
-import antd.input.textArea
-import antd.select.SelectValue
-import kotlinext.js.Object
-import kotlinext.js.js
-import kotlinx.html.id
-import org.w3c.dom.HTMLTextAreaElement
+import antd.*
+import antd.autocomplete.*
+import antd.input.*
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
-import react.dom.*
+import styled.*
 
-private fun handleSelect(value: SelectValue, option: Object) {
+private val handleSelect = { value: Any, _: Any ->
     console.log("onSelect", value)
 }
 
@@ -21,7 +17,7 @@ interface CustomCompleteState : RState {
 }
 
 class CustomComplete : RComponent<RProps, CustomCompleteState>() {
-    private val handleSearch = fun (value: String) {
+    private val handleSearch = fun(value: String) {
         setState {
             dataSource = if (value.isEmpty()) {
                 emptyArray()
@@ -44,7 +40,7 @@ class CustomComplete : RComponent<RProps, CustomCompleteState>() {
             attrs {
                 dataSource = state.dataSource
                 style = js { width = 200 }
-                onSelect = ::handleSelect
+                onSelect = handleSelect
                 onSearch = handleSearch
             }
             textArea {
@@ -62,8 +58,8 @@ class CustomComplete : RComponent<RProps, CustomCompleteState>() {
 fun RBuilder.customComplete() = child(CustomComplete::class) {}
 
 fun RBuilder.custom() {
-    div("auto-complete-container") {
-        attrs.id = "auto-complete-custom"
+    styledDiv {
+        css { +AutoCompleteStyles.custom }
         customComplete()
     }
 }

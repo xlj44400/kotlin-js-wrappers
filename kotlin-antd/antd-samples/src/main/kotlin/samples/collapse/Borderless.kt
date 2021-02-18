@@ -1,28 +1,24 @@
 package samples.collapse
 
-import antd.collapse.collapse
-import antd.collapse.collapsePanel
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
-import react.dom.jsStyle
-import react.dom.p
+import antd.collapse.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val text = buildElement {
-   p {
-       attrs.jsStyle = js { paddingLeft = 24 }
-       +"""
+    p {
+        attrs.jsStyle = js { paddingLeft = 24 }
+        +"""
            A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found 
            as a welcome guest in many households across the world.
        """.trimIndent()
-   }
-}!!
+    }
+}
 
 fun RBuilder.borderless() {
-    div("collapse-container") {
-        attrs.id = "collapse-borderless"
+    styledDiv {
+        css { +CollapseStyles.borderless }
         collapse {
             attrs {
                 bordered = false

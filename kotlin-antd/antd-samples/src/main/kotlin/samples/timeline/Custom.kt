@@ -1,26 +1,22 @@
 package samples.timeline
 
-import antd.icon.icon
-import antd.timeline.timeline
-import antd.timeline.timelineItem
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.icon.*
+import antd.timeline.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 fun RBuilder.custom() {
-    div("timeline-container") {
-        attrs.id = "timeline-custom"
+    styledDiv {
+        css { +TimelineStyles.custom }
         timeline {
             timelineItem { +"Create a services site 2015-09-01" }
             timelineItem { +"Solve initial network problems 2015-09-01" }
             timelineItem {
                 attrs {
                     dot = buildElement {
-                        icon {
+                        clockCircleOutlined {
                             attrs {
-                                type = "clock-circle-o"
                                 style = js { fontSize = "16px" }
                                 color = "red"
                             }

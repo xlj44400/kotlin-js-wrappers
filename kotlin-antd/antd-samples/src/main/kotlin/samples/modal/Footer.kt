@@ -1,15 +1,14 @@
 package samples.modal
 
-import antd.MouseEvent
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.modal.modal
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import antd.modal.*
+import kotlinext.js.*
+import kotlinx.browser.*
+import org.w3c.dom.*
 import react.*
 import react.dom.*
-import kotlin.browser.window
+import styled.*
 
 interface FooterAppState : RState {
     var loading: Boolean
@@ -94,8 +93,8 @@ class FooterApp : RComponent<RProps, FooterAppState>() {
 fun RBuilder.footerApp() = child(FooterApp::class) {}
 
 fun RBuilder.footer() {
-    div("modal-container") {
-        attrs.id = "modal-footer"
+    styledDiv {
+        css { +ModalStyles.footer }
         footerApp()
     }
 }

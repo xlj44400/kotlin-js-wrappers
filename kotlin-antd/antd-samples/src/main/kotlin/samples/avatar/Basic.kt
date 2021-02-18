@@ -1,34 +1,43 @@
 package samples.avatar
 
-import antd.avatar.avatar
-import kotlinx.html.id
+import antd.avatar.*
+import antd.icon.userOutlined
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("avatar-container") {
-        attrs.id = "avatar-basic"
+    styledDiv {
+        css { +AvatarStyles.basic }
         div {
             div {
                 avatar {
                     attrs {
                         size = 64
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
                 avatar {
                     attrs {
                         size = "large"
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
                 avatar {
-                    attrs.icon = "user"
+                    attrs.icon = buildElement {
+                        userOutlined {}
+                    }
                 }
                 avatar {
                     attrs {
                         size = "small"
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
             }
@@ -37,27 +46,35 @@ fun RBuilder.basic() {
                     attrs {
                         shape = "square"
                         size = 64
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
                 avatar {
                     attrs {
                         shape = "square"
                         size = "large"
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
                 avatar {
                     attrs {
                         shape = "square"
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
                 avatar {
                     attrs {
                         shape = "square"
                         size = "small"
-                        icon = "user"
+                        icon = buildElement {
+                            userOutlined {}
+                        }
                     }
                 }
             }

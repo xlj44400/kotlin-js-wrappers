@@ -1,12 +1,13 @@
 package samples.progress
 
-import antd.MouseEventHandler
+import antd.*
+import antd.button.*
 import antd.button.button
-import antd.button.buttonGroup
+import antd.icon.*
 import antd.progress.progress
-import kotlinx.html.id
 import react.*
 import react.dom.div
+import styled.*
 
 interface DynamicAppState : RState {
     var percent: Number
@@ -50,13 +51,17 @@ class DynamicApp : RComponent<RProps, DynamicAppState>() {
                 button {
                     attrs {
                         onClick = decline
-                        icon = "minus"
+                        icon = buildElement {
+                            minusOutlined {}
+                        }
                     }
                 }
                 button {
                     attrs {
                         onClick = increase
-                        icon = "plus"
+                        icon = buildElement {
+                            plusOutlined {}
+                        }
                     }
                 }
             }
@@ -67,8 +72,8 @@ class DynamicApp : RComponent<RProps, DynamicAppState>() {
 fun RBuilder.dynamicApp() = child(DynamicApp::class) {}
 
 fun RBuilder.dynamic() {
-    div("progress-container") {
-        attrs.id = "progress-dynamic"
+    styledDiv {
+        css { +ProgressStyles.dynamic }
         dynamicApp()
     }
 }

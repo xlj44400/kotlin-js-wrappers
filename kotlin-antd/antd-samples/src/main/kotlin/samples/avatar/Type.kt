@@ -1,17 +1,20 @@
 package samples.avatar
 
-import antd.avatar.avatar
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.avatar.*
+import antd.icon.userOutlined
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.type() {
-    div("avatar-container") {
-        attrs.id = "avatar-type"
+    styledDiv {
+        css { +AvatarStyles.type }
         div {
             avatar {
-                attrs.icon = "user"
+                attrs.icon = buildElement {
+                    userOutlined {}
+                }
             }
             avatar { +"U" }
             avatar { +"USER" }
@@ -27,7 +30,9 @@ fun RBuilder.type() {
             avatar {
                 attrs {
                     style = js { backgroundColor = "#87d068" }
-                    icon = "user"
+                    icon = buildElement {
+                        userOutlined {}
+                    }
                 }
             }
         }

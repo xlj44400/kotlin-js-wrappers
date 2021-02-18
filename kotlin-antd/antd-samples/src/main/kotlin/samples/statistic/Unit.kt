@@ -1,17 +1,14 @@
 package samples.statistic
 
-import antd.grid.col
-import antd.grid.row
-import antd.icon.icon
-import antd.statistic.statistic
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.grid.*
+import antd.icon.*
+import antd.statistic.*
+import react.*
+import styled.*
 
 fun RBuilder.unit() {
-    div("statistic-container") {
-        attrs.id = "statistic-unit"
+    styledDiv {
+        css { +StatisticStyles.unit }
         row {
             attrs.gutter = 16
             col {
@@ -21,9 +18,7 @@ fun RBuilder.unit() {
                         title = "Feedback"
                         value = 1128
                         prefix = buildElement {
-                            icon {
-                                attrs.type = "like"
-                            }
+                            likeOutlined {}
                         }
                     }
                 }

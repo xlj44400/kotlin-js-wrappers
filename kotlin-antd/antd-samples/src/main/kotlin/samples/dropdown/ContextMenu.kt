@@ -1,12 +1,11 @@
 package samples.dropdown
 
-import antd.dropdown.dropdown
-import antd.menu.menu
-import antd.menu.menuItem
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.dropdown.*
+import antd.menu.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val menu = buildElement {
     menu {
@@ -23,11 +22,11 @@ private val menu = buildElement {
             +"3rd menu item"
         }
     }
-}!!
+}
 
 fun RBuilder.contextMenu() {
-    div("dropdown-container") {
-        attrs.id = "dopdown-context-menu"
+    styledDiv {
+        css { +DropdownStyles.contextMenu }
         dropdown {
             attrs {
                 overlay = menu

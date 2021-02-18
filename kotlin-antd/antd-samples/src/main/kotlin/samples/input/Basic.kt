@@ -1,13 +1,12 @@
 package samples.input
 
-import antd.input.input
-import kotlinx.html.id
+import antd.input.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("input-container") {
-        attrs.id = "input-basic"
+    styledDiv {
+        css { +InputStyles.basic }
         input {
             attrs.placeholder = "Basic usage"
         }

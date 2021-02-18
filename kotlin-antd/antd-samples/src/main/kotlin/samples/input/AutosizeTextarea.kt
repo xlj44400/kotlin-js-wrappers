@@ -1,21 +1,20 @@
 package samples.input
 
-import antd.input.AutoSizeType
+import antd.input.*
 import antd.input.textArea
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.autosizeTextarea() {
-    div("input-container") {
-        attrs.id = "input-autosize-textarea"
+    styledDiv {
+        css { +InputStyles.autosizeTextarea }
         div {
             textArea {
                 attrs {
                     placeholder = "Autosize height based on content lines"
-                    autosize = true
+                    autoSize = true
                 }
             }
             div {
@@ -24,7 +23,7 @@ fun RBuilder.autosizeTextarea() {
             textArea {
                 attrs {
                     placeholder = "Autosize height with minimum and maximum number of lines"
-                    autosize = jsObject<AutoSizeType> {
+                    autoSize = jsObject<AutoSizeType> {
                         minRows = 2
                         maxRows = 6
                     }

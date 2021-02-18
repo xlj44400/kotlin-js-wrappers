@@ -1,11 +1,9 @@
 @file:JsModule("antd/lib/collapse")
+@file:JsNonModule
 
 package antd.collapse
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external object CollapseComponent : Component<CollapseProps, RState> {
@@ -15,8 +13,8 @@ external object CollapseComponent : Component<CollapseProps, RState> {
 }
 
 external interface CollapseProps : RProps {
-    var activeKey: Any? /* Array<String> | String */
-    var defaultActiveKey: Any? /* Array<String> | String */
+    var activeKey: Any? /* Array<String | Number> | String | Number */
+    var defaultActiveKey: Any? /* Array<String | Number> | String | Number */
     var accordion: Boolean?
     var destroyInactivePanel: Boolean?
     var onChange: ((key: Any /* String | Array<String> */) -> Unit)?
@@ -24,8 +22,9 @@ external interface CollapseProps : RProps {
     var className: String?
     var bordered: Boolean?
     var prefixCls: String?
-    var expandIcon: ((panelProps: PanelProps) -> ReactElement)?
+    var expandIcon: ((panelProps: PanelProps) -> Any /* String | ReactElement */)?
     var expandIconPosition: ExpandIconPosition?
+    var ghost: Boolean?
 }
 
 external interface PanelProps {

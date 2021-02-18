@@ -1,21 +1,20 @@
 package samples.slider
 
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import antd.inputnumber.inputNumber
-import antd.slider.SliderValue
-import antd.slider.slider
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.inputnumber.*
+import antd.slider.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface IntegerStepState : RState {
-    var inputValue: SliderValue
+    var inputValue: Number
 }
 
 class IntegerStep : RComponent<RProps, IntegerStepState>() {
-    private val handleChange = fun (value: SliderValue) {
+    private val handleChange = fun(value: Number) {
         setState {
             inputValue = value
         }
@@ -58,11 +57,11 @@ class IntegerStep : RComponent<RProps, IntegerStepState>() {
 fun RBuilder.integerStep() = child(IntegerStep::class) {}
 
 interface DecimalStepState : RState {
-    var inputValue: SliderValue
+    var inputValue: Number
 }
 
 class DecimalStep : RComponent<RProps, DecimalStepState>() {
-    private val handleChange = fun (value: SliderValue) {
+    private val handleChange = fun(value: Number) {
         if (value.unsafeCast<Double>().isNaN()) {
             return
         }
@@ -111,8 +110,8 @@ class DecimalStep : RComponent<RProps, DecimalStepState>() {
 fun RBuilder.decimalStep() = child(DecimalStep::class) {}
 
 fun RBuilder.inputNumber() {
-    div("slider-container") {
-        attrs.id = "slider-input-number"
+    styledDiv {
+        css { +SliderStyles.inputNumber }
         div {
             integerStep()
             decimalStep()

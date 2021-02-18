@@ -1,13 +1,13 @@
 package samples.typography
 
 import antd.typography.title
-import kotlinx.html.id
-import react.RBuilder
+import react.*
 import react.dom.div
+import styled.*
 
 fun RBuilder.title() {
-    div("typography-container") {
-        attrs.id = "typography-title"
+    styledDiv {
+        css { +TypographyStyles.title }
         div {
             title { +"h1. Ant Design" }
             title {

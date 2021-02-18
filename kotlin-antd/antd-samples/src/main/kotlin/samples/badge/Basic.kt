@@ -1,23 +1,23 @@
 package samples.badge
 
-import antd.badge.badge
-import antd.icon.icon
-import kotlinext.js.js
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.badge.*
+import antd.icon.*
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("badge-container") {
-        attrs.id = "badge-basic"
+    styledDiv {
+        css { +BadgeStyles.basic }
         div {
             badge {
                 attrs.count = 5
                 a {
                     attrs {
-                        href = "#"
                         classes = setOf("head-example")
+                        href = "#"
                     }
                 }
             }
@@ -28,26 +28,23 @@ fun RBuilder.basic() {
                 }
                 a {
                     attrs {
-                        href = "#"
                         classes = setOf("head-example")
+                        href = "#"
                     }
                 }
             }
             badge {
                 attrs {
                     count = buildElement {
-                        icon {
-                            attrs {
-                                type = "clock-circle"
-                                style = js { color = "#f5222d" }
-                            }
+                        clockCircleOutlined {
+                            attrs.style = js { color = "#f5222d" }
                         }
                     }
                 }
                 a {
                     attrs {
-                        href = "#"
                         classes = setOf("head-example")
+                        href = "#"
                     }
                 }
             }

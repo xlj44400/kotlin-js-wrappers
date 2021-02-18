@@ -1,17 +1,17 @@
 package samples.card
 
-import antd.card.card
+import antd.card.*
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
+import kotlinext.js.*
+import react.*
 import react.dom.div
 import react.dom.jsStyle
+import styled.*
 
 fun RBuilder.inColumn() {
-    div("card-container") {
-        attrs.id = "card-in-column"
+    styledDiv {
+        css { +CardStyles.inColumn }
         div {
             attrs.jsStyle = js {
                 background = "#ECECEC"

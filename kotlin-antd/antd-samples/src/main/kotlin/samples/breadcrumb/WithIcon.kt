@@ -1,27 +1,22 @@
 package samples.breadcrumb
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import antd.icon.icon
-import kotlinx.html.id
+import antd.breadcrumb.*
+import antd.icon.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.withIcon() {
-    div("breadcrumb-container") {
-        attrs.id = "breadcrumb-with-icon"
+    styledDiv {
+        css { +BreadcrumbStyles.withIcon }
         breadcrumb {
             breadcrumbItem {
                 attrs.href = ""
-                icon {
-                    attrs.type = "home"
-                }
+                homeOutlined {}
             }
             breadcrumbItem {
                 attrs.href = ""
-                icon {
-                    attrs.type = "user"
-                }
+                userOutlined {}
                 span { +"Application List" }
             }
             breadcrumbItem { +"Application" }

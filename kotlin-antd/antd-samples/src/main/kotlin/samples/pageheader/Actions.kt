@@ -1,19 +1,18 @@
 package samples.pageheader
 
 import antd.button.button
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import antd.pageheader.pageHeader
-import antd.statistic.statistic
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import antd.tag.tag
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.pageheader.*
+import antd.statistic.*
+import antd.tabs.*
+import antd.tag.*
+import kotlinx.browser.*
+import kotlinx.html.*
 import react.*
 import react.dom.a
 import react.dom.div
-import kotlin.browser.window
+import styled.*
 
 interface ActionsDescriptionProps : RProps {
     var term: String
@@ -99,8 +98,8 @@ private val extraContent = buildElement {
 }
 
 fun RBuilder.actions() {
-    div("page-header-container") {
-        attrs.id = "page-header-actions"
+    styledDiv {
+        css { +PageHeaderStyles.actions }
         pageHeader {
             attrs {
                 onBack = { window.history.back() }
@@ -113,27 +112,27 @@ fun RBuilder.actions() {
                     }
                 }
                 extra = arrayOf(
-                        buildElement {
-                            button {
-                                attrs.key = "3"
-                                +"Operation"
-                            }
-                        },
-                        buildElement {
-                            button {
-                                attrs.key = "2"
-                                +"Operation"
-                            }
-                        },
-                        buildElement {
-                            button {
-                                attrs {
-                                    key = "1"
-                                    type = "primary"
-                                }
-                                +"Primary"
-                            }
+                    buildElement {
+                        button {
+                            attrs.key = "3"
+                            +"Operation"
                         }
+                    },
+                    buildElement {
+                        button {
+                            attrs.key = "2"
+                            +"Operation"
+                        }
+                    },
+                    buildElement {
+                        button {
+                            attrs {
+                                key = "1"
+                                type = "primary"
+                            }
+                            +"Primary"
+                        }
+                    }
                 )
                 footer = buildElement {
                     tabs {

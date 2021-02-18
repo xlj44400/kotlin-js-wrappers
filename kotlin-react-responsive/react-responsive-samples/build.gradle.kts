@@ -1,4 +1,2 @@
-import org.jetbrains.kotlin.utils.addToStdlib.cast
-
-extra.get("configureKotlinJs").cast<() -> Unit>().invoke()
-extra.get("configureSamples").cast<() -> Unit>().invoke()
+apply(plugin = "kotlin-js-wrapper")
+apply(plugin = "kotlin-js-wrapper-samples")

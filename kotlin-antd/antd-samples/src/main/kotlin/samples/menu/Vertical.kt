@@ -1,22 +1,22 @@
 package samples.menu
 
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
-private fun handleClick(param: ClickParam) {
-    console.log("click ", param)
+private val handleClick: MenuClickEventHandler = { info ->
+    console.log("click ", info)
 }
 
 fun RBuilder.vertical() {
-    div("menu-container") {
-        attrs.id = "menu-vertical"
+    styledDiv {
+        css { +MenuStyles.vertical }
         menu {
             attrs {
-                onClick = ::handleClick
+                onClick = handleClick
                 style = js { width = 256 }
                 mode = "vertical"
             }
@@ -25,9 +25,7 @@ fun RBuilder.vertical() {
                     key = "sub1"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "mail"
-                            }
+                            mailOutlined {}
                             span { +"Navigation One" }
                         }
                     }
@@ -82,9 +80,7 @@ fun RBuilder.vertical() {
                     key = "sub2"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "appstore"
-                            }
+                            appstoreOutlined {}
                             span { +"Navigation Two" }
                         }
                     }
@@ -95,9 +91,7 @@ fun RBuilder.vertical() {
                     key = "sub4"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "setting"
-                            }
+                            settingOutlined {}
                             span { +"Navigation Three" }
                         }
                     }

@@ -1,9 +1,6 @@
 package antd.badge
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 external object ScrollNumberComponent : Component<ScrollNumberProps, ScrollNumberState> {
     override fun render(): ReactElement?
@@ -13,11 +10,12 @@ external interface ScrollNumberProps : RProps {
     var prefixCls: String?
     var className: String?
     var count: Any? /* String | Number */
-    var displayComponent: ReactElement?
+    var children: ReactElement?
     var component: String?
     var onAnimated: Function<Any>?
     var style: dynamic
     var title: Any? /* String | Number */
+    var show: Boolean
 }
 
 external interface ScrollNumberState : RState {

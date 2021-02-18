@@ -1,11 +1,9 @@
 @file:JsModule("react-responsive")
+@file:JsNonModule
 
 package reactresponsive
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external class MediaQueryComponent : Component<MediaQueryProps, RState> {
@@ -18,12 +16,47 @@ external interface MediaQueryProps : MediaQueryAllQueryable, RProps {
     var style: dynamic
     var className: String?
     var children: Any? /* ReactElement | MediaQueryChildrenFn */
+    var device: MediaQueryMatchers?
     var values: MediaQueryMatchers?
     var onBeforeChange: ((matches: Boolean) -> Unit)?
     var onChange: ((matches: Boolean) -> Unit)?
 }
 
-external interface MediaQueryAllQueryable : MediaQueryFeatures, MediaQueryTypes
+@JsName("toQuery")
+external fun toQuery(matchers: MediaQueryAllQueryable): String
+
+@JsName("context")
+external val context: RContext<MediaQueryAllQueryable>
+
+external interface MediaQueryTypes {
+    var all: Boolean?
+    var grid: Boolean?
+    var aural: Boolean?
+    var braille: Boolean?
+    var handheld: Boolean?
+    var print: Boolean?
+    var projection: Boolean?
+    var screen: Boolean?
+    var tty: Boolean?
+    var tv: Boolean?
+    var embossed: Boolean?
+}
+
+external interface MediaQueryMatchers {
+    var aspectRatio: String?
+    var deviceAspectRatio: String?
+    var height: Any? /* Number | String */
+    var deviceHeight: Any? /* Number | String */
+    var width: Any? /* Number | String */
+    var deviceWidth: Any? /* Number | String */
+    var color: Boolean?
+    var colorIndex: Boolean?
+    var monochrome: Boolean?
+    var resolution: Any? /* Number | String */
+    var orientation: MediaQueryMatcherOrientation?
+    var scan: MediaQueryMatcherScan?
+    var type: MediaQueryType?
+}
 
 external interface MediaQueryFeatures : MediaQueryMatchers {
     var minAspectRatio: String?
@@ -57,35 +90,4 @@ external interface MediaQueryFeatures : MediaQueryMatchers {
     var maxResolution: Any? /* Number | String */
 }
 
-external interface MediaQueryMatchers {
-    var aspectRatio: String?
-    var deviceAspectRatio: String?
-    var height: Any? /* Number | String */
-    var deviceHeight: Any? /* Number | String */
-    var width: Any? /* Number | String */
-    var deviceWidth: Any? /* Number | String */
-    var color: Boolean?
-    var colorIndex: Boolean?
-    var monochrome: Boolean?
-    var resolution: Any? /* Number | String */
-    var orientation: MediaQueryMatcherOrientation?
-    var scan: MediaQueryMatcherScan?
-    var type: MediaQueryType?
-}
-
-external interface MediaQueryTypes {
-    var all: Boolean?
-    var grid: Boolean?
-    var aural: Boolean?
-    var braille: Boolean?
-    var handheld: Boolean?
-    var print: Boolean?
-    var projection: Boolean?
-    var screen: Boolean?
-    var tty: Boolean?
-    var tv: Boolean?
-    var embossed: Boolean?
-}
-
-@JsName("toQuery")
-external fun toQuery(matchers: MediaQueryAllQueryable): String
+external interface MediaQueryAllQueryable : MediaQueryFeatures, MediaQueryTypes

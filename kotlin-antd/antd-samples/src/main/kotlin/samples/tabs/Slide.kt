@@ -1,14 +1,11 @@
 package samples.tabs
 
-import antd.radio.RadioChangeEvent
-import antd.radio.radioButton
-import antd.radio.radioGroup
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.radio.*
+import antd.tabs.*
+import kotlinext.js.*
 import react.*
-import react.dom.div
+import react.dom.*
+import styled.*
 
 interface SlidingTabsDemoState : RState {
     var mode: String
@@ -65,8 +62,8 @@ class SlidingTabsDemo : RComponent<RProps, SlidingTabsDemoState>() {
 fun RBuilder.slidingTabsDemo() = child(SlidingTabsDemo::class) {}
 
 fun RBuilder.slide() {
-    div("tabs-container") {
-        attrs.id = "tabs-slide"
+    styledDiv {
+        css { +TabsStyles.slide }
         slidingTabsDemo()
     }
 }

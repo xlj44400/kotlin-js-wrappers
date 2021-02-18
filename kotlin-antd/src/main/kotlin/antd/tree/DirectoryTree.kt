@@ -1,18 +1,16 @@
 package antd.tree
 
-import react.Component
-import react.RState
-import react.ReactElement
+import react.*
 
 external object DirectoryTreeComponent : Component<DirectoryTreeProps, DirectoryTreeState> {
     override fun render(): ReactElement?
 }
 
 external interface DirectoryTreeProps : TreeProps {
-    var expandAction: DirectoryTreeExpandAction
+    var expandAction: ExpandAction
 }
 
 external interface DirectoryTreeState : RState {
-    var expandedKeys: Array<String>?
-    var selectedKeys: Array<String>?
+    var expandedKeys: Array<Key>?
+    var selectedKeys: Array<Key>?
 }

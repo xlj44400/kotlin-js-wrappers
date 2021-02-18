@@ -1,10 +1,10 @@
 package samples.comment
 
-import antd.avatar.avatar
-import antd.comment.comment
-import kotlinx.html.id
+import antd.avatar.*
+import antd.comment.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface ExampleCommentProps : RProps {
     var children: ReactElement
@@ -15,8 +15,8 @@ class ExampleComment : RComponent<ExampleCommentProps, RState>() {
         comment {
             attrs {
                 actions = arrayOf(buildElement {
-                   span { +"Reply to" }
-                }!!)
+                    span { +"Reply to" }
+                })
                 author = buildElement {
                     a { +"Han Solo" }
                 }
@@ -35,7 +35,7 @@ class ExampleComment : RComponent<ExampleCommentProps, RState>() {
                             resources (Sketch and Axure).
                         """.trimIndent()
                     }
-                }!!
+                }
             }
             childList.add(props.children)
         }
@@ -45,8 +45,8 @@ class ExampleComment : RComponent<ExampleCommentProps, RState>() {
 fun RBuilder.exampleComment(handler: RHandler<ExampleCommentProps>) = child(ExampleComment::class, handler)
 
 fun RBuilder.nested() {
-    div("comment-container") {
-        attrs.id = "comment-basic"
+    styledDiv {
+        css { +CommentStyles.nested }
         exampleComment {
             exampleComment {
                 exampleComment {}

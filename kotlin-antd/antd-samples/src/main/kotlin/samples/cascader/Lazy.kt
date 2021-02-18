@@ -1,56 +1,49 @@
 package samples.cascader
 
-import antd.cascader.CascaderOptionType
-import antd.cascader.cascader
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.cascader.*
+import kotlinext.js.*
+import kotlinx.browser.*
 import react.*
-import react.dom.*
-import kotlin.browser.window
+import styled.*
 
-interface LazyCascaderOptionType : CascaderOptionType {
-    var isLeaf: Boolean?
-    var loading: Boolean?
-}
-
-private val cascaderOptions = arrayOf<LazyCascaderOptionType>(
-        jsObject {
-            value = "zhejiang"
-            label = "Zhejiang"
-            isLeaf = false
-        },
-        jsObject {
-            value = "jiangsu"
-            label = "Jiangsu"
-            isLeaf = false
-        }
+private val cascaderOptions = arrayOf<CascaderOptionType>(
+    jsObject {
+        value = "zhejiang"
+        label = "Zhejiang"
+        isLeaf = false
+    },
+    jsObject {
+        value = "jiangsu"
+        label = "Jiangsu"
+        isLeaf = false
+    }
 )
 
 interface LazyOptionsState : RState {
-    var options: Array<LazyCascaderOptionType>
+    var options: Array<CascaderOptionType>
 }
 
 class LazyOptions : RComponent<RProps, LazyOptionsState>() {
-    private val handleChange = fun (value: Array<String>, selectedOptions: Array<CascaderOptionType>?) {
+    private val handleChange = fun(value: CascaderValueType, selectedOptions: Array<CascaderOptionType>?) {
         console.log(value, selectedOptions!!)
     }
 
-    private val handleLoadData = fun (selectedOptions: Array<CascaderOptionType>?) {
-        val targetOption = selectedOptions!![selectedOptions.size - 1].unsafeCast<LazyCascaderOptionType>()
+    private val handleLoadData = fun(selectedOptions: Array<CascaderOptionType>?) {
+        val targetOption = selectedOptions!![selectedOptions.size - 1].unsafeCast<CascaderOptionType>()
         targetOption.loading = true
 
         // load options lazily
         window.setTimeout({
             targetOption.loading = false
             targetOption.children = arrayOf(
-                    jsObject {
-                        label = buildElement { +"${targetOption.label} Dynamic 1" }
-                        value = "dynamic1"
-                    },
-                    jsObject {
-                        label = react.buildElement { +"${targetOption.label} Dynamic 2" }
-                        value = "dynamic2"
-                    }
+                jsObject {
+                    label = buildElement { +"${targetOption.label} Dynamic 1" }
+                    value = "dynamic1"
+                },
+                jsObject {
+                    label = buildElement { +"${targetOption.label} Dynamic 2" }
+                    value = "dynamic2"
+                }
             )
 
             setState {
@@ -78,8 +71,8 @@ class LazyOptions : RComponent<RProps, LazyOptionsState>() {
 fun RBuilder.lazyOptions() = child(LazyOptions::class) {}
 
 fun RBuilder.lazy() {
-    div("cascader-container") {
-        attrs.id = "cascader-lazy"
+    styledDiv {
+        css { +CascaderStyles.lazy }
         lazyOptions()
     }
 }

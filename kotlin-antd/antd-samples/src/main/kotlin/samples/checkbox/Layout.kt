@@ -1,22 +1,18 @@
 package samples.checkbox
 
-import antd.checkbox.CheckboxValueType
-import antd.checkbox.checkbox
-import antd.checkbox.checkboxGroup
-import antd.grid.col
-import antd.grid.row
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.checkbox.*
+import antd.grid.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 private fun handleChange(checkedValues: Array<CheckboxValueType>) {
     console.log("checked = ", checkedValues)
 }
 
 fun RBuilder.layout() {
-    div("checkbox-container") {
-        attrs.id = "checkbox-layout"
+    styledDiv {
+        css { +CheckboxStyles.layout }
         checkboxGroup {
             attrs {
                 style = js { width = "100%" }

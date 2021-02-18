@@ -1,18 +1,15 @@
 package samples.tree
 
-import antd.tree.TreeNodeSelectedEvent
-import antd.tree.directoryTree
-import antd.tree.treeNode
-import kotlinx.html.id
+import antd.tree.*
 import react.*
-import react.dom.div
+import styled.*
 
 class DirectoryDemo : RComponent<RProps, RState>() {
-    private val handleSelect = fun (selectedKeys: Array<String>, info: TreeNodeSelectedEvent) {
+    private val handleSelect = fun(selectedKeys: Array<Key>, info: OnSelectInfo) {
         console.log("selected", selectedKeys, info)
     }
 
-    private val handleExpand: () -> Unit = {
+    private val handleExpand: (expandedKey: Array<Key>, info: OnExpandInfo) -> Unit = { _, _ ->
         console.log("Trigger Expand")
     }
 
@@ -71,8 +68,8 @@ class DirectoryDemo : RComponent<RProps, RState>() {
 fun RBuilder.directoryDemo() = child(DirectoryDemo::class) {}
 
 fun RBuilder.directory() {
-    div("tree-container") {
-        attrs.id = "tree-directory"
+    styledDiv {
+        css { +TreeStyles.directory }
         directoryDemo()
     }
 }

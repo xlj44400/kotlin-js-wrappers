@@ -2,11 +2,21 @@ package samples.comment
 
 import react.*
 import react.dom.*
+import styled.*
+
+object CommentStyles : StyleSheet("comment", isStatic = true) {
+    val container by css {}
+    val basic by css {}
+    val list by css {}
+    val nested by css {}
+    val editor by css {}
+}
 
 class CommentApp : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
         h2 { +"Comment" }
-        div {
+        styledDiv {
+            css { +CommentStyles.container }
             basic()
             list()
             nested()

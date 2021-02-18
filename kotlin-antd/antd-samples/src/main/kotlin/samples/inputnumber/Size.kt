@@ -1,17 +1,17 @@
 package samples.inputnumber
 
-import antd.inputnumber.inputNumber
-import kotlinx.html.id
+import antd.inputnumber.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(value: Any?) {
     console.log("changed", value)
 }
 
 fun RBuilder.size() {
-    div("input-number-container") {
-        attrs.id = "input-number-size"
+    styledDiv {
+        css { +InputNumberStyles.size }
         div {
             inputNumber {
                 attrs {

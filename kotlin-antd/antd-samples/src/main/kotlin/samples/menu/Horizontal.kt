@@ -1,21 +1,21 @@
 package samples.menu
 
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import kotlinx.html.id
 import react.*
 import react.dom.*
+import styled.*
 
 interface HorizontalAppState : RState {
     var current: String
 }
 
 class HorizontalApp : RComponent<RProps, HorizontalAppState>() {
-    private val handleClick = fun (param: ClickParam) {
-        console.log("click ", param)
+    private val handleClick: MenuClickEventHandler = { info ->
+        console.log("click ", info)
 
         setState {
-            current = param.key
+            current = info.key
         }
     }
 
@@ -32,9 +32,7 @@ class HorizontalApp : RComponent<RProps, HorizontalAppState>() {
             }
             menuItem {
                 attrs.key = "mail"
-                icon {
-                    attrs.type = "mail"
-                }
+                mailOutlined {}
                 +"Navigation One"
             }
             menuItem {
@@ -42,18 +40,14 @@ class HorizontalApp : RComponent<RProps, HorizontalAppState>() {
                     key = "app"
                     disabled = true
                 }
-                icon {
-                    attrs.type = "appstore"
-                }
+                appstoreOutlined {}
                 +"Navigation Two"
             }
             subMenu {
                 attrs {
                     title = buildElement {
                         span("submenu-title-wrapper") {
-                            icon {
-                                attrs.type = "setting"
-                            }
+                            settingOutlined {}
                             +"Navigation Three - Submenu"
                         }
                     }
@@ -99,8 +93,8 @@ class HorizontalApp : RComponent<RProps, HorizontalAppState>() {
 fun RBuilder.horizontalApp() = child(HorizontalApp::class) {}
 
 fun RBuilder.horizontal() {
-    div("menu-container") {
-        attrs.id = "menu-horizontal"
+    styledDiv {
+        css { +MenuStyles.horizontal }
         horizontalApp()
     }
 }

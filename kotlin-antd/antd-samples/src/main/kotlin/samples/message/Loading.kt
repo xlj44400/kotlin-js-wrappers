@@ -1,12 +1,11 @@
 package samples.message
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.message.message
-import kotlinx.html.id
+import antd.*
+import antd.button.*
+import antd.message.*
+import kotlinx.browser.*
 import react.*
-import react.dom.*
-import kotlin.browser.window
+import styled.*
 
 private val success: MouseEventHandler<Any> = {
     val hide = message.loading("Action in progress..", 0)
@@ -16,8 +15,8 @@ private val success: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.loading() {
-    div("message-container") {
-        attrs.id = "message-loading"
+    styledDiv {
+        css { +MessageStyles.loading }
         button {
             attrs.onClick = success
             +"Display a loading indicator"

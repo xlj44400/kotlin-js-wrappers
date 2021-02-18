@@ -1,12 +1,9 @@
 package samples.mentions
 
-import antd.mentions.OptionProps
-import antd.mentions.mentions
-import antd.mentions.option
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.mentions.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 private fun handleChange(value: Any) {
     console.log("Change: ", value)
@@ -17,8 +14,8 @@ private fun handleSelect(option: OptionProps, prefix: String) {
 }
 
 fun RBuilder.basic() {
-    div("mentions-container") {
-        attrs.id = "mentions-basic"
+    styledDiv {
+        css { MentionsStyles.basic }
         mentions {
             attrs {
                 style = js { width = "100%" }

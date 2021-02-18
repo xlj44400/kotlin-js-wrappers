@@ -1,15 +1,11 @@
 package samples.autocomplete
 
-import antd.autocomplete.DataSourceItemType
-import antd.autocomplete.autoComplete
-import antd.select.SelectValue
-import kotlinext.js.Object
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.autocomplete.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
-private fun handleSelect(value: SelectValue, option: Object) {
+private val handleSelect = { value: Any, _: Any ->
     console.log("onSelect", value)
 }
 
@@ -18,7 +14,7 @@ interface BasicCompleteState : RState {
 }
 
 class BasicComplete : RComponent<RProps, BasicCompleteState>() {
-    private val handleSearch = fun (value: String) {
+    private val handleSearch = fun(value: String) {
         setState {
             dataSource = if (value.isEmpty()) {
                 emptyArray()
@@ -37,7 +33,7 @@ class BasicComplete : RComponent<RProps, BasicCompleteState>() {
             attrs {
                 dataSource = state.dataSource
                 style = js { width = 200 }
-                onSelect = ::handleSelect
+                onSelect = handleSelect
                 onSearch = handleSearch
                 placeholder = "input here"
             }
@@ -48,8 +44,8 @@ class BasicComplete : RComponent<RProps, BasicCompleteState>() {
 fun RBuilder.basicComplete() = child(BasicComplete::class) {}
 
 fun RBuilder.basic() {
-    div("auto-complete-container") {
-        attrs.id = "auto-complete-basic"
+    styledDiv {
+        css { +AutoCompleteStyles.basic }
         basicComplete()
     }
 }

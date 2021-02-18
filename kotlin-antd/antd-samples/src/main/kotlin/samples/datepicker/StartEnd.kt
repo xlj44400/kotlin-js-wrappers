@@ -1,10 +1,10 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import kotlinx.html.id
-import moment.Moment
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface DateRangeState : RState {
     var startValue: Moment?
@@ -13,7 +13,7 @@ interface DateRangeState : RState {
 }
 
 class DateRange : RComponent<RProps, DateRangeState>() {
-    private val handleDisabledStartDate = fun (current: Moment?): Boolean {
+    private val handleDisabledStartDate = fun(current: Moment?): Boolean {
         val endValue = state.endValue
 
         if (current == null || endValue == null) {
@@ -23,7 +23,7 @@ class DateRange : RComponent<RProps, DateRangeState>() {
         return current.valueOf().asDynamic() > endValue.valueOf().asDynamic()
     }
 
-    private val handleDisabledEndDate = fun (current: Moment?): Boolean {
+    private val handleDisabledEndDate = fun(current: Moment?): Boolean {
         val startValue = state.startValue
 
         if (current == null || startValue == null) {
@@ -33,19 +33,19 @@ class DateRange : RComponent<RProps, DateRangeState>() {
         return current.valueOf().asDynamic() <= startValue.valueOf().asDynamic()
     }
 
-    private val handleStartChange = fun (date: Moment, _: String) {
+    private val handleStartChange = fun(date: Moment, _: String) {
         setState {
             startValue = date
         }
     }
 
-    private val handleEndChange = fun (date: Moment, _: String) {
+    private val handleEndChange = fun(date: Moment, _: String) {
         setState {
             endValue = date
         }
     }
 
-    private val handleStartOpenChange = fun (status: Boolean) {
+    private val handleStartOpenChange = fun(status: Boolean) {
         if (!status) {
             setState {
                 endOpen = true
@@ -53,7 +53,7 @@ class DateRange : RComponent<RProps, DateRangeState>() {
         }
     }
 
-    private val handleEndOpenChange = fun (status: Boolean) {
+    private val handleEndOpenChange = fun(status: Boolean) {
         setState {
             endOpen = status
         }
@@ -98,8 +98,8 @@ class DateRange : RComponent<RProps, DateRangeState>() {
 fun RBuilder.dateRange() = child(DateRange::class) {}
 
 fun RBuilder.startEnd() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-start-end"
+    styledDiv {
+        css { +DatePickerStyles.startEnd }
         dateRange()
     }
 }

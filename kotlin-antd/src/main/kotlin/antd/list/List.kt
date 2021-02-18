@@ -1,26 +1,27 @@
 @file:JsModule("antd/lib/list")
+@file:JsNonModule
 
 package antd.list
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external class ListComponent<T> : Component<ListProps<T>, ListState> {
     companion object {
-        val Item: ListItemComponent
+        val Item: ItemComponent
     }
 
     override fun render(): ReactElement?
 }
 
+external val listContext: RContext<ListConsumerProps>
+external val listConsumer: RConsumer<ListConsumerProps>
+
 external interface ListProps<T> : RProps {
     var bordered: Boolean?
     var className: String?
     var style: dynamic
-    var children: ReactElement?
+    var children: Any? /* String | ReactElement */
     var dataSource: Array<T>?
     var extra: Any? /* String | ReactElement */
     var grid: ListGridType?
@@ -56,5 +57,10 @@ external interface ListGridType {
 }
 
 external interface ListLocale {
-    var emptyText: Any /* ReactElement | () -> ReactElement */
+    var emptyText: Any /* String | ReactElement | () -> String | ReactElement */
+}
+
+external interface ListConsumerProps {
+    var grid: Any
+    var itemLayout: String?
 }

@@ -1,20 +1,18 @@
 package samples.layout
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import antd.layout.layout
-import antd.layout.header
-import antd.layout.content
+import antd.breadcrumb.*
+import antd.layout.*
 import antd.layout.footer
+import antd.layout.header
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.top() {
-    div("layout-container") {
-        attrs.id = "layout-top"
+    styledDiv {
+        css { +LayoutStyles.top }
         layout {
             attrs.className = "layout"
             header {
@@ -54,7 +52,7 @@ fun RBuilder.top() {
                         padding = 24
                         minHeight = 280
                     }
-                    + "Content"
+                    +"Content"
                 }
             }
             footer {

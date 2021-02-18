@@ -1,18 +1,14 @@
 package samples.treeselect
 
-import antd.icon.icon
-import antd.treeselect.TreeSelectComponent
-import antd.treeselect.treeNode
-import antd.treeselect.treeSelect
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.icon.*
+import antd.treeselect.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val icon = buildElement {
-    icon {
-        attrs.type = "smile"
-    }
+    smileOutlined {}
 }
 
 interface SuffixDemoState : RState {
@@ -20,7 +16,7 @@ interface SuffixDemoState : RState {
 }
 
 class SuffixDemo : RComponent<RProps, SuffixDemoState>() {
-    private val handleChange = fun (newValue: String, _: Any, _: Any) {
+    private val handleChange = fun(newValue: String, _: Any, _: Any) {
         console.log(newValue)
 
         setState {
@@ -89,7 +85,7 @@ class SuffixDemo : RComponent<RProps, SuffixDemoState>() {
                                     attrs.jsStyle = js { color = "#08c" }
                                     +"sss"
                                 }
-                            }!!
+                            }
                             key = "random3"
                         }
                     }
@@ -102,8 +98,8 @@ class SuffixDemo : RComponent<RProps, SuffixDemoState>() {
 fun RBuilder.suffixMultipleDemo() = child(SuffixDemo::class) {}
 
 fun RBuilder.suffix() {
-    div("tree-select-container") {
-        attrs.id = "tree-select-suffix"
+    styledDiv {
+        css { +TreeSelectStyles.suffix }
         suffixMultipleDemo()
     }
 }

@@ -1,13 +1,12 @@
 package samples.timepicker
 
-import antd.timepicker.timePicker
-import kotlinx.html.id
+import antd.timepicker.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.intervalOptions() {
-    div("time-picker-container") {
-        attrs.id = "time-picker-interval-options"
+    styledDiv {
+        css { +TimePickerStyles.intervalOptions }
         timePicker {
             attrs {
                 minuteStep = 15

@@ -1,24 +1,21 @@
 package samples.layout
 
-import antd.MouseEventHandler
-import antd.icon.icon
-import antd.layout.layout
+import antd.*
+import antd.icon.*
+import antd.layout.*
 import antd.layout.header
-import antd.layout.content
-import antd.layout.sider
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface CustomTriggerDemoState : RState {
     var collapsed: Boolean
 }
 
 class CustomTriggerDemo : RComponent<RProps, CustomTriggerDemoState>() {
-    private val toggle: MouseEventHandler<HTMLElement> = {
+    private val toggle: MouseEventHandler<Any> = {
         setState {
             collapsed = !state.collapsed
         }
@@ -45,23 +42,17 @@ class CustomTriggerDemo : RComponent<RProps, CustomTriggerDemoState>() {
                     }
                     menuItem {
                         attrs.key = "1"
-                        icon {
-                            attrs.type = "user"
-                        }
+                        userOutlined {}
                         span { +"mav 1" }
                     }
                     menuItem {
                         attrs.key = "2"
-                        icon {
-                            attrs.type = "video-camera"
-                        }
+                        videoCameraOutlined {}
                         span { +"nav 2" }
                     }
                     menuItem {
                         attrs.key = "3"
-                        icon {
-                            attrs.type = "upload"
-                        }
+                        uploadOutlined {}
                         span { +"nav 3" }
                     }
                 }
@@ -74,11 +65,19 @@ class CustomTriggerDemo : RComponent<RProps, CustomTriggerDemoState>() {
                             padding = 0
                         }
                     }
-                    icon {
-                        attrs {
-                            className = "trigger"
-                            type = if (state.collapsed) "menu-unfold" else "menu-fold"
-                            onClick = toggle
+                    if (state.collapsed){
+                        menuUnfoldOutlined {
+                            attrs {
+                                className = "trigger"
+                                onClick = toggle
+                            }
+                        }
+                    } else {
+                        menuFoldOutlined {
+                            attrs {
+                                className = "trigger"
+                                onClick = toggle
+                            }
                         }
                     }
                 }
@@ -101,8 +100,8 @@ class CustomTriggerDemo : RComponent<RProps, CustomTriggerDemoState>() {
 fun RBuilder.customTriggerDemo() = child(CustomTriggerDemo::class) {}
 
 fun RBuilder.customTrigger() {
-    div("layout-container") {
-        attrs.id = "layout-custom-trigger"
+    styledDiv {
+        css { +LayoutStyles.customTrigger }
         customTriggerDemo()
     }
 }

@@ -1,24 +1,20 @@
 package samples.steps
 
-import antd.icon.icon
-import antd.steps.step
-import antd.steps.steps
-import kotlinx.html.id
+import antd.icon.*
+import antd.steps.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.icon() {
-    div("steps-container") {
-        attrs.id = "steps-icon"
+    styledDiv {
+        css { +StepsStyles.icon }
         steps {
             step {
                 attrs {
                     status = "finish"
                     title = "Login"
                     icon = buildElement {
-                        icon {
-                            attrs.type = "user"
-                        }
+                        userOutlined {}
                     }
                 }
             }
@@ -27,9 +23,7 @@ fun RBuilder.icon() {
                     status = "finish"
                     title = "Verification"
                     icon = buildElement {
-                        icon {
-                            attrs.type = "solution"
-                        }
+                        solutionOutlined {}
                     }
                 }
             }
@@ -38,9 +32,7 @@ fun RBuilder.icon() {
                     status = "process"
                     title = "Pay"
                     icon = buildElement {
-                        icon {
-                            attrs.type = "loading"
-                        }
+                        loadingOutlined {}
                     }
                 }
             }
@@ -49,9 +41,7 @@ fun RBuilder.icon() {
                     status = "wait"
                     title = "Done"
                     icon = buildElement {
-                        icon {
-                            attrs.type = "smile-o"
-                        }
+                        smileOutlined {}
                     }
                 }
             }

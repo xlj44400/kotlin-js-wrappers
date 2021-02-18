@@ -1,14 +1,12 @@
 package samples.steps
 
-import antd.steps.step
-import antd.steps.steps
-import kotlinx.html.id
+import antd.steps.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.progressDot() {
-    div("steps-container") {
-        attrs.id = "steps-progress-dot"
+    styledDiv {
+        css { +StepsStyles.progressDot }
         steps {
             attrs {
                 progressDot = true

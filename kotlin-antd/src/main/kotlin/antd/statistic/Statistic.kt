@@ -1,12 +1,10 @@
 @file:JsModule("antd/lib/statistic")
+@file:JsNonModule
 
 package antd.statistic
 
-import antd.configprovider.ConfigConsumerProps
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.configprovider.*
+import react.*
 
 @JsName("default")
 external object StatisticComponent : Component<StatisticProps, RState> {

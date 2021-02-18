@@ -1,14 +1,13 @@
 package samples.modal
 
-import antd.MouseEvent
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.modal.modal
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import antd.modal.*
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface ButtonPropsAppState : RState {
     var visible: Boolean
@@ -56,8 +55,8 @@ class ButtonPropsApp : RComponent<RProps, ButtonPropsAppState>() {
                     visible = state.visible
                     onOk = handleOk
                     onCancel = handleCancel
-                    okButtonProps= jsObject { disabled = true }
-                    cancelButtonProps= jsObject { disabled = true }
+                    okButtonProps = jsObject { disabled = true }
+                    cancelButtonProps = jsObject { disabled = true }
                 }
                 p { +"Some contents..." }
                 p { +"Some contents..." }
@@ -70,8 +69,8 @@ class ButtonPropsApp : RComponent<RProps, ButtonPropsAppState>() {
 fun RBuilder.buttonPropsApp() = child(ButtonPropsApp::class) {}
 
 fun RBuilder.buttonProps() {
-    div("modal-container") {
-        attrs.id = "modal-button-props"
+    styledDiv {
+        css { +ModalStyles.butonProps }
         buttonPropsApp()
     }
 }

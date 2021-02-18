@@ -1,13 +1,12 @@
 package samples.pagination
 
-import antd.pagination.pagination
-import kotlinx.html.id
+import antd.pagination.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.simple() {
-    div("pagination-container") {
-        attrs.id = "pagination-simple"
+    styledDiv {
+        css { +PaginationStyles.simple }
         pagination {
             attrs {
                 simple = true

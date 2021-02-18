@@ -1,10 +1,8 @@
 package antd.grid
 
 typealias ColSpanType = Any /* Number | String */
+typealias FlexType = Any /* Number | "none" | "auto" | String */
 
-typealias RowBreakpoint = String /* "xxl" | "xl" | "lg" | "md" | "sm" | "xs" */
-typealias BreakpointMap = Map<RowBreakpoint, String>
-
-typealias RowType = String /* "flex" */
-typealias RowAlign = String /* "top" | "middle" | "bottom" */
+typealias Gutter = Any /* Number | ScreenSizeMap */
+typealias RowAligns = String /* "top" | "middle" | "bottom" | "stretch" */
 typealias RowJustify = String /* "start" | "end" | "center" | "space-around" | "space-between" */

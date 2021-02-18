@@ -1,13 +1,12 @@
 package samples.skeleton
 
-import antd.skeleton.skeleton
-import kotlinx.html.id
+import antd.skeleton.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.active() {
-    div("skeleton-container") {
-        attrs.id = "skeleton-active"
+    styledDiv {
+        css { +SkeletonStyles.active }
         skeleton {
             attrs.active = true
         }

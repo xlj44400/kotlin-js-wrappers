@@ -1,15 +1,13 @@
 package samples.calendar
 
-import antd.badge.badge
-import antd.calendar.calendar
-import kotlinext.js.js
-import kotlinx.html.classes
-import kotlinx.html.id
-import moment.Moment
-import react.RBuilder
-import react.ReactElement
-import react.buildElement
+import antd.badge.*
+import antd.calendar.*
+import kotlinext.js.*
+import kotlinx.html.*
+import moment.*
+import react.*
 import react.dom.*
+import styled.*
 
 private fun getListData(value: Moment): Array<Any> {
     return when (value.date()) {
@@ -24,44 +22,44 @@ private fun getListData(value: Moment): Array<Any> {
             }
         ).unsafeCast<Array<Any>>()
         10 -> arrayOf(
-                js {
-                    type = "warning"
-                    content = "This is warning event."
-                },
-                js {
-                    type = "success"
-                    content = "This is usual event."
-                },
-                js {
-                    type = "error"
-                    content = "This is error event."
-                }
+            js {
+                type = "warning"
+                content = "This is warning event."
+            },
+            js {
+                type = "success"
+                content = "This is usual event."
+            },
+            js {
+                type = "error"
+                content = "This is error event."
+            }
         ).unsafeCast<Array<Any>>()
-        15 ->  arrayOf(
-                js {
-                    type = "warning"
-                    content = "This is warning event."
-                },
-                js {
-                    type = "success"
-                    content = "This is very long usual event。。...."
-                },
-                js {
-                    type = "error"
-                    content = "This is error event 1."
-                },
-                js {
-                    type = "error"
-                    content = "This is error event 2."
-                },
-                js {
-                    type = "error"
-                    content = "This is error event 3."
-                },
-                js {
-                    type = "error"
-                    content = "This is error event 4."
-                }
+        15 -> arrayOf(
+            js {
+                type = "warning"
+                content = "This is warning event."
+            },
+            js {
+                type = "success"
+                content = "This is very long usual event。。...."
+            },
+            js {
+                type = "error"
+                content = "This is error event 1."
+            },
+            js {
+                type = "error"
+                content = "This is error event 2."
+            },
+            js {
+                type = "error"
+                content = "This is error event 3."
+            },
+            js {
+                type = "error"
+                content = "This is error event 4."
+            }
         ).unsafeCast<Array<Any>>()
         else -> emptyArray()
     }
@@ -85,7 +83,7 @@ private fun dateCellRender(value: Moment): ReactElement {
                 }
             }.toTypedArray()
         }
-    }!!
+    }
 }
 
 private fun getMonthData(value: Moment): Number? {
@@ -106,13 +104,13 @@ private fun monthCellRender(value: Moment): ReactElement {
                 section { +"$num" }
                 span { +"Backlog number" }
             }
-        }!!
-    } else buildElement {}!!
+        }
+    } else buildElement {}
 }
 
 fun RBuilder.noticeCalendar() {
-    div("calendar-container") {
-        attrs.id = "calendar-notice-calendar"
+    styledDiv {
+        css { +CalendarStyles.noticeCalendar }
         calendar {
             attrs {
                 dateCellRender = ::dateCellRender

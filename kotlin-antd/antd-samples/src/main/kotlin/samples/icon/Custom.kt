@@ -1,13 +1,11 @@
 package samples.icon
 
-import antd.icon.CustomIconComponentProps
-import antd.icon.IconProps
-import antd.icon.icon
-import kotlinext.js.js
-import kotlinx.html.HTMLTag
-import kotlinx.html.id
+import antd.icon.*
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.path(tagName: String, block: RDOMBuilder<HTMLTag>.() -> Unit): ReactElement = tag(block) {
     HTMLTag(tagName, it, mapOf(), null, inlineTag = true, emptyTag = false)
@@ -80,36 +78,35 @@ object PandaSvg : RComponent<CustomIconComponentProps, RState>() {
     }
 }
 
-class HeartIcon : RComponent<IconProps, RState>() {
+class HeartIcon : RComponent<CustomIconComponentProps, RState>() {
     override fun RBuilder.render() {
         icon {
             attrs {
                 component = HeartSvg::class.js
-                style = props.style
             }
         }
     }
 }
 
-fun RBuilder.heartIcon(handler: RHandler<IconProps>) = child(HeartIcon::class, handler)
+fun RBuilder.heartIcon(handler: RHandler<CustomIconComponentProps>) = child(HeartIcon::class, handler)
 
-class PandaIcon : RComponent<IconProps, RState>() {
+class PandaIcon : RComponent<CustomIconComponentProps, RState>() {
     override fun RBuilder.render() {
         icon {
             attrs {
                 component = PandaSvg::class.js
-                style = props.style
             }
         }
     }
 }
 
-fun RBuilder.pandaIcon(handler: RHandler<IconProps>) = child(PandaIcon::class, handler)
+fun RBuilder.pandaIcon(handler: RHandler<CustomIconComponentProps>) = child(PandaIcon::class, handler)
 
 fun RBuilder.custom() {
-    div("icon-container") {
-        attrs.id = "icon-custom"
-        div("custom-icons-list") {
+    styledDiv {
+        css { +IconStyles.custom }
+        div {
+            attrs.classes = setOf("custom-icons-list")
             heartIcon {
                 attrs.style = js { color = "hotpink" }
             }

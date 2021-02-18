@@ -1,17 +1,15 @@
 package samples.statistic
 
-import antd.button.button
-import antd.grid.col
-import antd.grid.row
-import antd.statistic.statistic
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.button.*
+import antd.grid.*
+import antd.statistic.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("statistic-container") {
-        attrs.id = "statistic-basic"
+    styledDiv {
+        css { +StatisticStyles.basic }
         row {
             attrs.gutter = 16
             col {

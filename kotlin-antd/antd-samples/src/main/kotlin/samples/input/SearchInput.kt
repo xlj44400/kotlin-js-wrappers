@@ -1,14 +1,14 @@
 package samples.input
 
-import antd.input.search
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.input.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.searchInput() {
-    div("input-container") {
-        attrs.id = "input-search-input"
+    styledDiv {
+        css { +InputStyles.searchInput }
         div {
             search {
                 attrs {

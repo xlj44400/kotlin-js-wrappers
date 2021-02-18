@@ -1,22 +1,18 @@
 package samples.list
 
-import antd.MouseEventHandler
-import antd.avatar.avatar
+import antd.*
+import antd.avatar.*
 import antd.button.button
-import antd.list.ListComponent
-import antd.list.list
-import antd.list.listItem
-import antd.list.listItemMeta
-import antd.skeleton.skeleton
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import org.w3c.dom.events.Event
+import antd.list.*
+import antd.skeleton.*
+import kotlinext.js.*
+import kotlinx.browser.*
+import org.w3c.dom.events.*
 import react.*
 import react.dom.a
 import react.dom.div
 import react.dom.jsStyle
-import kotlin.browser.window
+import styled.*
 import kotlin.js.json
 
 private val count = 3
@@ -35,7 +31,7 @@ interface LoadMoreListState : RState {
 }
 
 class LoadMoreList : RComponent<RProps, LoadMoreListState>() {
-    private val getData = fun (callback: (Any) -> Unit) {
+    private val getData = fun(callback: (Any) -> Unit) {
         window.fetch(fakeDataUrl, jsObject {
             method = "GET"
             headers = json().apply {
@@ -116,8 +112,8 @@ class LoadMoreList : RComponent<RProps, LoadMoreListState>() {
                 renderItem = { item, _ ->
                     listItem {
                         attrs.actions = arrayOf(
-                                buildElement { a { +"edit" } }!!,
-                                buildElement { a { +"more" } }!!
+                            buildElement { a { +"edit" } },
+                            buildElement { a { +"more" } }
                         )
                         skeleton {
                             attrs {
@@ -154,8 +150,8 @@ class LoadMoreList : RComponent<RProps, LoadMoreListState>() {
 fun RBuilder.loadMoreList() = child(LoadMoreList::class) {}
 
 fun RBuilder.loadMore() {
-    div("list-container") {
-        attrs.id = "list-load-more"
+    styledDiv {
+        css { +ListStyles.loadMore }
         loadMoreList()
     }
 }

@@ -1,14 +1,12 @@
 package samples.descriptions
 
-import antd.descriptions.descriptions
-import antd.descriptions.descriptionsItem
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.descriptions.*
+import react.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("descriptions-container") {
-        attrs.id = "descriptions-basic"
+    styledDiv {
+        css { +DescriptionsStyles.basic }
         descriptions {
             attrs.title = "User Info"
             descriptionsItem {

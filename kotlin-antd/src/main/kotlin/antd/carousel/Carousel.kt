@@ -1,11 +1,9 @@
 @file:JsModule("antd/lib/carousel")
+@file:JsNonModule
 
 package antd.carousel
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external object CarouselComponent : Component<CarouselProps, RState> {
@@ -19,4 +17,13 @@ external interface CarouselProps : Settings, RProps {
     var slickGoTo: Number?
     var dotPosition: DotPosition?
     var children: ReactElement?
+    override var dots: Any? /* Boolean | SettingsDots */
+}
+
+external interface CarouselRef {
+    var goTo: (slide: Number, dontAnimate: Boolean) -> Unit
+    var next: () -> Unit
+    var prev: () -> Unit
+    var autoPlay: Boolean
+    var innerSlider: Any
 }

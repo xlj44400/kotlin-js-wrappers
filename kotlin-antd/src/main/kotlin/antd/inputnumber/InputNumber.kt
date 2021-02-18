@@ -1,13 +1,12 @@
 @file:JsModule("antd/lib/input-number")
+@file:JsNonModule
 
 package antd.inputnumber
 
-import antd.InputHTMLAttributes
-import org.w3c.dom.HTMLInputElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import antd.configprovider.SizeType
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object InputNumberComponent : Component<InputNumberProps, RState> {
@@ -24,7 +23,8 @@ external interface InputNumberProps : InputHTMLAttributes<HTMLInputElement>, RPr
     override var tabIndex: Number?
     override var onChange: dynamic /* (value: Number?) -> Unit */
     override var disabled: Boolean?
-    override var size: InputNumberSize?
+    override var readOnly: Boolean?
+    override var size: SizeType?
     var formatter: ((value: Any? /* Number | String */) -> String)?
     var parser: ((displayValue: String?) -> Any /* Number | String */)?
     var decimalSeparator: String?
@@ -34,4 +34,11 @@ external interface InputNumberProps : InputHTMLAttributes<HTMLInputElement>, RPr
     override var name: String?
     override var id: String?
     var precision: Number?
+    var onPressEnter: KeyboardEventHandler<HTMLInputElement>?
+    var onStep: ((value: Number, info: OnStepInfo) -> Unit)?
+}
+
+external interface OnStepInfo {
+    var offset: Number
+    var type: String /* "up" | "down" */
 }

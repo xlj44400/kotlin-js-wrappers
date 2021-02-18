@@ -1,18 +1,16 @@
 package samples.tabs
 
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.tabs.*
+import react.*
+import styled.*
 
 private fun callback(key: String) {
     console.log(key)
 }
 
 fun RBuilder.basic() {
-    div("tabs-container") {
-        attrs.id = "tabs-basic"
+    styledDiv {
+        css { +TabsStyles.basic }
         tabs {
             attrs {
                 defaultActiveKey = "1"

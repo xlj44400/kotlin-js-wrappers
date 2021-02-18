@@ -1,25 +1,18 @@
 package samples.result
 
-import antd.button.button
-import antd.icon.icon
-import antd.result.result
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.button.*
+import antd.icon.*
+import antd.result.*
+import react.*
+import styled.*
 
 fun RBuilder.customIcon() {
-    div("result-container") {
-        attrs.id = "result-custom-icon"
+    styledDiv {
+        css { +ResultStyles.customIcon }
         result {
             attrs {
                 icon = buildElement {
-                    icon {
-                        attrs {
-                            type = "smile"
-                            theme = "twoTone"
-                        }
-                    }
+                    smileTwoTone {}
                 }
                 title = "Great, we have done all the operations!"
                 extra = buildElement {

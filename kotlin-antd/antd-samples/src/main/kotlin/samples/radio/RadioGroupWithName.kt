@@ -1,10 +1,8 @@
 package samples.radio
 
-import antd.radio.radio
-import antd.radio.radioGroup
-import kotlinx.html.id
+import antd.radio.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.radioGroupWithNameApp() {
     radioGroup {
@@ -32,8 +30,8 @@ fun RBuilder.radioGroupWithNameApp() {
 }
 
 fun RBuilder.radioGroupWithName() {
-    div("radio-container") {
-        attrs.id = "radio-radio-group-with-name"
+    styledDiv {
+        css { +RadioStyles.radioGroupWithName }
         radioGroupWithNameApp()
     }
 }

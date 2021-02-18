@@ -1,14 +1,12 @@
 package samples.tabs
 
-import antd.select.SelectComponent
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.tabs.*
+import kotlinext.js.*
 import react.*
 import react.dom.div
+import styled.*
 
 private val positionList = arrayOf("left", "right", "top", "bottom")
 
@@ -149,8 +147,8 @@ class NestDemo : RComponent<RProps, NestDemoState>() {
 fun RBuilder.nestDemo() = child(NestDemo::class) {}
 
 fun RBuilder.nest() {
-    div("tabs-container") {
-        attrs.id = "tabs-nest"
+    styledDiv {
+        css { +TabsStyles.nest }
         nestDemo()
     }
 }

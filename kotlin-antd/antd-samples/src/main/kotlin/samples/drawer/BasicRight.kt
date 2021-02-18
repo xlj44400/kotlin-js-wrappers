@@ -1,13 +1,12 @@
 package samples.drawer
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.drawer.EventType
-import antd.drawer.drawer
-import kotlinx.html.id
+import antd.drawer.*
 import react.*
 import react.dom.div
 import react.dom.p
+import styled.*
 
 interface BasicRightAppState : RState {
     var visible: Boolean
@@ -58,8 +57,8 @@ class BasicRightApp : RComponent<RProps, BasicRightAppState>() {
 fun RBuilder.basicRightApp() = child(BasicRightApp::class) {}
 
 fun RBuilder.basicRight() {
-    div("drawer-container") {
-        attrs.id = "drawer-basic-right"
+    styledDiv {
+        css { +DrawerStyles.basicRight }
         basicRightApp()
     }
 }

@@ -1,13 +1,12 @@
 package samples.input
 
-import antd.input.password
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.input.*
+import react.*
+import styled.*
 
 fun RBuilder.passwordInput() {
-    div("input-container") {
-        attrs.id = "input-password-input"
+    styledDiv {
+        css { +InputStyles.passwordInput }
         password {
             attrs.placeholder = "input password"
         }

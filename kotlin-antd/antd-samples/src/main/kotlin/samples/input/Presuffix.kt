@@ -1,16 +1,15 @@
 package samples.input
 
-import antd.icon.icon
-import antd.input.input
-import antd.tooltip.tooltip
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.icon.*
+import antd.input.*
+import antd.tooltip.*
+import kotlinext.js.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.presuffix() {
-    div("input-container") {
-        attrs.id = "input-presuffix"
+    styledDiv {
+        css { +InputStyles.presuffix }
         input {
             attrs {
                 placeholder = "Enter your username"

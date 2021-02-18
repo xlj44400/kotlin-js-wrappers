@@ -1,17 +1,7 @@
-import org.jetbrains.kotlin.utils.addToStdlib.cast
+version = "5.8.1-pre.3"
 
-val kotlinVersion: String by project.extra
-val kotlinReactVersion: String by project.extra
-
-val packageVersions = mapOf(
-    "kotlin_version" to kotlinVersion,
-    "kotlin_react_intl_version" to project.version as String,
-    "kotlin_react_version" to kotlinReactVersion
-)
-
-extra.get("configureKotlinJs").cast<() -> Unit>().invoke()
-extra.get("configureBintrayPublishing").cast<() -> Unit>().invoke()
-extra.get("configureNpmPublishing").cast<(Map<String, String>) -> Unit>().invoke(packageVersions)
+apply(plugin = "kotlin-js-wrapper")
+apply(plugin = "kotlin-js-wrapper-publish")
 
 dependencies {
     "implementation"("org.jetbrains:kotlin-react:$kotlinReactVersion-kotlin-$kotlinVersion")

@@ -1,33 +1,22 @@
 package samples.icon
 
-import antd.icon.icon
-import kotlinx.html.id
+import antd.icon.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.twoTone() {
-    div("icon-container") {
-        attrs.id = "icon-two-tone"
-        div("icons-list") {
-            icon {
-                attrs {
-                    type = "smile"
-                    theme = "twoTone"
-                }
+    styledDiv {
+        css { +IconStyles.twoTone }
+        div {
+            attrs.classes = setOf("icons-list")
+            smileTwoTone {}
+            heartTwoTone {
+                attrs.twoToneColor = "#eb2f96"
             }
-            icon {
-                attrs {
-                    type = "heart"
-                    theme = "twoTone"
-                    twoToneColor = "#eb2f96"
-                }
-            }
-            icon {
-                attrs {
-                    type = "check-circle"
-                    theme = "twoTone"
-                    twoToneColor = "#52c41a"
-                }
+            checkCircleTwoTone {
+                attrs.twoToneColor = "#52c41a"
             }
         }
     }

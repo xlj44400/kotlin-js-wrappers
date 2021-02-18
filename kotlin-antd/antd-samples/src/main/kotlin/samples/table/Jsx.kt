@@ -1,14 +1,12 @@
 package samples.table
 
-import antd.divider.divider
+import antd.divider.*
 import antd.table.*
-import antd.tag.tag
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.tag.*
+import kotlinext.js.*
 import react.RBuilder
-import react.dom.a
-import react.dom.div
-import react.dom.span
+import react.dom.*
+import styled.*
 
 private interface JsxTableDataItem {
     var key: String
@@ -20,35 +18,35 @@ private interface JsxTableDataItem {
 }
 
 private val data = arrayOf<JsxTableDataItem>(
-        jsObject {
-            key = "1"
-            firstName = "John"
-            lastName = "Brown"
-            age = 32
-            address = "New York No. 1 Lake Park"
-            tags = arrayOf("nice", "developer")
-        },
-        jsObject {
-            key = "2"
-            firstName = "Jim"
-            lastName = "Green"
-            age = 42
-            address = "London No. 1 Lake Park"
-            tags = arrayOf("loser")
-        },
-        jsObject {
-            key = "3"
-            firstName = "Joe"
-            lastName = "Black"
-            age = 32
-            address = "Sidney No. 1 Lake Park"
-            tags = arrayOf("cool", "teacher")
-        }
+    jsObject {
+        key = "1"
+        firstName = "John"
+        lastName = "Brown"
+        age = 32
+        address = "New York No. 1 Lake Park"
+        tags = arrayOf("nice", "developer")
+    },
+    jsObject {
+        key = "2"
+        firstName = "Jim"
+        lastName = "Green"
+        age = 42
+        address = "London No. 1 Lake Park"
+        tags = arrayOf("loser")
+    },
+    jsObject {
+        key = "3"
+        firstName = "Joe"
+        lastName = "Black"
+        age = 32
+        address = "Sidney No. 1 Lake Park"
+        tags = arrayOf("cool", "teacher")
+    }
 )
 
 fun RBuilder.jsx() {
-    div("table-container") {
-        attrs.id = "table-jsx"
+    styledDiv {
+        css { +TableStyles.jsx }
         table<JsxTableDataItem, TableComponent<JsxTableDataItem>> {
             attrs.dataSource = data
             columnGroup {

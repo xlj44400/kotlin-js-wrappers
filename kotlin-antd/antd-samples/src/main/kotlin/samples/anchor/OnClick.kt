@@ -1,23 +1,20 @@
 package samples.anchor
 
-import antd.MouseEvent
-import antd.anchor.AnchorLink
-import antd.anchor.anchor
-import antd.anchor.anchorLink
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import antd.*
+import antd.anchor.*
+import org.w3c.dom.*
 import react.*
-import react.dom.*
+import styled.*
 
-private val handleClick = fun (e: MouseEvent<HTMLElement>, link: AnchorLink) {
+private val handleClick = fun(e: MouseEvent<HTMLElement>, link: AnchorLink) {
     e.preventDefault()
 
     console.log(link)
 }
 
 fun RBuilder.onClick() {
-    div("anchor-container") {
-        attrs.id = "anchor-on-click"
+    styledDiv {
+        css { +AnchorStyles.onClick }
         anchor {
             attrs {
                 affix = false

@@ -1,13 +1,12 @@
 package samples.slider
 
-import antd.slider.slider
-import kotlinx.html.id
+import antd.slider.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.showTooltip() {
-    div("slider-container") {
-        attrs.id = "slider-show-tooltip"
+    styledDiv {
+        css { +SliderStyles.showTooltip }
         slider {
             attrs {
                 defaultValue = 30

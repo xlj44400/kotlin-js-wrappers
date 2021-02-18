@@ -1,16 +1,16 @@
 package samples.comment
 
-import antd.MouseEventHandler
-import antd.avatar.avatar
-import antd.comment.comment
-import antd.icon.icon
-import antd.tooltip.tooltip
-import kotlinext.js.js
-import kotlinx.html.id
-import moment.moment
-import org.w3c.dom.HTMLElement
+import antd.avatar.*
+import antd.comment.*
+import antd.icon.*
+import antd.tooltip.*
+import kotlinext.js.*
+import kotlinx.html.js.*
+import moment.*
+import org.w3c.dom.events.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface BasicAppState : RState {
     var likes: Number
@@ -19,7 +19,7 @@ interface BasicAppState : RState {
 }
 
 class BasicApp : RComponent<RProps, BasicAppState>() {
-    private val like: MouseEventHandler<HTMLElement> = {
+    private val like = { _: Event ->
         setState {
             likes = 1
             dislikes = 0
@@ -27,7 +27,7 @@ class BasicApp : RComponent<RProps, BasicAppState>() {
         }
     }
 
-    private val dislike: MouseEventHandler<HTMLElement> = {
+    private val dislike = { _: Event ->
         setState {
             likes = 0
             dislikes = 1
@@ -42,57 +42,55 @@ class BasicApp : RComponent<RProps, BasicAppState>() {
     }
 
     override fun RBuilder.render() {
-        val commnetActions = arrayOf(
-                buildElement {
-                    span {
-                        tooltip {
-                            attrs.title = "Like"
-                            icon {
-                                attrs {
-                                    type = "like"
-                                    theme = if (state.action == "liked") "filled" else "outlined"
-                                    onClick = like
-                                }
-                            }
-                        }
+        val commentActions = arrayOf(
+            buildElement {
+                span {
+                    tooltip {
+                        attrs.title = "Like"
                         span {
-                            attrs.jsStyle = js {
-                                paddingLeft = 8
-                                cursor = "auto"
-                            }
-                            +"${state.likes}"
+                            attrs.onClickFunction = like
+                            if (state.action == "liked") {
+                                likeFilled {}
+                            } else likeOutlined {}
                         }
                     }
-                },
-                buildElement {
                     span {
-                        tooltip {
-                            attrs.title = "Dislike"
-                            icon {
-                                attrs {
-                                    type = "dislike"
-                                    theme = if (state.action == "disliked") "filled" else "outlined"
-                                    onClick = dislike
-                                }
-                            }
+                        attrs.jsStyle = js {
+                            paddingLeft = 8
+                            cursor = "auto"
                         }
-                        span {
-                            attrs.jsStyle = js {
-                                paddingLeft = 8
-                                cursor = "auto"
-                            }
-                            +"${state.dislikes}"
-                        }
+                        +"${state.likes}"
                     }
-                },
-                buildElement {
-                    span { +"Reply to" }
                 }
+            },
+            buildElement {
+                span {
+                    tooltip {
+                        attrs.title = "Dislike"
+                        span {
+                            attrs.onClickFunction = dislike
+                            if (state.action == "disliked") {
+                                dislikeFilled {}
+                            } else dislikeOutlined {}
+                        }
+                    }
+                    span {
+                        attrs.jsStyle = js {
+                            paddingLeft = 8
+                            cursor = "auto"
+                        }
+                        +"${state.dislikes}"
+                    }
+                }
+            },
+            buildElement {
+                span { +"Reply to" }
+            }
         ).unsafeCast<Array<Any>>()
 
         comment {
             attrs {
-                actions = commnetActions
+                actions = commentActions
                 author = buildElement {
                     a { +"Han Solo" }
                 }
@@ -112,7 +110,7 @@ class BasicApp : RComponent<RProps, BasicAppState>() {
                             and efficiently.
                         """.trimIndent()
                     }
-                }!!
+                }
                 datetime = buildElement {
                     tooltip {
                         attrs.title = moment().format("YYYY-MM-DD HH:mm:ss")
@@ -127,8 +125,8 @@ class BasicApp : RComponent<RProps, BasicAppState>() {
 fun RBuilder.basicApp() = child(BasicApp::class) {}
 
 fun RBuilder.basic() {
-    div("comment-container") {
-        attrs.id = "comment-basic"
+    styledDiv {
+        css { +CommentStyles.basic }
         basicApp()
     }
 }

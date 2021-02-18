@@ -1,19 +1,17 @@
 package samples.descriptions
 
-import antd.descriptions.ColumnBreakpoint
-import antd.descriptions.descriptions
-import antd.descriptions.descriptionsItem
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.ScreenSizeMap
+import antd.descriptions.*
+import kotlinext.js.*
 import react.*
-import react.dom.br
-import react.dom.div
+import react.dom.*
+import styled.*
 
 fun RBuilder.responsiveDemo() {
     descriptions {
         attrs {
             title = "Responsive Descriptions"
-            column = jsObject<ColumnBreakpoint> {
+            column = jsObject<ScreenSizeMap> {
                 xxl = 4
                 xl = 2
                 lg = 3
@@ -65,8 +63,8 @@ fun RBuilder.responsiveDemo() {
 }
 
 fun RBuilder.responsive() {
-    div("descriptions-container") {
-        attrs.id = "descriptions-responsive"
+    styledDiv {
+        css { +DescriptionsStyles.responsive }
         responsiveDemo()
     }
 }

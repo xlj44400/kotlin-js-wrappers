@@ -1,19 +1,16 @@
 package samples.dropdown
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.dropdown.dropdown
-import antd.dropdown.dropdownButton
-import antd.icon.icon
-import antd.menu.ClickParam
-import antd.menu.menu
-import antd.menu.menuItem
-import antd.message.message
-import kotlinext.js.js
-import kotlinx.html.id
-import org.w3c.dom.HTMLButtonElement
+import antd.dropdown.*
+import antd.icon.*
+import antd.menu.*
+import antd.message.*
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val handleButtonClick: MouseEventHandler<HTMLButtonElement> = {
     message.info("Click on left button.")
@@ -21,42 +18,36 @@ private val handleButtonClick: MouseEventHandler<HTMLButtonElement> = {
     console.log("Click on left button", it)
 }
 
-private fun handleMenuClick(param: ClickParam) {
+private val handleMenuClick: MenuClickEventHandler = { info ->
     message.info("Click on menu item.")
 
-    console.log("Click on menu item", param)
+    console.log("Click on menu item", info)
 }
 
 private val menu = buildElement {
     menu {
-        attrs.onClick = ::handleMenuClick
+        attrs.onClick = handleMenuClick
         menuItem {
             attrs.key = "1"
-            icon {
-                attrs.type = "user"
-            }
+            userOutlined {}
             +"1st menu item"
         }
         menuItem {
             attrs.key = "2"
-            icon {
-                attrs.type = "user"
-            }
+            userOutlined {}
             +"2nd menu item"
         }
         menuItem {
             attrs.key = "3"
-            icon {
-                attrs.type = "user"
-            }
+            userOutlined {}
             +"3rd menu item"
         }
     }
-}!!
+}
 
 fun RBuilder.dropdownButton() {
-    div("dropdown-container") {
-        attrs.id = "dropdown-dropdown-button"
+    styledDiv {
+        css { +DropdownStyles.dropdownButton }
         div {
             dropdownButton {
                 attrs {
@@ -69,9 +60,7 @@ fun RBuilder.dropdownButton() {
                 attrs {
                     overlay = menu
                     icon = buildElement {
-                        icon {
-                            attrs.type = "user"
-                        }
+                        userOutlined {}
                     }
                 }
                 +"Dropdown"
@@ -90,9 +79,7 @@ fun RBuilder.dropdownButton() {
                 button {
                     attrs.style = js { marginLeft = 8 }
                     +"Button "
-                    icon {
-                        attrs.type = "down"
-                    }
+                    downOutlined {}
                 }
             }
         }

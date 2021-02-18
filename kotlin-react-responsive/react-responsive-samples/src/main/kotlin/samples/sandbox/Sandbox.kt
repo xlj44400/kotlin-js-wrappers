@@ -1,22 +1,15 @@
 package samples.sandbox
 
-import kotlinext.js.jsObject
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
-import react.dom.div
-import reactresponsive.mediaQuery
+import react.*
+import react.dom.*
+import reactresponsive.*
 
 class Sandbox : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
         div {
             div { +"Device Test!" }
             mediaQuery {
-                attrs {
-                    minDeviceWidth = 1224
-                    values = jsObject { deviceWidth = 1230 }
-                }
+                attrs.minDeviceWidth = 1224
                 div { +"You are a desktop or laptop" }
                 mediaQuery {
                     attrs.minDeviceWidth = 1824
@@ -31,7 +24,6 @@ class Sandbox : RComponent<RProps, RState>() {
                 attrs.maxDeviceWidth = 1224
                 div { +"You are a tablet or mobile phone" }
             }
-
             mediaQuery {
                 attrs.orientation = "portrait"
                 div { +"You are portrait" }

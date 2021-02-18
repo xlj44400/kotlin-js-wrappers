@@ -1,15 +1,12 @@
 package samples.transfer
 
-import antd.MouseEvent
-import antd.MouseEventHandler
-import antd.transfer.TransferItem
-import antd.transfer.transfer
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.*
+import antd.transfer.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
-import kotlin.random.Random
+import styled.*
+import kotlin.random.*
 
 interface CustomItemTransferItem : TransferItem {
     var chosen: Boolean
@@ -46,7 +43,7 @@ class CustomItemApp : RComponent<RProps, CustomItemAppState>() {
         }
     }
 
-    private val handleChange = fun (nextTargetKeys: Array<String>, direction: String, moveKeys: Any) {
+    private val handleChange = fun(nextTargetKeys: Array<String>, direction: String, moveKeys: Any) {
         console.log(nextTargetKeys, direction, moveKeys)
 
         setState {
@@ -54,12 +51,12 @@ class CustomItemApp : RComponent<RProps, CustomItemAppState>() {
         }
     }
 
-    private val renderItem = fun (item: TransferItem): Any {
+    private val renderItem = fun(item: TransferItem): Any {
         val customLabel = buildElement {
             span("custom-item") {
                 +"${item.title} - ${item.description}"
             }
-        }!!
+        }
 
         return js {
             label = customLabel // for displayed item
@@ -95,8 +92,8 @@ class CustomItemApp : RComponent<RProps, CustomItemAppState>() {
 fun RBuilder.customItemApp() = child(CustomItemApp::class) {}
 
 fun RBuilder.customItem() {
-    div("transfer-container") {
-        attrs.id = "transfer-custom-item"
+    styledDiv {
+        css { +TransferStyles.customItem }
         customItemApp()
     }
 }

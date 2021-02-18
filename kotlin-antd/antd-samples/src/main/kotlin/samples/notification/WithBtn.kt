@@ -1,13 +1,11 @@
 package samples.notification
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.notification.notification
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.*
+import antd.button.*
+import antd.notification.*
+import kotlinext.js.*
+import react.*
+import styled.*
 import kotlin.js.Date
 
 private val close: () -> Unit = {
@@ -37,8 +35,8 @@ private val openNotification: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.withBtn() {
-    div("notification-container") {
-        attrs.id = "notification-with-btn"
+    styledDiv {
+        css { +NotificationStyles.withBtn }
         button {
             attrs {
                 type = "primary"

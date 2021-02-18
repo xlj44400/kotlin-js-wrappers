@@ -1,20 +1,17 @@
 package samples.tabs
 
-import antd.button.button
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
+import antd.button.*
+import antd.tabs.*
+import react.*
+import styled.*
 
 private val operation = buildElement {
-   button { +"Extra Action" }
-}!!
+    button { +"Extra Action" }
+}
 
 fun RBuilder.extra() {
-    div("tabs-container") {
-        attrs.id = "tabs-extra"
+    styledDiv {
+        css { +TabsStyles.extra }
         tabs {
             attrs.tabBarExtraContent = operation
             tabPane {

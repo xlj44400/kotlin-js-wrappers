@@ -1,18 +1,17 @@
 package samples.steps
 
-import antd.popover.popover
-import antd.steps.step
-import antd.steps.steps
-import kotlinx.html.id
+import antd.popover.*
+import antd.steps.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface CustomDotStep {
     var index: String
     var status: String
 }
 
-private val customDot = fun (dot: ReactElement, step: CustomDotStep): ReactElement {
+private val customDot = fun(dot: ReactElement, step: CustomDotStep): ReactElement {
     return buildElement {
         popover {
             attrs {
@@ -24,12 +23,12 @@ private val customDot = fun (dot: ReactElement, step: CustomDotStep): ReactEleme
             }
             childList.add(dot)
         }
-    }!!
+    }
 }
 
 fun RBuilder.customizedProgressDot() {
-    div("steps-container") {
-        attrs.id = "steps-customized-progress-dot"
+    styledDiv {
+        css { +StepsStyles.customizedProgressDot }
         steps {
             attrs {
                 current = 1

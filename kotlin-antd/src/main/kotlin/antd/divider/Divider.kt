@@ -1,11 +1,9 @@
 @file:JsModule("antd/lib/divider")
+@file:JsNonModule
 
 package antd.divider
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external object DividerComponent : Component<DividerProps, RState> {
@@ -14,10 +12,11 @@ external object DividerComponent : Component<DividerProps, RState> {
 
 external interface DividerProps : RProps {
     var prefixCls: String?
-    var type: DividerType?
-    var orientation: DividerOrientation?
+    var type: String? /* "horizontal" | "vertical" */
+    var orientation: String? /* "left" | "right" | "center" */
     var className: String?
-    var children: ReactElement?
+    var children: Any? /* String | ReactElement */
     var dashed: Boolean?
     var style: dynamic
+    var plain: Boolean?
 }

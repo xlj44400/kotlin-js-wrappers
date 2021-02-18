@@ -1,12 +1,12 @@
 package samples.slider
 
-import antd.icon.icon
-import antd.slider.SliderValue
-import antd.slider.slider
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.icon.*
+import antd.slider.*
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface IconSliderDemoProps : RProps {
     var min: Number
@@ -14,11 +14,11 @@ interface IconSliderDemoProps : RProps {
 }
 
 interface IconSliderDemoState : RState {
-    var value: SliderValue
+    var value: Number
 }
 
 class IconSliderDemo : RComponent<IconSliderDemoProps, IconSliderDemoState>() {
-    private val handleChange: (SliderValue) -> Unit = {
+    private val handleChange: (Number) -> Unit = {
         setState {
             value = it
         }
@@ -40,11 +40,8 @@ class IconSliderDemo : RComponent<IconSliderDemoProps, IconSliderDemoState>() {
         val nextColor = if (sliderValue >= sliderMid) "rgba(0, 0, 0, .45)" else ""
 
         div("icon-wrapper") {
-            icon {
-                attrs {
-                    style = js { color = nextColor }
-                    type = "frown-o"
-                }
+            frownOutlined {
+                attrs.style = js { color = nextColor }
             }
             slider {
                 attrs {
@@ -54,11 +51,8 @@ class IconSliderDemo : RComponent<IconSliderDemoProps, IconSliderDemoState>() {
                     value = sliderValue
                 }
             }
-            icon {
-                attrs {
-                    style = js { color = preColor }
-                    type = "smile-o"
-                }
+            smileOutlined {
+                attrs.style = js { color = preColor }
             }
         }
     }
@@ -67,8 +61,9 @@ class IconSliderDemo : RComponent<IconSliderDemoProps, IconSliderDemoState>() {
 fun RBuilder.iconSliderDemo(handler: RHandler<IconSliderDemoProps>) = child(IconSliderDemo::class, handler)
 
 fun RBuilder.iconSlider() {
-    div("slider-container icon-wrapper") {
-        attrs.id = "slider-icon-slider"
+    styledDiv {
+        css { +SliderStyles.iconSlider }
+        attrs.classes = setOf("icon-wrapper")
         iconSliderDemo {
             attrs {
                 min = 0

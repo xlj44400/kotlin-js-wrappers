@@ -1,14 +1,12 @@
 package samples.dropdown
 
-import antd.dropdown.dropdown
-import antd.icon.icon
-import antd.menu.menu
-import antd.menu.menuItem
-import antd.menu.subMenu
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.dropdown.*
+import antd.icon.*
+import antd.menu.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val menu = buildElement {
     menu {
@@ -28,11 +26,11 @@ private val menu = buildElement {
             menuItem { +"6th menu item" }
         }
     }
-}!!
+}
 
 fun RBuilder.subMenu() {
-    div("dropdown-container") {
-        attrs.id = "dropdown-sub-menu"
+    styledDiv {
+        css { +DropdownStyles.subMenu }
         dropdown {
             attrs.overlay = menu
             a {
@@ -41,9 +39,7 @@ fun RBuilder.subMenu() {
                     href = "#"
                 }
                 +"Cascading menu "
-                icon {
-                    attrs.type = "down"
-                }
+                downOutlined {}
             }
         }
     }

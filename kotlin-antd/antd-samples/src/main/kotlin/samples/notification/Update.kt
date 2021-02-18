@@ -1,13 +1,12 @@
 package samples.notification
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.notification.notification
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import kotlin.browser.window
+import antd.*
+import antd.button.*
+import antd.notification.*
+import kotlinext.js.*
+import kotlinx.browser.*
+import react.*
+import styled.*
 
 private val notKey = "updatable"
 
@@ -28,8 +27,8 @@ private val openNotification: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.update() {
-    div("notification-container") {
-        attrs.id = "notification-update"
+    styledDiv {
+        css { +NotificationStyles.update }
         button {
             attrs {
                 type = "primary"

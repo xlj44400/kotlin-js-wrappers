@@ -1,22 +1,17 @@
 package samples.tree
 
-import antd.tree.TreeNodeCheckedEvent
-import antd.tree.TreeNodeSelectedEvent
-import antd.tree.tree
-import antd.tree.treeNode
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.tree.*
+import kotlinext.js.*
 import react.*
-import react.dom.div
-import react.dom.jsStyle
-import react.dom.span
+import react.dom.*
+import styled.*
 
 class BasicDemo : RComponent<RProps, RState>() {
-    private val handleSelect = fun (selectedKeys: Array<String>, info: TreeNodeSelectedEvent) {
+    private val handleSelect = fun(selectedKeys: Array<Key>, info: OnSelectInfo) {
         console.log("selected", selectedKeys, info)
     }
 
-    private val handleCheck = fun (checkedKeys: Any, info: TreeNodeCheckedEvent) {
+    private val handleCheck = fun(checkedKeys: Any, info: CheckInfo) {
         console.log("onCheck", checkedKeys, info)
     }
 
@@ -80,8 +75,8 @@ class BasicDemo : RComponent<RProps, RState>() {
 fun RBuilder.basicDemo() = child(BasicDemo::class) {}
 
 fun RBuilder.basic() {
-    div("tree-container") {
-        attrs.id = "tree-basic"
+    styledDiv {
+        css { +TreeStyles.basic }
         basicDemo()
     }
 }

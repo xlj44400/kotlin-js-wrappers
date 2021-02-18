@@ -1,17 +1,16 @@
 package samples.inputnumber
 
-import antd.inputnumber.inputNumber
-import kotlinx.html.id
+import antd.inputnumber.*
 import react.*
-import react.dom.*
+import styled.*
 
 private fun handleChange(value: Any?) {
     console.log("changed", value)
 }
 
 fun RBuilder.digit() {
-    div("input-number-container") {
-        attrs.id = "input-number-digit"
+    styledDiv {
+        css { +InputNumberStyles.digit }
         inputNumber {
             attrs {
                 min = 0

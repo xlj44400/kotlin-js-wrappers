@@ -1,10 +1,11 @@
 package samples.grid
 
-import antd.grid.row
+import antd.grid.*
 import antd.grid.col
-import kotlinx.html.id
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface DemoBoxProps : RProps {
     var value: Number
@@ -12,7 +13,8 @@ interface DemoBoxProps : RProps {
 
 class DemoBoxComponent : RComponent<DemoBoxProps, RState>() {
     override fun RBuilder.render() {
-        p("height-${props.value}") {
+        p {
+            attrs.classes = setOf("height-${props.value}")
             childList.add(props.children)
         }
     }
@@ -21,13 +23,12 @@ class DemoBoxComponent : RComponent<DemoBoxProps, RState>() {
 fun RBuilder.demoBox(handler: RHandler<DemoBoxProps>) = child(DemoBoxComponent::class, handler)
 
 fun RBuilder.flexAlign() {
-    div("grid-container") {
-        attrs.id = "grid-flex-align"
+    styledDiv {
+        css { +GridStyles.flexAlign }
         div {
             p { +"Align Top" }
             row {
                 attrs {
-                    type = "flex"
                     justify = "center"
                     align = "top"
                 }
@@ -63,7 +64,6 @@ fun RBuilder.flexAlign() {
             p { +"Align Center" }
             row {
                 attrs {
-                    type = "flex"
                     justify = "space-around"
                     align = "middle"
                 }
@@ -99,7 +99,6 @@ fun RBuilder.flexAlign() {
             p { +"Align Bottom" }
             row {
                 attrs {
-                    type = "flex"
                     justify = "space-between"
                     align = "bottom"
                 }

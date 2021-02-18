@@ -1,17 +1,17 @@
 package samples.pagination
 
-import antd.pagination.pagination
-import kotlinx.html.id
+import antd.pagination.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(page: Number, pageSize: Number?) {
     console.log("Page: ", page)
 }
 
 fun RBuilder.jump() {
-    div("pagination-container") {
-        attrs.id = "pagination-jump"
+    styledDiv {
+        css { +PaginationStyles.jump }
         pagination {
             attrs {
                 showQuickJumper = true

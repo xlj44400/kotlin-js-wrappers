@@ -1,29 +1,25 @@
 package samples.badge
 
-import antd.badge.badge
-import antd.icon.icon
-import kotlinx.html.id
+import antd.badge.*
+import antd.icon.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.dot() {
-    div("badge-container") {
-        attrs.id = "badge-dot"
+    styledDiv {
+        css { +BadgeStyles.dot }
         div {
             badge {
                 attrs.dot = true
-                icon {
-                    attrs.type = "notification"
-                }
+                notificationOutlined {}
             }
             badge {
                 attrs {
                     count = 0
                     dot = true
                 }
-                icon {
-                    attrs.type = "notification"
-                }
+                notificationOutlined {}
             }
             badge {
                 attrs.dot = true

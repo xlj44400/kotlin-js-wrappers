@@ -1,18 +1,15 @@
 package samples.radio
 
-import antd.radio.RadioChangeEvent
-import antd.radio.radio
-import antd.radio.radioGroup
-import kotlinx.html.id
+import antd.radio.*
 import react.*
-import react.dom.*
+import styled.*
 
 interface RadioGroupAppState : RState {
     var value: Any
 }
 
 class RadioGroupApp : RComponent<RProps, RadioGroupAppState>() {
-    private val handleChange = fun (event: RadioChangeEvent) {
+    private val handleChange = fun(event: RadioChangeEvent) {
         console.log("radio checked", event.target.value)
 
         setState {
@@ -53,8 +50,8 @@ class RadioGroupApp : RComponent<RProps, RadioGroupAppState>() {
 fun RBuilder.radioGroupApp() = child(RadioGroupApp::class) {}
 
 fun RBuilder.radioGroup() {
-    div("radio-container") {
-        attrs.id = "radio-radio-group"
+    styledDiv {
+        css { +RadioStyles.radioGroup }
         radioGroupApp()
     }
 }

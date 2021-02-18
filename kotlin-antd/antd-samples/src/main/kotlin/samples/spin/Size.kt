@@ -1,13 +1,12 @@
 package samples.spin
 
-import antd.spin.spin
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.spin.*
+import react.*
+import styled.*
 
 fun RBuilder.size() {
-    div("spin-container") {
-        attrs.id = "spin-size"
+    styledDiv {
+        css { +SpinStyles.size }
         spin {
             attrs.size = "small"
         }

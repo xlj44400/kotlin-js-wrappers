@@ -1,14 +1,14 @@
 package samples.timepicker
 
-import antd.timepicker.timePicker
-import kotlinx.html.id
-import moment.moment
+import antd.timepicker.*
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.size() {
-    div("time-picker-container") {
-        attrs.id = "time-picker-size"
+    styledDiv {
+        css { +TimePickerStyles.size }
         div {
             timePicker {
                 attrs {

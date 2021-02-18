@@ -1,53 +1,45 @@
 package samples.localeprovider
 
-import antd.MouseEvent
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.calendar.calendar
-import antd.datepicker.datePicker
+import antd.calendar.*
+import antd.datepicker.*
 import antd.datepicker.rangePicker
+import antd.localeprovider.*
 import antd.localeprovider.Locale
-import antd.localeprovider.enUS
-import antd.localeprovider.localeProvider
-import antd.localeprovider.zhCN
-import antd.modal.ModalComponent
-import antd.modal.modal
-import antd.pagination.pagination
-import antd.popconfirm.popconfirm
-import antd.radio.RadioChangeEvent
-import antd.radio.radioButton
-import antd.radio.radioGroup
+import antd.modal.*
+import antd.pagination.*
+import antd.popconfirm.*
+import antd.radio.*
 import antd.select.SelectComponent
 import antd.select.select
-import antd.table.ColumnProps
-import antd.table.TableComponent
-import antd.table.table
+import antd.table.*
+import antd.timepicker.*
 import antd.timepicker.timePicker
-import antd.transfer.transfer
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.classes
-import kotlinx.html.id
-import moment.moment
-import org.w3c.dom.HTMLElement
+import antd.transfer.*
+import kotlinext.js.*
+import kotlinx.html.*
+import moment.*
+import org.w3c.dom.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val tableColumns = arrayOf<ColumnProps<Any>>(
-        jsObject {
-            title = "Name"
-            dataIndex = "name"
-            filters = arrayOf(
-                    jsObject {
-                        text = "filter1"
-                        value = "filter1"
-                    }
-            )
-        },
-        jsObject {
-            title = "Age"
-            dataIndex = "age"
-        }
+    jsObject {
+        title = "Name"
+        dataIndex = "name"
+        filters = arrayOf(
+            jsObject {
+                text = "filter1"
+                value = "filter1"
+            }
+        )
+    },
+    jsObject {
+        title = "Age"
+        dataIndex = "age"
+    }
 )
 
 interface PageProps : RProps {
@@ -65,7 +57,7 @@ class Page : RComponent<PageProps, PageState>() {
         }
     }
 
-    private val hideModal = fun (_: MouseEvent<HTMLElement>) {
+    private val hideModal = fun(_: MouseEvent<HTMLElement>) {
         setState {
             visible = false
         }
@@ -201,7 +193,7 @@ interface PageAppState : RState {
 }
 
 class PageApp : RComponent<RProps, PageAppState>() {
-    private val changeLocale = fun (event: RadioChangeEvent)  {
+    private val changeLocale = fun(event: RadioChangeEvent) {
         val localeValue = event.target.value.unsafeCast<Locale?>()
 
         setState {
@@ -261,8 +253,8 @@ class PageApp : RComponent<RProps, PageAppState>() {
 fun RBuilder.pageApp() = child(PageApp::class) {}
 
 fun RBuilder.all() {
-    div("locale-provider-container") {
-        attrs.id = "locale-provider-all"
+    styledDiv {
+        css { LocaleProviderStyles.all }
         pageApp()
     }
 }

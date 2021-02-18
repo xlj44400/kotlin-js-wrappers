@@ -1,21 +1,20 @@
 package samples.select
 
-import antd.select.SelectComponent
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinx.html.id
-import kotlinx.html.role
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(value: Array<String>, option: Any) {
     console.log("selected $value")
 }
 
 fun RBuilder.optionLabelProp() {
-    div("select-container") {
-        attrs.id = "select-option-label-prop"
+    styledDiv {
+        css { +SelectStyles.optionLabelProp }
         select<Array<String>, SelectComponent<Array<String>>> {
             attrs {
                 mode = "multiple"

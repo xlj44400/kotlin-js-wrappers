@@ -1,12 +1,11 @@
 package samples.notification
 
 import antd.button.button
-import antd.notification.ArgsProps
-import antd.notification.notification
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
+import antd.notification.*
+import kotlinext.js.*
+import react.*
 import react.dom.div
+import styled.*
 
 private val openNotificationWithIcon: (String) -> Unit = { type ->
     notification.asDynamic()[type](jsObject<ArgsProps> {
@@ -16,8 +15,8 @@ private val openNotificationWithIcon: (String) -> Unit = { type ->
 }
 
 fun RBuilder.withIcon() {
-    div("notification-container") {
-        attrs.id = "notification-with-icon"
+    styledDiv {
+        css { +NotificationStyles.withIcon }
         div {
             button {
                 attrs.onClick = { openNotificationWithIcon("success") }

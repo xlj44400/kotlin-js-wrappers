@@ -1,17 +1,17 @@
 package samples.slider
 
-import antd.slider.slider
-import kotlinx.html.id
+import antd.slider.*
 import react.*
 import react.dom.*
+import styled.*
 
-private fun formatter(value: Number): ReactElement {
-    return buildElement { +"$value%" }!!
+private fun formatter(value: Number?): ReactElement {
+    return buildElement { +"$value%" }
 }
 
 fun RBuilder.tipFormatter() {
-    div("slider-container") {
-        attrs.id = "slider-tip-formatter"
+    styledDiv {
+        css { +SliderStyles.tipFormatter }
         div {
             slider {
                 attrs.tipFormatter = ::formatter

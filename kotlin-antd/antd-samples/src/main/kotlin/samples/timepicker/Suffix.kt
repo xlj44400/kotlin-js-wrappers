@@ -1,26 +1,22 @@
 package samples.timepicker
 
-import antd.icon.icon
-import antd.timepicker.timePicker
-import kotlinx.html.id
-import moment.Moment
-import moment.moment
+import antd.icon.*
+import antd.timepicker.*
+import moment.*
 import react.*
-import react.dom.*
+import styled.*
 
 private fun handleChange(time: Moment, timeString: String) {
     console.log(time, timeString)
 }
 
 private val icon = buildElement {
-    icon {
-        attrs.type = "smile"
-    }
+    smileOutlined {}
 }
 
 fun RBuilder.suffix() {
-    div("time-picker-container") {
-        attrs.id = "time-picker-suffix"
+    styledDiv {
+        css { +TimePickerStyles.suffix }
         timePicker {
             attrs {
                 suffixIcon = icon

@@ -1,16 +1,14 @@
 package samples.tabs
 
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinx.html.classes
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.tabs.*
+import kotlinx.html.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.cardTop() {
-    div("tabs-container") {
-        attrs.id = "tabs-card-top"
+    styledDiv {
+        css { +TabsStyles.cardTop }
         div {
             attrs.classes = setOf("card-container")
             tabs {

@@ -1,13 +1,12 @@
 package samples.skeleton
 
-import antd.skeleton.skeleton
-import kotlinx.html.id
+import antd.skeleton.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("skeleton-container") {
-        attrs.id = "skeleton-basic"
+    styledDiv {
+        css { +SkeletonStyles.basic }
         skeleton {}
     }
 }

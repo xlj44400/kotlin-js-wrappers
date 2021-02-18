@@ -1,11 +1,11 @@
 package samples.popover
 
 import antd.button.button
-import antd.popover.popover
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.popover.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val text = buildElement {
     span { +"Title" }
@@ -21,8 +21,8 @@ private val contentElement = buildElement {
 private val buttonWidth = 70
 
 fun RBuilder.placement() {
-    div("popover-container") {
-        attrs.id = "popover-placement"
+    styledDiv {
+        css { +PopoverStyles.placement }
         div("demo") {
             div {
                 attrs.jsStyle = js {

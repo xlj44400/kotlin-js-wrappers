@@ -1,9 +1,8 @@
 package antd.dropdown
 
-import antd.MouseEventHandler
-import antd.button.ButtonGroupProps
-import antd.button.ButtonHTMLType
-import org.w3c.dom.HTMLButtonElement
+import antd.*
+import antd.button.*
+import org.w3c.dom.*
 import react.*
 
 external object DropdownButtonComponent : Component<DropdownButtonProps, RState> {
@@ -15,7 +14,9 @@ external interface DropdownButtonProps : ButtonGroupProps, DropdownProps {
     var htmlType: ButtonHTMLType?
     override var disabled: Boolean?
     var onClick: MouseEventHandler<HTMLButtonElement>?
-    var icon: ReactElement?
+    var icon: Any? /* String | ReactElement */
     var href: String?
-    var children: ReactElement?
+    var children: Any? /* String | ReactElement */
+    var title: String?
+    var buttonsRender: ((buttons: Array<Any /* String | ReactElement */>) -> Array<Any /* String | ReactElement */>)?
 }

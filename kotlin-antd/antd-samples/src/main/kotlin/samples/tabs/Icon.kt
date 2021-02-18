@@ -1,26 +1,21 @@
 package samples.tabs
 
-import antd.icon.icon
-import antd.tabs.tabPane
-import antd.tabs.tabs
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
-import react.dom.span
+import antd.icon.*
+import antd.tabs.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.icon() {
-    div("tabs-container") {
-        attrs.id = "tabs-icon"
+    styledDiv {
+        css { +TabsStyles.icon }
         tabs {
             attrs.defaultActiveKey = "2"
             tabPane {
                 attrs {
                     tab = buildElement {
                         span {
-                            icon {
-                                attrs.type = "apple"
-                            }
+                            appleOutlined {}
                             +"Tab 1"
                         }
                     }
@@ -32,9 +27,7 @@ fun RBuilder.icon() {
                 attrs {
                     tab = buildElement {
                         span {
-                            icon {
-                                attrs.type = "android"
-                            }
+                            androidOutlined {}
                             +"Tab 2"
                         }
                     }

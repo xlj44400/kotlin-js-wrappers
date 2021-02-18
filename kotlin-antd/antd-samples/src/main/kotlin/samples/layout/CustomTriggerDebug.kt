@@ -1,24 +1,22 @@
 package samples.layout
 
-import antd.MouseEventHandler
-import antd.icon.icon
-import antd.layout.layout
+import antd.*
+import antd.icon.*
+import antd.layout.*
 import antd.layout.header
-import antd.layout.content
-import antd.layout.sider
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import kotlinext.js.*
+import org.w3c.dom.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface CustomTriggerDebugDemoState : RState {
     var collapsed: Boolean
 }
 
 class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>() {
-    private val toggle: MouseEventHandler<HTMLElement> = {
+    private val toggle: MouseEventHandler<Any> = {
         setState {
             collapsed = !state.collapsed
         }
@@ -46,16 +44,12 @@ class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>()
                     }
                     menuItem {
                         attrs.key = "1"
-                        icon {
-                            attrs.type = "pie-chart"
-                        }
+                        pieChartOutlined {}
                         span { +"Option 1" }
                     }
                     menuItem {
                         attrs.key = "2"
-                        icon {
-                            attrs.type = "desktop"
-                        }
+                        desktopOutlined {}
                         span { +"Option 2" }
                     }
                     subMenu {
@@ -63,9 +57,7 @@ class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>()
                             key = "sub1"
                             title = buildElement {
                                 span {
-                                    icon {
-                                        attrs.type = "user"
-                                    }
+                                    userOutlined {}
                                     span { +"User" }
                                 }
                             }
@@ -88,18 +80,14 @@ class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>()
                             key = "sub2"
                             title = buildElement {
                                 span {
-                                    icon {
-                                        attrs.type = "team"
-                                    }
+                                    teamOutlined {}
                                     span { +"Team" }
                                 }
                             }
                         }
                         menuItem {
                             attrs.key = "9"
-                            icon {
-                                attrs.type = "file"
-                            }
+                            fileOutlined {}
                             span { +"File" }
                         }
                     }
@@ -113,11 +101,19 @@ class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>()
                             padding = 0
                         }
                     }
-                    icon {
-                        attrs {
-                            className = "trigger"
-                            type = if (state.collapsed) "menu-unfold" else "menu-fold"
-                            onClick = toggle
+                    if (state.collapsed){
+                        menuUnfoldOutlined {
+                            attrs {
+                                className = "trigger"
+                                onClick = toggle
+                            }
+                        }
+                    } else {
+                        menuFoldOutlined {
+                            attrs {
+                                className = "trigger"
+                                onClick = toggle
+                            }
                         }
                     }
                 }
@@ -140,8 +136,8 @@ class CustomTriggerDebugDemo : RComponent<RProps, CustomTriggerDebugDemoState>()
 fun RBuilder.customTriggerDebugDemo() = child(CustomTriggerDebugDemo::class) {}
 
 fun RBuilder.customTriggerDebug() {
-    div("layout-container") {
-        attrs.id = "layout-custom-trigger-debug"
+    styledDiv {
+        css { +LayoutStyles.customTriggerDebug }
         customTriggerDebugDemo()
     }
 }

@@ -1,17 +1,16 @@
 package samples.grid
 
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import kotlinx.html.id
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.flexOrder() {
-    div("grid-container") {
-        attrs.id = "grid-flex-order"
+    styledDiv {
+        css { +GridStyles.flexOrder }
         div {
             row {
-                attrs { type = "flex" }
                 col {
                     attrs {
                         span = 6

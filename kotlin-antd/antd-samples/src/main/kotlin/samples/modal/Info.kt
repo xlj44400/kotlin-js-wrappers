@@ -1,13 +1,13 @@
 package samples.modal
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.modal.ModalComponent
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.modal.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
-import kotlin.js.Promise
+import styled.*
+import kotlin.js.*
 
 private val info: MouseEventHandler<Any> = {
     ModalComponent.info(jsObject {
@@ -44,8 +44,8 @@ private val warning: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.info() {
-    div("modal-container") {
-        attrs.id = "modal-info"
+    styledDiv {
+        css { +ModalStyles.info }
         div {
             button {
                 attrs.onClick = info

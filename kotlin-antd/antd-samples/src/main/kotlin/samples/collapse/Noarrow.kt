@@ -1,11 +1,9 @@
 package samples.collapse
 
-import antd.collapse.collapse
-import antd.collapse.collapsePanel
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.collapse.*
+import react.*
+import react.dom.*
+import styled.*
 
 private fun callback(key: Any) {
     console.log(key)
@@ -18,8 +16,8 @@ private val text = """
 """.trimIndent()
 
 fun RBuilder.noarrow() {
-    div("collapse-container") {
-        attrs.id = "collapse-noarrow"
+    styledDiv {
+        css { +CollapseStyles.noarrow }
         collapse {
             attrs {
                 defaultActiveKey = arrayOf("1")

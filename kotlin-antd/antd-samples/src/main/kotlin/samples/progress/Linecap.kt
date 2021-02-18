@@ -1,13 +1,13 @@
 package samples.progress
 
 import antd.progress.progress
-import kotlinx.html.id
-import react.RBuilder
+import react.*
 import react.dom.div
+import styled.*
 
 fun RBuilder.linecap() {
-    div("progress-container") {
-        attrs.id = "progress-linecap"
+    styledDiv {
+        css { +ProgressStyles.linecap }
         div {
             progress {
                 attrs {

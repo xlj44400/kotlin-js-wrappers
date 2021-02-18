@@ -1,92 +1,90 @@
 package samples.tree
 
 import antd.tree.*
-import kotlinext.js.jsObject
-import kotlinext.js.objectAssign
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
-import react.dom.div
+import styled.*
 
 private val treeData = arrayOf<TreeNodeNormal>(
-        jsObject {
-            title = "0-0"
-            key = "0-0"
-            children = arrayOf(
-                jsObject {
-                    title = "0-0-0"
-                    key = "0-0-0"
-                    children = arrayOf(
-                            jsObject {
-                                title = "0-0-0-0"
-                                key = "0-0-0-0"
-                            },
-                            jsObject {
-                                title = "0-0-0-1"
-                                key = "0-0-0-1"
-                            },
-                            jsObject {
-                                title = "0-0-0-2"
-                                key = "0-0-0-2"
-                            }
-                    )
-                },
-                jsObject {
-                    title = "0-0-1"
-                    key = "0-0-1"
-                    children = arrayOf(
-                            jsObject {
-                                title = "0-0-1-0"
-                                key = "0-0-1-0"
-                            },
-                            jsObject {
-                                title = "0-0-1-1"
-                                key = "0-0-1-1"
-                            },
-                            jsObject {
-                                title = "0-0-1-"
-                                key = "0-0-1-2"
-                            }
-                    )
-                },
-                jsObject {
-                    title = "0-0-2"
-                    key = "0-0-2"
-                }
-            )
-        },
-        jsObject {
-            title = "0-1"
-            key = "0-1"
-            children = arrayOf(
+    jsObject {
+        title = "0-0"
+        key = "0-0"
+        children = arrayOf(
+            jsObject {
+                title = "0-0-0"
+                key = "0-0-0"
+                children = arrayOf(
                     jsObject {
-                        title = "0-1-0-0"
-                        key = "0-1-0-0"
+                        title = "0-0-0-0"
+                        key = "0-0-0-0"
                     },
                     jsObject {
-                        title = "0-1-0-1"
-                        key = "0-1-0-1"
+                        title = "0-0-0-1"
+                        key = "0-0-0-1"
                     },
                     jsObject {
-                        title = "0-1-0-2"
-                        key = "0-1-0-2"
+                        title = "0-0-0-2"
+                        key = "0-0-0-2"
                     }
-            )
-        },
-        jsObject {
-            title = "0-2"
-            key = "0-2"
-        }
+                )
+            },
+            jsObject {
+                title = "0-0-1"
+                key = "0-0-1"
+                children = arrayOf(
+                    jsObject {
+                        title = "0-0-1-0"
+                        key = "0-0-1-0"
+                    },
+                    jsObject {
+                        title = "0-0-1-1"
+                        key = "0-0-1-1"
+                    },
+                    jsObject {
+                        title = "0-0-1-"
+                        key = "0-0-1-2"
+                    }
+                )
+            },
+            jsObject {
+                title = "0-0-2"
+                key = "0-0-2"
+            }
+        )
+    },
+    jsObject {
+        title = "0-1"
+        key = "0-1"
+        children = arrayOf(
+            jsObject {
+                title = "0-1-0-0"
+                key = "0-1-0-0"
+            },
+            jsObject {
+                title = "0-1-0-1"
+                key = "0-1-0-1"
+            },
+            jsObject {
+                title = "0-1-0-2"
+                key = "0-1-0-2"
+            }
+        )
+    },
+    jsObject {
+        title = "0-2"
+        key = "0-2"
+    }
 )
 
 interface BasicControlledDemoState : RState {
-    var expandedKeys: Array<String>
+    var expandedKeys: Array<Key>
     var autoExpandParent: Boolean
-    var checkedKeys: Array<String>
-    var selectedKeys: Array<String>
+    var checkedKeys: Array<Key>
+    var selectedKeys: Array<Key>
 }
 
 class BasicControlledDemo : RComponent<RProps, BasicControlledDemoState>() {
-    private val handleExpand = fun (expandKeys: Array<String>, _: TreeNodeExpandedEvent) {
+    private val handleExpand = fun(expandKeys: Array<Key>, _: OnExpandInfo) {
         console.log("onExpand", expandKeys)
 
         // if not set autoExpandParent to false, if children expanded, parent can not collapse.
@@ -97,15 +95,15 @@ class BasicControlledDemo : RComponent<RProps, BasicControlledDemoState>() {
         }
     }
 
-    private val handleCheck = fun (checkKeys: Any, _: TreeNodeCheckedEvent) {
+    private val handleCheck = fun(checkKeys: Any, _: CheckInfo) {
         console.log("onCheck", checkKeys)
 
         setState {
-            checkedKeys = checkKeys.unsafeCast<Array<String>>()
+            checkedKeys = checkKeys.unsafeCast<Array<Key>>()
         }
     }
 
-    private val handleSelect = fun (selectKeys: Array<String>, _: TreeNodeSelectedEvent) {
+    private val handleSelect = fun(selectKeys: Array<Key>, _: OnSelectInfo) {
         console.log("selected", selectKeys)
 
         setState {
@@ -120,19 +118,19 @@ class BasicControlledDemo : RComponent<RProps, BasicControlledDemoState>() {
                     treeNode {
                         attrs {
                             title = item.title
-                            key = item.key
+                            key = item.key as String
                         }
                         attrs.asDynamic()["dataRef"] = item
                         childList.add(renderTreeNodes(item.children!!))
                     }
-                }!!
+                }
             }
 
             return@map buildElement {
-               treeNode {
-                   objectAssign(attrs, item)
-               }
-            }!!
+                treeNode {
+                    Object.assign(attrs, item)
+                }
+            }
         }.toTypedArray()
     }
 
@@ -162,8 +160,8 @@ class BasicControlledDemo : RComponent<RProps, BasicControlledDemoState>() {
 fun RBuilder.basicControlledDemo() = child(BasicControlledDemo::class) {}
 
 fun RBuilder.basicControlled() {
-    div("tree-container") {
-        attrs.id = "tree-basic-controlled"
+    styledDiv {
+        css { +TreeStyles.basicControlled }
         basicControlledDemo()
     }
 }

@@ -1,13 +1,11 @@
 package samples.notification
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.notification.notification
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.*
+import antd.button.*
+import antd.notification.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 private val openNotification: MouseEventHandler<Any> = {
     notification.open(jsObject {
@@ -21,8 +19,8 @@ private val openNotification: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.customStyle() {
-    div("notification-container") {
-        attrs.id = "notification-custom-style"
+    styledDiv {
+        css { +NotificationStyles.customStyle }
         button {
             attrs {
                 type = "primary"

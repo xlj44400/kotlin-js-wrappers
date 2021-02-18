@@ -1,16 +1,16 @@
 package samples.dropdown
 
-import antd.dropdown.dropdown
-import antd.icon.icon
+import antd.dropdown.*
+import antd.icon.*
 import antd.menu.*
-import antd.message.message
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.message.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
-private val handleClick = fun (param: ClickParam) {
-    message.info("Click on item ${param.key}")
+private val handleClick: MenuClickEventHandler = { info ->
+    message.info("Click on item ${info.key}")
 }
 
 private val menu = buildElement {
@@ -29,11 +29,11 @@ private val menu = buildElement {
             +"3rd menu item"
         }
     }
-}!!
+}
 
 fun RBuilder.event() {
-    div("dropdown-container") {
-        attrs.id = "dropdown-event"
+    styledDiv {
+        css { +DropdownStyles.event }
         dropdown {
             attrs.overlay = menu
             a {
@@ -42,9 +42,7 @@ fun RBuilder.event() {
                     href = "#"
                 }
                 +"Hover me, Click menu item "
-                icon {
-                    attrs.type = "down"
-                }
+                downOutlined {}
             }
         }
     }

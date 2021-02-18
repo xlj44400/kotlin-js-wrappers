@@ -1,17 +1,14 @@
 package samples.card
 
-import antd.card.card
-import antd.card.cardMeta
-import kotlinext.js.js
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.div
-import react.dom.img
+import antd.card.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.flexibleContent() {
-    div("card-container") {
-        attrs.id = "card-flexible-content"
+    styledDiv {
+        css { +CardStyles.flexibleContent }
         card {
             attrs {
                 hoverable = true

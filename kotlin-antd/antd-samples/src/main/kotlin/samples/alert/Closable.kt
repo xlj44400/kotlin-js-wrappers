@@ -1,19 +1,19 @@
 package samples.alert
 
-import antd.MouseEventHandler
-import antd.alert.alert
-import kotlinx.html.id
-import org.w3c.dom.HTMLAnchorElement
-import react.RBuilder
-import react.dom.div
+import antd.*
+import antd.alert.*
+import org.w3c.dom.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val handleCLose: MouseEventHandler<HTMLAnchorElement> = { e ->
     console.log(e, "I was closed.")
 }
 
 fun RBuilder.closable() {
-    div("alert-container") {
-        attrs.id = "alert-closable"
+    styledDiv {
+        css { +AlertStyles.closable }
         div {
             alert {
                 attrs {

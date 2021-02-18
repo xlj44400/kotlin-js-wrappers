@@ -1,29 +1,26 @@
 package samples.calendar
 
-import antd.calendar.CalendarMode
-import antd.calendar.calendar
+import antd.calendar.*
+import antd.grid.*
 import antd.grid.col
-import antd.grid.row
-import antd.radio.radioButton
-import antd.radio.radioGroup
-import antd.select.SelectComponent
+import antd.radio.*
+import antd.select.*
 import antd.select.option
-import antd.select.select
-import kotlinext.js.js
-import kotlinx.html.id
-import moment.Moment
+import kotlinext.js.*
+import moment.*
 import react.RBuilder
 import react.ReactElement
 import react.dom.div
 import react.dom.jsStyle
+import styled.*
 
 private fun handlePanelChange(value: Moment?, mode: CalendarMode?) {
     console.log(value, mode)
 }
 
 fun RBuilder.customizeHeader() {
-    div("calendar-container") {
-        attrs.id = "calendar-customize-header"
+    styledDiv {
+        css { +CalendarStyles.customizeHeader }
         div {
             attrs.jsStyle = js {
                 width = 300
@@ -80,10 +77,7 @@ fun RBuilder.customizeHeader() {
                                 +"Custom header "
                             }
                             row {
-                                attrs {
-                                    type = "flex"
-                                    justify = "space-between"
-                                }
+                                attrs.justify = "space-between"
                                 col {
                                     radioGroup {
                                         attrs {

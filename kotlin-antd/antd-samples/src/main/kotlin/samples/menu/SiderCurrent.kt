@@ -1,11 +1,11 @@
 package samples.menu
 
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface SiderCurrentSiderState : RState {
     var openKeys: Array<String>
@@ -14,7 +14,7 @@ interface SiderCurrentSiderState : RState {
 class SiderCurrentSider : RComponent<RProps, SiderCurrentSiderState>() {
     private val rootSubmenuKeys = arrayOf("sub1", "sub2", "sub4")
 
-    private val handleOpenChange = fun (keys: Array<String>) {
+    private val handleOpenChange = fun(keys: Array<Key>) {
         val latestOpenKey = keys.find { key -> !state.openKeys.contains(key) }
 
         if (!rootSubmenuKeys.contains(latestOpenKey)) {
@@ -43,9 +43,7 @@ class SiderCurrentSider : RComponent<RProps, SiderCurrentSiderState>() {
                     key = "sub1"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "mail"
-                            }
+                            mailOutlined {}
                             span { +"Navigation One" }
                         }
                     }
@@ -72,9 +70,7 @@ class SiderCurrentSider : RComponent<RProps, SiderCurrentSiderState>() {
                     key = "sub2"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "appstore"
-                            }
+                            appstoreOutlined {}
                             span { +"Navigation Two" }
                         }
                     }
@@ -107,9 +103,7 @@ class SiderCurrentSider : RComponent<RProps, SiderCurrentSiderState>() {
                     key = "sub4"
                     title = buildElement {
                         span {
-                            icon {
-                                attrs.type = "setting"
-                            }
+                            settingOutlined {}
                             span { +"Navigation Three" }
                         }
                     }
@@ -138,8 +132,8 @@ class SiderCurrentSider : RComponent<RProps, SiderCurrentSiderState>() {
 fun RBuilder.siderCurrentSider() = child(SiderCurrentSider::class) {}
 
 fun RBuilder.siderCurrent() {
-    div("menu-container") {
-        attrs.id = "menu-sider-current"
+    styledDiv {
+        css { +MenuStyles.siderCurrent }
         siderCurrentSider()
     }
 }

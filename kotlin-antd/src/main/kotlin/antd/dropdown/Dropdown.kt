@@ -1,8 +1,9 @@
 @file:JsModule("antd/lib/dropdown")
+@file:JsNonModule
 
 package antd.dropdown
 
-import org.w3c.dom.HTMLElement
+import org.w3c.dom.*
 import react.*
 
 @JsName("default")
@@ -13,17 +14,18 @@ external object DropdownComponent : Component<DropdownProps, RState> {
 }
 
 external interface DropdownProps : RProps {
-    var trigger: DropdownTrigger?
-    var overlay: Any /* ReactElement | DropdownOverlayFunc */
+    var arrow: Boolean?
+    var trigger: Array<String /* "click" | "hover" | "contextMenu" */>?
+    var overlay: Any /* ReactElement | OverlayFunc */
     var onVisibleChange: ((visible: Boolean) -> Unit)?
     var visible: Boolean?
     var disabled: Boolean?
-    var align: DropdownAlign?
+    var align: Align?
     var getPopupContainer: ((triggerNode: HTMLElement) -> HTMLElement)?
     var prefixCls: String?
     var className: String?
     var transitionName: String?
-    var placement: DropdownPlacement?
+    var placement: Placement?
     var overlayClassName: String?
     var overlayStyle: dynamic
     var forceRender: Boolean?
@@ -32,17 +34,17 @@ external interface DropdownProps : RProps {
     var openClassName: String?
 }
 
-external interface DropdownAlign {
+external interface Align {
     var points: Array<String>?
     var offset: Array<Number>?
     var targetOffset: Array<Number>?
-    var overflow: DropdownAlignOverflow?
+    var overflow: AlignOverflow?
     var useCssRight: Boolean?
     var useCssBottom: Boolean?
     var useCssTransform: Boolean?
 }
 
-external interface DropdownAlignOverflow {
+external interface AlignOverflow {
     var adjustX: Boolean
     var adjustY: Boolean
 }

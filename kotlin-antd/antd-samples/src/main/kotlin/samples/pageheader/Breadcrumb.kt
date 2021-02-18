@@ -1,30 +1,29 @@
 package samples.pageheader
 
-import antd.breadcrumb.Route
-import antd.pageheader.pageHeader
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
+import antd.breadcrumb.*
+import antd.pageheader.*
+import kotlinext.js.*
+import react.*
+import styled.*
 
 private val breadcrumbRoutes = arrayOf<Route>(
-        jsObject {
-            path = "index"
-            breadcrumbName = "First-level Menu"
-        },
-        jsObject {
-            path = "first"
-            breadcrumbName = "Second-level Menu"
-        },
-        jsObject {
-            path = "second"
-            breadcrumbName = "Third-level Menu"
-        }
+    jsObject {
+        path = "index"
+        breadcrumbName = "First-level Menu"
+    },
+    jsObject {
+        path = "first"
+        breadcrumbName = "Second-level Menu"
+    },
+    jsObject {
+        path = "second"
+        breadcrumbName = "Third-level Menu"
+    }
 )
 
 fun RBuilder.breadcrumb() {
-    div("page-header-container") {
-        attrs.id = "page-header-breadcrumb"
+    styledDiv {
+        css { +PageHeaderStyles.breadcrumb }
         pageHeader {
             attrs {
                 title = "Title"

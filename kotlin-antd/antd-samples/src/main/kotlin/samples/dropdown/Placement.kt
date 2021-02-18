@@ -1,16 +1,15 @@
 package samples.dropdown
 
 import antd.button.button
-import antd.dropdown.dropdown
-import antd.menu.menu
-import antd.menu.menuItem
-import kotlinx.html.id
+import antd.dropdown.*
+import antd.menu.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val menu = buildElement {
     menu {
-       menuItem {
+        menuItem {
             a {
                 attrs {
                     target = "_blank"
@@ -41,11 +40,11 @@ private val menu = buildElement {
             }
         }
     }
-}!!
+}
 
 fun RBuilder.placement() {
-    div("dropdown-container") {
-        attrs.id = "dopdown-placement"
+    styledDiv {
+        css { +DropdownStyles.placement }
         div {
             dropdown {
                 attrs {

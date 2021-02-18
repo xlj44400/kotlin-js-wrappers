@@ -1,16 +1,16 @@
 package samples.tag
 
-import antd.tag.checkableTag
-import kotlinx.html.id
+import antd.tag.*
 import react.*
-import react.dom.div
+import react.dom.*
+import styled.*
 
 interface MyTagState : RState {
     var checked: Boolean
 }
 
 class MyTag : RComponent<RProps, MyTagState>() {
-    private val handleChange = fun (value: Boolean) {
+    private val handleChange = fun(value: Boolean) {
         setState {
             checked = value
         }
@@ -34,8 +34,8 @@ class MyTag : RComponent<RProps, MyTagState>() {
 fun RBuilder.myTag(handler: RHandler<RProps>) = child(MyTag::class, handler)
 
 fun RBuilder.checkable() {
-    div("tag-container") {
-        attrs.id = "tag-checkable"
+    styledDiv {
+        css { +TagStyles.checkable }
         div {
             myTag { +"Tag 1" }
             myTag { +"Tag 2" }

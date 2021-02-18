@@ -1,13 +1,13 @@
 package samples.menu
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface InlineCollapsedAppState : RState {
     var collapsed: Boolean
@@ -33,9 +33,9 @@ class InlineCollapsedApp : RComponent<RProps, InlineCollapsedAppState>() {
                     onClick = toggleCollapsed
                     style = js { marginBottom = 16 }
                 }
-                icon {
-                    attrs.type = if (state.collapsed) "menu-unfold" else "menu-fold"
-                }
+                if (state.collapsed) {
+                  menuUnfoldOutlined {}
+                } else menuFoldOutlined {}
             }
             menu {
                 attrs {
@@ -47,23 +47,17 @@ class InlineCollapsedApp : RComponent<RProps, InlineCollapsedAppState>() {
                 }
                 menuItem {
                     attrs.key = "1"
-                    icon {
-                        attrs.type = "pie-chart"
-                    }
+                    pieChartOutlined {}
                     span { +"Option 1" }
                 }
                 menuItem {
                     attrs.key = "2"
-                    icon {
-                        attrs.type = "desktop"
-                    }
+                    desktopOutlined {}
                     span { +"Option 2" }
                 }
                 menuItem {
                     attrs.key = "3"
-                    icon {
-                        attrs.type = "inbox"
-                    }
+                    inboxOutlined {}
                     span { +"Option 3" }
                 }
                 subMenu {
@@ -71,9 +65,7 @@ class InlineCollapsedApp : RComponent<RProps, InlineCollapsedAppState>() {
                         key = "sub1"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "mail"
-                                }
+                                mailOutlined {}
                                 span { +"Navigation One" }
                             }
                         }
@@ -100,9 +92,7 @@ class InlineCollapsedApp : RComponent<RProps, InlineCollapsedAppState>() {
                         key = "sub2"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "appstore"
-                                }
+                                appstoreOutlined {}
                                 span { +"Navigation Two" }
                             }
                         }
@@ -138,8 +128,8 @@ class InlineCollapsedApp : RComponent<RProps, InlineCollapsedAppState>() {
 fun RBuilder.inlineCollapsedApp() = child(InlineCollapsedApp::class) {}
 
 fun RBuilder.inlineCollapsed() {
-    div("menu-container") {
-        attrs.id = "menu-inline-collapsed"
+    styledDiv {
+        css { +MenuStyles.inlineCollapsed }
         inlineCollapsedApp()
     }
 }

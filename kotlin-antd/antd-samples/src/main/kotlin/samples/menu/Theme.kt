@@ -1,13 +1,13 @@
 package samples.menu
 
-import antd.icon.icon
+import antd.icon.*
 import antd.menu.*
-import antd.switch.switch
-import kotlinext.js.js
-import kotlinx.html.id
-import org.w3c.dom.events.MouseEvent
+import antd.switch.*
+import kotlinext.js.*
+import org.w3c.dom.events.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface ThemeSiderState : RState {
     var theme: MenuTheme
@@ -15,17 +15,17 @@ interface ThemeSiderState : RState {
 }
 
 class ThemeSider : RComponent<RProps, ThemeSiderState>() {
-    private val changeTheme = fun (checked: Boolean, _: MouseEvent) {
+    private val changeTheme = fun(checked: Boolean, _: MouseEvent) {
         setState {
             theme = if (checked) "dark" else "light"
         }
     }
 
-    private val handleClick = fun (param: ClickParam) {
-        console.log("click ", param)
+    private val handleClick: MenuClickEventHandler = { info ->
+        console.log("click ", info)
 
         setState {
-            current = param.key
+            current = info.key
         }
     }
 
@@ -41,7 +41,7 @@ class ThemeSider : RComponent<RProps, ThemeSiderState>() {
                     checked = state.theme == "dark"
                     onChange = changeTheme
                     checkedChildren = "Dark"
-                    unCheckedChildren ="Light"
+                    unCheckedChildren = "Light"
                 }
             }
             br {}
@@ -60,9 +60,7 @@ class ThemeSider : RComponent<RProps, ThemeSiderState>() {
                         key = "sub1"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "mail"
-                                }
+                                mailOutlined {}
                                 span { +"Navigation One" }
                             }
                         }
@@ -89,9 +87,7 @@ class ThemeSider : RComponent<RProps, ThemeSiderState>() {
                         key = "sub2"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "appstore"
-                                }
+                                appstoreOutlined {}
                                 span { +"Navigation Two" }
                             }
                         }
@@ -124,9 +120,7 @@ class ThemeSider : RComponent<RProps, ThemeSiderState>() {
                         key = "sub4"
                         title = buildElement {
                             span {
-                                icon {
-                                    attrs.type = "setting"
-                                }
+                                settingOutlined {}
                                 span { +"Navigation Three" }
                             }
                         }
@@ -156,8 +150,8 @@ class ThemeSider : RComponent<RProps, ThemeSiderState>() {
 fun RBuilder.themeSider() = child(ThemeSider::class) {}
 
 fun RBuilder.theme() {
-    div("menu-container") {
-        attrs.id = "menu-theme"
+    styledDiv {
+        css { +MenuStyles.theme }
         themeSider()
     }
 }

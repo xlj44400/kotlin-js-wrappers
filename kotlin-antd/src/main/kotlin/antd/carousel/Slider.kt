@@ -1,9 +1,7 @@
 package antd.carousel
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.MouseEventHandler
+import react.*
 
 external object SliderComponent : Component<SlideProps, RState> {
     fun slickNext()
@@ -31,9 +29,9 @@ external interface Settings {
     var centerPadding: String?
     var className: String?
     var cssEase: String?
-    var customPaging: ((index: Number) -> Any)?
+    var customPaging: ((index: Number) -> dynamic)?
     var dotsClass: String?
-    var dots: Boolean?
+    var dots: Any? /* Boolean | SettingsDots */
     var draggable: Boolean?
     var easing: String?
     var edgeFriction: Number?
@@ -42,7 +40,7 @@ external interface Settings {
     var infinite: Boolean?
     var initialSlide: Number?
     var lazyLoad: LazyLoadTypes?
-    var nextArrow: Any?
+    var nextArrow: dynamic
     var onEdge: ((swipeDirection: SwipeDirection) -> Unit)?
     var onInit: (() -> Unit)?
     var onLazyLoad: ((slidesToLoad: Array<Number>) -> Unit)?
@@ -51,7 +49,7 @@ external interface Settings {
     var pauseOnDotsHover: Boolean?
     var pauseOnFocus: Boolean?
     var pauseOnHover: Boolean?
-    var prevArrow: Any?
+    var prevArrow: dynamic
     var responsive: Array<ResponsiveObject>?
     var rows: Number?
     var rtl: Boolean?
@@ -63,7 +61,7 @@ external interface Settings {
     var swipeToSlide: Boolean?
     var swipe: Boolean?
     var swipeEvent: ((swipeDirection: SwipeDirection) -> Unit)?
-    var touchMove:Boolean?
+    var touchMove: Boolean?
     var touchThreshold: Number?
     var useCSS: Boolean?
     var useTransform: Boolean?
@@ -71,6 +69,18 @@ external interface Settings {
     var vertical: Boolean?
     var verticalSwiping: Boolean?
     var waitForAnimate: Boolean?
+}
+
+external interface SettingsDots {
+    var className: String?
+}
+
+external interface CustomArrowProps {
+    var className: String?
+    var style: dynamic
+    var onClick: MouseEventHandler<Any>?
+    var currentSlide: Number?
+    var slideCount: Number?
 }
 
 external interface ResponsiveObject {

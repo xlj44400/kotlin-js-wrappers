@@ -1,16 +1,16 @@
 package samples.upload
 
-import antd.icon.icon
-import antd.message.message
-import antd.upload.dragger
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.icon.*
+import antd.message.*
+import antd.upload.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.drag() {
-    div("upload-container") {
-        attrs.id = "upload-drag"
+    styledDiv {
+        css { +UploadStyles.drag }
         dragger {
             attrs {
                 name = "file"
@@ -29,9 +29,7 @@ fun RBuilder.drag() {
             }
             p {
                 attrs.classes = setOf("ant-upload-drag-icon")
-                icon {
-                    attrs.type = "inbox"
-                }
+                inboxOutlined {}
             }
             p {
                 attrs.classes = setOf("ant-upload-text")

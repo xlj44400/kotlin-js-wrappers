@@ -1,12 +1,12 @@
 package samples.skeleton
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import antd.skeleton.skeleton
-import kotlinx.html.id
+import antd.skeleton.*
+import kotlinx.browser.*
 import react.*
 import react.dom.*
-import kotlin.browser.window
+import styled.*
 
 interface ChildrenDemoState : RState {
     var loading: Boolean
@@ -52,8 +52,8 @@ class ChildrenDemo : RComponent<RProps, ChildrenDemoState>() {
 fun RBuilder.childrenDemo() = child(ChildrenDemo::class) {}
 
 fun RBuilder.child() {
-    div("skeleton-container") {
-        attrs.id = "skeleton-children"
+    styledDiv {
+        css { +SkeletonStyles.children }
         childrenDemo()
     }
 }

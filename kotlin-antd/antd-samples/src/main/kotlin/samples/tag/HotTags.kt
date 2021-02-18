@@ -1,12 +1,10 @@
 package samples.tag
 
-import antd.tag.checkableTag
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.tag.*
+import kotlinext.js.*
 import react.*
-import react.dom.div
-import react.dom.h6
-import react.dom.jsStyle
+import react.dom.*
+import styled.*
 
 private val tagsFromServer = arrayOf("Movies", "Books", "Music", "Sports")
 
@@ -15,7 +13,7 @@ interface HotTagsAppState : RState {
 }
 
 class HotTagsApp : RComponent<RProps, HotTagsAppState>() {
-    private val handleChange = fun (tag: String, checked: Boolean) {
+    private val handleChange = fun(tag: String, checked: Boolean) {
         val nextSelectedTags = if (checked) {
             state.selectedTags.plus(tag)
         } else {
@@ -59,8 +57,8 @@ class HotTagsApp : RComponent<RProps, HotTagsAppState>() {
 fun RBuilder.hotTagsApp() = child(HotTagsApp::class) {}
 
 fun RBuilder.hotTags() {
-    div("tag-container") {
-        attrs.id = "tag-hot-tags"
+    styledDiv {
+        css { +TagStyles.hotTags }
         hotTagsApp()
     }
 }

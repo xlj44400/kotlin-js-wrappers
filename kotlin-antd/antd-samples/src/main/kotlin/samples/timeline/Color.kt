@@ -1,15 +1,13 @@
 package samples.timeline
 
-import antd.timeline.timeline
-import antd.timeline.timelineItem
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.timeline.*
+import react.*
+import react.dom.*
+import styled.*
 
 fun RBuilder.color() {
-    div("timeline-container") {
-        attrs.id = "timeline-color"
+    styledDiv {
+        css { +TimelineStyles.color }
         timeline {
             timelineItem {
                 attrs.color = "green"

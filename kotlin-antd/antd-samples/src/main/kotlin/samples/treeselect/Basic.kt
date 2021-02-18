@@ -1,19 +1,17 @@
 package samples.treeselect
 
-import antd.treeselect.TreeSelectComponent
-import antd.treeselect.treeNode
-import antd.treeselect.treeSelect
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.treeselect.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface BasicDemoState : RState {
     var value: String?
 }
 
 class BasicDemo : RComponent<RProps, BasicDemoState>() {
-    private val handleChange = fun (newValue: String, _: Any, _: Any) {
+    private val handleChange = fun(newValue: String, _: Any, _: Any) {
         console.log(newValue)
 
         setState {
@@ -81,7 +79,7 @@ class BasicDemo : RComponent<RProps, BasicDemoState>() {
                                     attrs.jsStyle = js { color = "#08c" }
                                     +"sss"
                                 }
-                            }!!
+                            }
                             key = "random3"
                         }
                     }
@@ -94,8 +92,8 @@ class BasicDemo : RComponent<RProps, BasicDemoState>() {
 fun RBuilder.basicDemo() = child(BasicDemo::class) {}
 
 fun RBuilder.basic() {
-    div("tree-select-container") {
-        attrs.id = "tree-select-basic"
+    styledDiv {
+        css { +TreeSelectStyles.basic }
         basicDemo()
     }
 }

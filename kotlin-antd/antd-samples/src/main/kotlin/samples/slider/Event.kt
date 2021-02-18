@@ -1,22 +1,21 @@
 package samples.slider
 
-import antd.slider.SliderValue
-import antd.slider.slider
-import kotlinx.html.id
+import antd.slider.*
 import react.*
 import react.dom.*
+import styled.*
 
-private fun handleChange(value: SliderValue) {
+private fun handleChange(value: Array<Number>) {
     console.log("onChange: ", value)
 }
 
-private fun handleAfterChange(value: SliderValue) {
+private fun handleAfterChange(value: Array<Number>) {
     console.log("onAfterChange: ", value)
 }
 
 fun RBuilder.event() {
-    div("slider-container") {
-        attrs.id = "slider-event"
+    styledDiv {
+        css { +SliderStyles.event }
         div {
             slider {
                 attrs {

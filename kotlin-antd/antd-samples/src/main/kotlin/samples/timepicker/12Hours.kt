@@ -1,18 +1,18 @@
 package samples.timepicker
 
-import antd.timepicker.timePicker
-import kotlinx.html.id
-import moment.Moment
+import antd.timepicker.*
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(time: Moment, timeString: String) {
     console.log(time, timeString)
 }
 
 fun RBuilder.hours12() {
-    div("time-picker-container") {
-        attrs.id = "time-picker-12-hours"
+    styledDiv {
+        css { +TimePickerStyles.hours12 }
         div {
             timePicker {
                 attrs {

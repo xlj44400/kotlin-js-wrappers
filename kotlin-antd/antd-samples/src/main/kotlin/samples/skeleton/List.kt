@@ -1,19 +1,15 @@
 package samples.skeleton
 
-import antd.avatar.avatar
-import antd.icon.icon
-import antd.list.ListComponent
-import antd.list.list
-import antd.list.listItem
-import antd.list.listItemMeta
-import antd.skeleton.skeleton
-import antd.switch.switch
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import org.w3c.dom.events.MouseEvent
+import antd.avatar.*
+import antd.icon.*
+import antd.list.*
+import antd.skeleton.*
+import antd.switch.*
+import kotlinext.js.*
+import org.w3c.dom.events.*
 import react.*
 import react.dom.*
+import styled.*
 
 private interface ListListDataItem {
     var href: String
@@ -34,32 +30,27 @@ private val listData = (0..2).map { i ->
 }.toTypedArray()
 
 interface ListIconTextProps : RProps {
-    var type: String
+    var icon: ReactElement
     var text: String
 }
 
-class ListIconText : RComponent<ListIconTextProps, RState>() {
-    override fun RBuilder.render() {
-        span {
-            icon {
-                attrs {
-                    type = props.type
-                    style = js { marginRight = 8 }
-                }
-            }
-            +props.text
-        }
+private val iconText = functionalComponent<ListIconTextProps> { props ->
+    props.icon.props.unsafeCast<IconProps>().style = js { marginRight = 8 }
+
+    span {
+        childList += props.icon
+        +" ${props.text}"
     }
 }
 
-fun RBuilder.iconText(handler: RHandler<ListIconTextProps>) = child(ListIconText::class, handler)
+fun RBuilder.iconText(handler: RHandler<ListIconTextProps>) = child(iconText, jsObject {}, handler)
 
 interface ListAppState : RState {
     var loading: Boolean
 }
 
 class ListApp : RComponent<RProps, ListAppState>() {
-    private val handleChange = fun (checked: Boolean, _: MouseEvent) {
+    private val handleChange = fun(checked: Boolean, _: MouseEvent) {
         setState {
             loading = !checked
         }
@@ -88,30 +79,30 @@ class ListApp : RComponent<RProps, ListAppState>() {
                                 key = item.title
                                 actions = if (!state.loading) {
                                     arrayOf(
-                                            buildElement {
-                                                iconText {
-                                                    attrs {
-                                                        type = "star-o"
-                                                        text = "156"
-                                                    }
+                                        buildElement {
+                                            iconText {
+                                                attrs {
+                                                    icon = starOutlined {}
+                                                    text = "156"
                                                 }
-                                            }!!,
-                                            buildElement {
-                                                iconText {
-                                                    attrs {
-                                                        type = "like-o"
-                                                        text = "156"
-                                                    }
+                                            }
+                                        },
+                                        buildElement {
+                                            iconText {
+                                                attrs {
+                                                    icon = likeOutlined {}
+                                                    text = "156"
                                                 }
-                                            }!!,
-                                            buildElement {
-                                                iconText {
-                                                    attrs {
-                                                        type = "message"
-                                                        text = "2"
-                                                    }
+                                            }
+                                        },
+                                        buildElement {
+                                            iconText {
+                                                attrs {
+                                                    icon = messageOutlined {}
+                                                    text = "2"
                                                 }
-                                            }!!
+                                            }
+                                        }
                                     )
                                 } else null
                                 extra = if (!state.loading) {
@@ -161,8 +152,8 @@ class ListApp : RComponent<RProps, ListAppState>() {
 fun RBuilder.listApp() = child(ListApp::class) {}
 
 fun RBuilder.list() {
-    div("skeleton-container") {
-        attrs.id = "skeleton-list"
+    styledDiv {
+        css { +SkeletonStyles.list }
         listApp()
     }
 }

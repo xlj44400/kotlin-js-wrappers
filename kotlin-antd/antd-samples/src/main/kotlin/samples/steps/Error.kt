@@ -1,14 +1,12 @@
 package samples.steps
 
-import antd.steps.step
-import antd.steps.steps
-import kotlinx.html.id
+import antd.steps.*
 import react.*
-import react.dom.*
+import styled.*
 
 fun RBuilder.error() {
-    div("steps-container") {
-        attrs.id = "steps-error"
+    styledDiv {
+        css { +StepsStyles.error }
         steps {
             attrs {
                 current = 1

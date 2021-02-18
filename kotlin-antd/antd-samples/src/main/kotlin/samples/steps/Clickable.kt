@@ -1,11 +1,10 @@
 package samples.steps
 
-import antd.divider.divider
-import antd.steps.step
-import antd.steps.steps
-import kotlinx.html.id
+import antd.divider.*
+import antd.steps.*
 import react.*
-import react.dom.div
+import react.dom.*
+import styled.*
 
 interface ClickableDemoState : RState {
     var current: Number
@@ -83,8 +82,8 @@ class ClickableDemo : RComponent<RProps, ClickableDemoState>() {
 fun RBuilder.clickableDemo() = child(ClickableDemo::class) {}
 
 fun RBuilder.clickable() {
-    div("steps-container") {
-        attrs.id = "steps-clickable"
+    styledDiv {
+        css { +StepsStyles.clickable }
         clickableDemo()
     }
 }

@@ -1,11 +1,11 @@
 package samples.tooltip
 
 import antd.button.button
-import antd.tooltip.tooltip
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.tooltip.*
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val text = buildElement {
     span { +"prompt text" }
@@ -14,8 +14,8 @@ private val text = buildElement {
 private val buttonWidth = 70
 
 fun RBuilder.placement() {
-    div("tooltip-container") {
-        attrs.id = "tooltip-placement"
+    styledDiv {
+        css { +TooltipStyles.placement }
         div("demo") {
             div {
                 attrs.jsStyle = js {

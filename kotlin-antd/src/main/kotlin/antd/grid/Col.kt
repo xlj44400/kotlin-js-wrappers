@@ -1,9 +1,10 @@
 @file:JsModule("antd/lib/grid/col")
+@file:JsNonModule
 
 package antd.grid
 
-import antd.HTMLAttributes
-import org.w3c.dom.HTMLDivElement
+import antd.*
+import org.w3c.dom.*
 import react.*
 
 @JsName("default")
@@ -12,6 +13,7 @@ external object ColComponent : Component<ColProps, RState> {
 }
 
 external interface ColProps : HTMLAttributes<HTMLDivElement>, RProps {
+    var flex: FlexType?
     var span: ColSpanType?
     var order: ColSpanType?
     var offset: ColSpanType?
@@ -27,6 +29,7 @@ external interface ColProps : HTMLAttributes<HTMLDivElement>, RProps {
 }
 
 external interface ColSize {
+    var flex: FlexType?
     var span: ColSpanType?
     var order: ColSpanType?
     var offset: ColSpanType?

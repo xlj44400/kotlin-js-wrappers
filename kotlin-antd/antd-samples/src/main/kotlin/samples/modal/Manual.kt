@@ -1,13 +1,12 @@
 package samples.modal
 
-import antd.MouseEventHandler
-import antd.button.button
-import antd.modal.ModalComponent
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.*
+import antd.button.*
+import antd.modal.*
+import kotlinext.js.*
+import kotlinx.browser.*
 import react.*
-import react.dom.*
-import kotlin.browser.window
+import styled.*
 
 private val countDown: MouseEventHandler<Any> = {
     var secondsToGo = 5
@@ -21,7 +20,7 @@ private val countDown: MouseEventHandler<Any> = {
         secondsToGo -= 1
 
         modal.update(jsObject {
-            content =  "This modal will be destroyed after $secondsToGo second"
+            content = "This modal will be destroyed after $secondsToGo second"
         })
     }, 1000)
 
@@ -29,8 +28,8 @@ private val countDown: MouseEventHandler<Any> = {
 }
 
 fun RBuilder.manual() {
-    div("modal-container") {
-        attrs.id = "modal-manual"
+    styledDiv {
+        css { +ModalStyles.manual }
         button {
             attrs.onClick = countDown
             +"Open modal to close in 5s"

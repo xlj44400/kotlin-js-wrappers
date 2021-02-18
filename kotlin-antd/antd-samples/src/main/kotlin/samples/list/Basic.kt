@@ -1,39 +1,34 @@
 package samples.list
 
-import antd.avatar.avatar
-import antd.list.ListComponent
-import antd.list.list
-import antd.list.listItem
-import antd.list.listItemMeta
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import react.RBuilder
-import react.buildElement
-import react.dom.a
-import react.dom.div
+import antd.avatar.*
+import antd.list.*
+import kotlinext.js.*
+import react.*
+import react.dom.*
+import styled.*
 
 private interface BasicListDataItem {
     var title: String
 }
 
 private val data = arrayOf<BasicListDataItem>(
-        jsObject {
-            title = "Ant Design Title 1"
-        },
-        jsObject {
-            title = "Ant Design Title 2"
-        },
-        jsObject {
-            title = "Ant Design Title 3"
-        },
-        jsObject {
-            title = "Ant Design Title 4"
-        }
+    jsObject {
+        title = "Ant Design Title 1"
+    },
+    jsObject {
+        title = "Ant Design Title 2"
+    },
+    jsObject {
+        title = "Ant Design Title 3"
+    },
+    jsObject {
+        title = "Ant Design Title 4"
+    }
 )
 
 fun RBuilder.basic() {
-    div("list-container") {
-        attrs.id = "list-basic"
+    styledDiv {
+        css { +ListStyles.basic }
         list<BasicListDataItem, ListComponent<BasicListDataItem>> {
             attrs {
                 itemLayout = "horizontal"

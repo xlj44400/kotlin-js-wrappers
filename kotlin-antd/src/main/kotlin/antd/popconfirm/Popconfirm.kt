@@ -1,16 +1,13 @@
 @file:JsModule("antd/lib/popconfirm")
+@file:JsNonModule
 
 package antd.popconfirm
 
-import antd.MouseEvent
-import antd.button.ButtonType
-import antd.button.NativeButtonProps
-import antd.tooltip.AbstractTooltipProps
-import org.w3c.dom.HTMLElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import antd.button.*
+import antd.tooltip.*
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object PopconfirmComponent : Component<PopconfirmProps, PopconfirmState> {
@@ -18,16 +15,17 @@ external object PopconfirmComponent : Component<PopconfirmProps, PopconfirmState
 }
 
 external interface PopconfirmProps : AbstractTooltipProps, RProps {
-    var title: Any /* String | ReactElement */
-    var onConfirm: ((e: MouseEvent<HTMLElement>) -> Unit)?
-    var onCancel: ((e: MouseEvent<HTMLElement>) -> Unit)?
+    var title: Any /* String | ReactElement | RenderFunction */
+    var disabled: Boolean?
+    var onConfirm: ((e: MouseEvent<HTMLElement>?) -> Unit)?
+    var onCancel: ((e: MouseEvent<HTMLElement>?) -> Unit)?
     var okText: Any? /* String | ReactElement */
-    var okType: ButtonType?
+    var okType: LegacyButtonType?
     var cancelText: Any? /* String | ReactElement */
     var okButtonProps: NativeButtonProps?
     var cancelButtonProps: NativeButtonProps?
-    var icon: ReactElement?
-    override var onVisibleChange: dynamic /* PopconfirmVisibleChange */
+    var icon: Any? /* String | ReactElement */
+    override var onVisibleChange: dynamic /* (visible: Boolean, e: Any? /* MouseEvent<HTMLElement> | KeyboardEvent<HTMLDivElement> */) -> Unit */
 }
 
 external interface PopconfirmState : RState {

@@ -1,36 +1,23 @@
 package samples.icon
 
-import antd.icon.icon
-import kotlinx.html.id
+import antd.icon.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.basic() {
-    div("icon-container") {
-        attrs.id = "icon-basic"
-        div("icons-list") {
-            icon {
-                attrs.type = "home"
+    styledDiv {
+        css { +IconStyles.basic }
+        div {
+            attrs.classes = setOf("icons-list")
+            homeOutlined {}
+            settingFilled {}
+            smileOutlined {}
+            syncOutlined {
+                attrs.spin = true
             }
-            icon {
-                attrs {
-                    type = "setting"
-                    theme = "filled"
-                }
-            }
-            icon {
-                attrs {
-                    type = "smile"
-                    theme = "outlined"
-                }
-            }
-            icon {
-                attrs {
-                    type = "sync"
-                    spin = true
-                }
-            }
-            icon {
+            /*icon {
                 attrs {
                     type = "smile"
                     rotate = 180
@@ -38,7 +25,7 @@ fun RBuilder.basic() {
             }
             icon {
                 attrs.type = "loading"
-            }
+            }*/
         }
     }
 }

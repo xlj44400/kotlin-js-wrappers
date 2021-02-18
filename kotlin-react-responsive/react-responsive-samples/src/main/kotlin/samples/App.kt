@@ -1,20 +1,39 @@
 package samples
 
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.RState
-import react.dom.div
-import react.dom.h1
-import samples.sandbox.sandbox
-import samples.static.static
+import kotlinx.css.*
+import react.*
+import react.dom.*
+import samples.sandbox.*
+import samples.static.*
+import styled.*
+
+object AppStyles : StyleSheet("app", isStatic = true) {
+    val header by css {
+        padding(all = 10.px)
+        textAlign = TextAlign.center
+    }
+    val content by css {
+        display = Display.flex
+        flexDirection = FlexDirection.column
+        justifyContent = JustifyContent.center
+        alignItems = Align.center
+        padding(all = 10.px)
+        children("*") {
+            margin(all = 20.px)
+        }
+    }
+}
 
 class App : RComponent<RProps, RState>() {
     override fun RBuilder.render() {
-        div("app-header") {
+        styledDiv {
+            css { +AppStyles.header }
             h1 { +"Examples" }
         }
-        div("app-content") {
+        styledDiv {
+            css { +AppStyles.content }
+            withHooks()
+            withComponents()
             static()
             sandbox()
         }

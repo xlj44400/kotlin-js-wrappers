@@ -1,13 +1,13 @@
 package samples.typography
 
-import antd.typography.text
-import kotlinx.html.id
-import react.RBuilder
+import antd.typography.*
+import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.text() {
-    div("typography-container") {
-        attrs.id = "typography-text"
+    styledDiv {
+        css { +TypographyStyles.text }
         div {
             text { +"Ant Design" }
             br {}

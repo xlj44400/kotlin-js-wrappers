@@ -1,11 +1,9 @@
 @file:JsModule("antd/lib/descriptions")
+@file:JsNonModule
 
 package antd.descriptions
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 @JsName("default")
 external object DescriptionsComponent : Component<DescriptionsProps, RState> {
@@ -19,18 +17,11 @@ external interface DescriptionsProps : RProps {
     var className: String?
     var style: dynamic
     var bordered: Boolean?
-    var size: DescriptionsSize?
-    var children: ReactElement?
-    var title: String?
-    var column: Any? /* Number | ColumnBreakpoint */
-    var layout: DescriptionsLayout?
-}
-
-external interface ColumnBreakpoint {
-    var xxl: Number?
-    var xl: Number?
-    var lg: Number?
-    var md: Number?
-    var sm: Number?
-    var xs: Number?
+    var size: String? /* "middle" | "small" | "default" */
+    var children: Any? /* String | ReactElement */
+    var title: Any? /* String | ReactElement */
+    var extra: Any? /* String | ReactElement */
+    var column: Any? /* Number | ScreenSizeMap */
+    var layout: String? /* "horizontal" | "vertical" */
+    var colon: Boolean?
 }

@@ -1,24 +1,20 @@
 package samples.form
 
-import antd.cascader.cascader
-import antd.datepicker.datePicker
+import antd.cascader.*
+import antd.datepicker.*
 import antd.form.*
 import antd.input.input
-import antd.inputnumber.inputNumber
-import antd.select.SelectComponent
+import antd.inputnumber.*
+import antd.select.*
 import antd.select.option
-import antd.select.select
 import antd.timepicker.timePicker
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinext.js.objectAssign
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
-import react.dom.div
 import react.dom.jsStyle
 import react.dom.span
+import styled.*
 
-private val formItemLayout = jsObject<FormItemProps> {
+private val formItemLayout = jsObject<FormItemProps<Any>> {
     labelCol = jsObject {
         xs = jsObject { span = 24 }
         sm = jsObject { span = 5 }
@@ -30,10 +26,13 @@ private val formItemLayout = jsObject<FormItemProps> {
 }
 
 fun RBuilder.validateStatic() {
-    div("form-container") {
-        attrs.id = "form-validate-static"
+    styledDiv {
+        css { +FormStyles.validateStatic }
         form {
-            objectAssign(attrs, formItemLayout)
+            attrs {
+                labelCol = formItemLayout.labelCol
+                wrapperCol = formItemLayout.wrapperCol
+            }
             formItem {
                 attrs {
                     label = "Fail"

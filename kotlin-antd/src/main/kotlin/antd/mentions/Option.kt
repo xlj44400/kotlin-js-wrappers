@@ -1,24 +1,21 @@
 package antd.mentions
 
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import react.*
 
 external object OptionComponent : Component<OptionProps, RState> {
     override fun render(): ReactElement?
 }
 
 external interface OptionProps : RcOptionProps, RProps {
-    override var value: String
-    override var children: ReactElement
-    /* [key: String]: Any */
+    override var value: String?
+    override var children: Any? /* String | ReactElement */
 }
 
 external interface RcOptionProps {
-    var value: String
+    var value: String?
+    var key: String?
     var disabled: Boolean?
-    var children: ReactElement
+    var children: Any? /* String | ReactElement */
     var className: String?
     var style: dynamic
 }

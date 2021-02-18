@@ -1,13 +1,11 @@
 @file:JsModule("antd/lib/tabs")
+@file:JsNonModule
 
 package antd.tabs
 
-import antd.MouseEventHandler
-import org.w3c.dom.HTMLElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object TabsComponent : Component<TabsProps, RState> {

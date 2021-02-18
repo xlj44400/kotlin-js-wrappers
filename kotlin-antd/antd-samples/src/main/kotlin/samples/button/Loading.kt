@@ -1,10 +1,11 @@
 package samples.button
 
-import antd.MouseEventHandler
+import antd.*
 import antd.button.button
-import kotlinx.html.id
+import antd.icon.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface LoadingAppState : RState {
     var loading: Boolean
@@ -58,7 +59,9 @@ class LoadingApp : RComponent<RProps, LoadingAppState>() {
             button {
                 attrs {
                     type = "primary"
-                    icon = "poweroff"
+                    icon = buildElement {
+                        poweroffOutlined {}
+                    }
                     loading = state.iconLoading
                     onClick = enterIconLoading
                 }
@@ -85,8 +88,8 @@ class LoadingApp : RComponent<RProps, LoadingAppState>() {
 fun RBuilder.loadingApp() = child(LoadingApp::class) {}
 
 fun RBuilder.loading() {
-    div("button-container") {
-        attrs.id = "button-loading"
+    styledDiv {
+        css { +ButtonStyles.loading }
         loadingApp()
     }
 }

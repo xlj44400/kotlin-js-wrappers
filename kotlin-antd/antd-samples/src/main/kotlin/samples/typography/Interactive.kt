@@ -1,12 +1,10 @@
 package samples.typography
 
-import antd.typography.CopyConfig
-import antd.typography.EditConfig
-import antd.typography.paragraph
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.typography.*
+import kotlinext.js.*
 import react.*
-import react.dom.div
+import react.dom.*
+import styled.*
 
 interface InteractiveDemoState : RState {
     var str: String
@@ -46,8 +44,8 @@ class InteractiveDemo : RComponent<RProps, InteractiveDemoState>() {
 fun RBuilder.interactiveDemo() = child(InteractiveDemo::class) {}
 
 fun RBuilder.interactive() {
-    div("typography-container") {
-        attrs.id = "typography-interactive"
+    styledDiv {
+        css { +TypographyStyles.interactive }
         interactiveDemo()
     }
 }

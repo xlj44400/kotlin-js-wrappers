@@ -1,17 +1,17 @@
 package samples.pagination
 
-import antd.pagination.pagination
-import kotlinx.html.id
+import antd.pagination.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleShowSizeChange(current: Number, size: Number) {
     console.log(current, size)
 }
 
 fun RBuilder.changer() {
-    div("pagination-container") {
-        attrs.id = "pagination-changer"
+    styledDiv {
+        css { +PaginationStyles.changer }
         pagination {
             attrs {
                 showSizeChanger = true

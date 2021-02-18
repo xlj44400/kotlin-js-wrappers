@@ -1,15 +1,16 @@
 package samples.avatar
 
-import antd.avatar.avatar
-import antd.badge.badge
-import kotlinext.js.js
-import kotlinx.html.id
+import antd.avatar.*
+import antd.badge.*
+import antd.icon.userOutlined
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.badge() {
-    div("avatar-container") {
-        attrs.id = "avatar-badge"
+    styledDiv {
+        css { +AvatarStyles.badge }
         div {
             span {
                 attrs.jsStyle = js { marginRight = 24 }
@@ -18,7 +19,9 @@ fun RBuilder.badge() {
                     avatar {
                         attrs {
                             shape = "square"
-                            icon = "user"
+                            icon = buildElement {
+                                userOutlined {}
+                            }
                         }
                     }
                 }
@@ -29,7 +32,9 @@ fun RBuilder.badge() {
                     avatar {
                         attrs {
                             shape = "square"
-                            icon = "user"
+                            icon = buildElement {
+                                userOutlined {}
+                            }
                         }
                     }
                 }

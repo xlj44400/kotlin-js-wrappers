@@ -1,15 +1,13 @@
 package samples.popconfirm
 
-import antd.MouseEvent
-import antd.message.message
-import antd.popconfirm.popconfirm
-import antd.switch.switch
-import kotlinx.html.id
-import org.w3c.dom.HTMLElement
+import antd.*
+import antd.message.*
+import antd.popconfirm.*
+import antd.switch.*
+import org.w3c.dom.*
 import react.*
-import react.dom.a
-import react.dom.br
-import react.dom.div
+import react.dom.*
+import styled.*
 
 interface DynamicTriggerAppState : RState {
     var visible: Boolean
@@ -17,13 +15,13 @@ interface DynamicTriggerAppState : RState {
 }
 
 class DynamicTriggerApp : RComponent<RProps, DynamicTriggerAppState>() {
-    private val changeCondition = fun (value: Boolean, _: org.w3c.dom.events.MouseEvent) {
+    private val changeCondition = fun(value: Boolean, _: org.w3c.dom.events.MouseEvent) {
         setState {
             condition = value
         }
     }
 
-    private val confirm = fun (_: MouseEvent<HTMLElement>) {
+    private val confirm = fun(_: MouseEvent<HTMLElement>?) {
         setState {
             visible = false
         }
@@ -31,7 +29,7 @@ class DynamicTriggerApp : RComponent<RProps, DynamicTriggerAppState>() {
         message.success("Next step.")
     }
 
-    private val cancel = fun (_: MouseEvent<HTMLElement>) {
+    private val cancel = fun(_: MouseEvent<HTMLElement>?) {
         setState {
             visible = false
         }
@@ -39,7 +37,7 @@ class DynamicTriggerApp : RComponent<RProps, DynamicTriggerAppState>() {
         message.success("Click on cancel.")
     }
 
-    private val handleVisibleChange = fun (newVisible: Boolean, e: MouseEvent<HTMLElement>?) {
+    private val handleVisibleChange = fun(newVisible: Boolean, e: MouseEvent<HTMLElement>?) {
         if (!newVisible) {
             setState {
                 visible = newVisible
@@ -98,8 +96,8 @@ class DynamicTriggerApp : RComponent<RProps, DynamicTriggerAppState>() {
 fun RBuilder.dynamicTriggerApp() = child(DynamicTriggerApp::class) {}
 
 fun RBuilder.dynamicTrigger() {
-    div("popconfirm-container") {
-        attrs.id = "popconfirm-dynamic-trigger"
+    styledDiv {
+        css { +PopconfirmStyles.dynamicTrigger }
         dynamicTriggerApp()
     }
 }

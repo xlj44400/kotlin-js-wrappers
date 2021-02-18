@@ -1,10 +1,10 @@
 package samples.popover
 
 import antd.button.button
-import antd.popover.popover
-import kotlinx.html.id
+import antd.popover.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val text = buildElement {
     span { +"Title" }
@@ -18,8 +18,8 @@ private val contentElement = buildElement {
 }
 
 fun RBuilder.arrowPointAtCenter() {
-    div("popover-container") {
-        attrs.id = "popover-arrow-point-at-center"
+    styledDiv {
+        css { +PopoverStyles.arrowPointAtCenter }
         div {
             popover {
                 attrs {

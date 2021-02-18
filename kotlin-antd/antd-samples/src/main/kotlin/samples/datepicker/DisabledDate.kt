@@ -1,18 +1,17 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import antd.timepicker.TimePickerProps
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import kotlinext.js.*
 import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun range(start: Number, end: Number): Array<Number> {
     return (start.toInt()..end.toInt()).toList().toTypedArray()
 }
 
-private fun hndleDisabledDate(current: Moment?): Boolean {
+private fun handleDisabledDate(current: Moment?): Boolean {
     if (current == null) {
         return false
     }
@@ -20,40 +19,40 @@ private fun hndleDisabledDate(current: Moment?): Boolean {
     return current.asDynamic() < moment().endOf("day").asDynamic()
 }
 
-private fun handleDisabledDateTime(current: Moment): DatePickerDisabledTime {
+private fun handleDisabledDateTime(current: Moment): DisabledTimes {
     return jsObject {
         disabledHours = { range(0, 24).sliceArray(4..24) }
         disabledMinutes = { range(30, 60) }
-        disabledSeconds = { arrayOf(55, 56) }
+        disabledSeconds = { _, _ -> arrayOf(55, 56) }
     }
 }
 
-private fun handleDisabledRangeTime(current: Moment?, type: String): DatePickerDisabledTime {
+private fun handleDisabledRangeTime(current: Moment?, type: String): DisabledTimes {
     if (type == "start") {
         return jsObject {
             disabledHours = { range(0, 60).sliceArray(4..24) }
             disabledMinutes = { range(30, 60) }
-            disabledSeconds = { arrayOf(55, 56) }
+            disabledSeconds = { _, _ -> arrayOf(55, 56) }
         }
     }
 
     return jsObject {
         disabledHours = { range(0, 60).sliceArray(20..24) }
         disabledMinutes = { range(0, 30) }
-        disabledSeconds = { arrayOf(55, 56) }
+        disabledSeconds = { _, _ -> arrayOf(55, 56) }
     }
 }
 
 fun RBuilder.disabledDate() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-disabled-date"
+    styledDiv {
+        css { +DatePickerStyles.disabledDate }
         div {
             datePicker {
                 attrs {
                     format = "YYYY-MM-DD HH:mm:ss"
-                    disabledDate = ::hndleDisabledDate
+                    disabledDate = ::handleDisabledDate
                     disabledTime = ::handleDisabledDateTime
-                    showTime = jsObject<TimePickerProps> {
+                    showTime = jsObject<SharedTimeProps<Moment>> {
                         defaultValue = moment("00:00:00", "HH:mm:ss")
                     }
                 }
@@ -61,20 +60,20 @@ fun RBuilder.disabledDate() {
             br {}
             monthPicker {
                 attrs {
-                    disabledDate = ::hndleDisabledDate
+                    disabledDate = ::handleDisabledDate
                     placeholder = "Select month"
                 }
             }
             br {}
             rangePicker {
                 attrs {
-                    disabledDate = ::hndleDisabledDate
+                    disabledDate = ::handleDisabledDate
                     disabledTime = ::handleDisabledRangeTime
-                    showTime = jsObject<TimePickerProps> {
+                    showTime = jsObject<RangeShowTimeObject<Moment>> {
                         hideDisabledOptions = true
                         defaultValue = arrayOf(
-                                moment("00:00:00", "HH:mm:ss"),
-                                moment("11:59:59", "HH:mm:ss")
+                            moment("00:00:00", "HH:mm:ss"),
+                            moment("11:59:59", "HH:mm:ss")
                         )
                     }
                     format = "YYYY-MM-DD HH:mm:ss"

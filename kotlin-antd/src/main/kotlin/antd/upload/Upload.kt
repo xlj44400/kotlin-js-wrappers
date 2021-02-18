@@ -1,12 +1,10 @@
 @file:JsModule("antd/lib/upload")
+@file:JsNonModule
 
 package antd.upload
 
-import org.w3c.files.File
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import org.w3c.files.*
+import react.*
 import kotlin.js.Date
 import kotlin.js.Promise
 

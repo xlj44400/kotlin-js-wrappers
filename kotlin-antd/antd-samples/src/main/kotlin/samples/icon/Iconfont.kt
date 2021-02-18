@@ -1,22 +1,23 @@
 package samples.icon
 
-import antd.icon.IconComponent
-import antd.icon.IconProps
-import kotlinext.js.jsObject
-import kotlinx.html.id
+import antd.icon.*
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
-private val iconFontComponent = IconComponent.createFromIconfontCN(jsObject {
+private val iconFontComponent = createFromIconfontCN(jsObject {
     scriptUrl = "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js"
 })
 
-fun RBuilder.iconFont(handler: RHandler<IconProps>) = child(iconFontComponent, jsObject {}, handler)
+private fun RBuilder.iconFont(handler: RHandler<IconFontProps>) = child(iconFontComponent, jsObject {}, handler)
 
 fun RBuilder.iconfont() {
-    div("icon-container") {
-        attrs.id = "icon-iconfont"
-        div("icons-list") {
+    styledDiv {
+        css { +IconStyles.iconfont }
+        div {
+            attrs.classes = setOf("icons-list")
             iconFont {
                 attrs.type = "icon-tuichu"
             }

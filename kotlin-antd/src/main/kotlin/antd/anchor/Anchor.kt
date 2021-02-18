@@ -1,13 +1,11 @@
 @file:JsModule("antd/lib/anchor")
+@file:JsNonModule
 
 package antd.anchor
 
-import antd.MouseEvent
-import org.w3c.dom.HTMLElement
-import react.Component
-import react.RProps
-import react.RState
-import react.ReactElement
+import antd.*
+import org.w3c.dom.*
+import react.*
 
 @JsName("default")
 external object AnchorComponent : Component<AnchorProps, AnchorState> {
@@ -26,7 +24,10 @@ external interface AnchorProps : RProps {
     var affix: Boolean?
     var showInkInFixed: Boolean?
     var getContainer: (() -> AnchorContainer)?
+    var getCurrentAnchor: (() -> String)?
     var onClick: ((e: MouseEvent<HTMLElement>, link: AnchorLink) -> Unit)?
+    var targetOffset: Number?
+    var onChange: ((currentActiveLink: String) -> Unit)?
 }
 
 external interface AnchorState : RState {
@@ -39,6 +40,13 @@ external interface AntAnchor {
     var activeLink: String?
     var scrollTo: (link: String) -> Unit
     var onClick: ((e: MouseEvent<HTMLElement>, link: AnchorLink) -> Unit)?
+}
+
+external interface AnchorDefaultProps : AnchorProps {
+    override var prefixCls: String?
+    override var affix: Boolean?
+    override var showInkInFixed: Boolean?
+    override var getContainer: (() -> AnchorContainer)?
 }
 
 external interface AnchorLink {

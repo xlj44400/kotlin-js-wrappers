@@ -1,29 +1,28 @@
 package samples.datepicker
 
 import antd.datepicker.*
-import antd.timepicker.TimePickerProps
-import kotlinext.js.jsObject
-import kotlinx.html.id
-import moment.Moment
+import kotlinext.js.*
+import moment.*
 import react.*
 import react.dom.*
+import styled.*
 
 private fun handleChange(date: Moment, dateString: String) {
     console.log("Selected Time: ", date)
     console.log("Formatted Selected Time: ", dateString)
 }
 
-private fun handleRangeChange(dates: RangePickerValue, dateStrings: Array<String>) {
+private fun handleRangeChange(dates: RangeValue<Moment>, dateStrings: Array<String>) {
     console.log(dates, dateStrings)
 }
 
-private fun handleOk(selectedTime: RangePickerPresetRange) {
+private fun handleOk(selectedTime: RangeValue<Moment>) {
     console.log("onOk: ", selectedTime)
 }
 
 fun RBuilder.time() {
-    div("date-picker-container") {
-        attrs.id = "date-picker-time"
+    styledDiv {
+        css { +DatePickerStyles.time }
         div {
             datePicker {
                 attrs {
@@ -36,7 +35,7 @@ fun RBuilder.time() {
             br {}
             rangePicker {
                 attrs {
-                    showTime = jsObject<TimePickerProps> {
+                    showTime = jsObject<RangeShowTimeObject<Moment>> {
                         defaultValue = "HH:mm"
                     }
                     format = "YYYY-MM-DD HH:mm"

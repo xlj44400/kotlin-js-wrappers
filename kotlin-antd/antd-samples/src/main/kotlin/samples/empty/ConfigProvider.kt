@@ -1,40 +1,31 @@
 package samples.empty
 
-import antd.cascader.cascader
-import antd.configprovider.RenderEmptyHandler
-import antd.configprovider.configProvider
-import antd.divider.divider
-import antd.icon.icon
-import antd.list.ListComponent
-import antd.list.list
-import antd.select.SelectComponent
-import antd.select.select
-import antd.switch.switch
-import antd.table.TableComponent
-import antd.table.table
-import antd.transfer.transfer
-import antd.treeselect.TreeSelectComponent
-import antd.treeselect.treeSelect
-import kotlinext.js.js
-import kotlinext.js.jsObject
-import kotlinx.html.classes
-import kotlinx.html.id
+import antd.cascader.*
+import antd.configprovider.*
+import antd.divider.*
+import antd.icon.*
+import antd.list.*
+import antd.select.*
+import antd.switch.*
+import antd.table.*
+import antd.transfer.*
+import antd.treeselect.*
+import kotlinext.js.*
+import kotlinx.html.*
 import react.*
 import react.dom.*
+import styled.*
 
 private val customizeRenderEmpty: RenderEmptyHandler = {
     buildElement {
         div {
             attrs.jsStyle = js { textAlign = "center" }
-            icon {
-                attrs {
-                    type = "smile"
-                    style = js { fontSize = 20 }
-                }
+            smileOutlined {
+                attrs.style = js { fontSize = 20 }
             }
             p { +"Data Not Found" }
         }
-    }!!
+    }
 }
 
 private val customStyle = js { width = 200 }
@@ -55,7 +46,7 @@ class ConfigProviderDemo : RComponent<RProps, ConfigProviderDemoState>() {
                     unCheckedChildren = "default"
                     checkedChildren = "customize"
                     checked = state.customize
-                    onChange = {  checked, _ ->
+                    onChange = { checked, _ ->
                         setState {
                             customize = checked
                         }
@@ -93,16 +84,16 @@ class ConfigProviderDemo : RComponent<RProps, ConfigProviderDemoState>() {
                         attrs {
                             style = js { marginTop = 8 }
                             columns = arrayOf(
-                                    jsObject {
-                                        title = "Name"
-                                        dataIndex = "name"
-                                        key = "name"
-                                    },
-                                    jsObject {
-                                        title = "Age"
-                                        dataIndex = "age"
-                                        key = "age"
-                                    }
+                                jsObject {
+                                    title = "Name"
+                                    dataIndex = "name"
+                                    key = "name"
+                                },
+                                jsObject {
+                                    title = "Age"
+                                    dataIndex = "age"
+                                    key = "age"
+                                }
                             )
                         }
                     }
@@ -117,8 +108,8 @@ class ConfigProviderDemo : RComponent<RProps, ConfigProviderDemoState>() {
 fun RBuilder.configProviderDemo() = child(ConfigProviderDemo::class) {}
 
 fun RBuilder.configProvider() {
-    div("empty-container") {
-        attrs.id = "empty-config-provider"
+    styledDiv {
+        css { +EmptyStyles.configProvider }
         configProviderDemo()
     }
 }

@@ -1,14 +1,14 @@
 package samples.switch
 
-import antd.icon.icon
-import antd.switch.switch
-import kotlinx.html.id
+import antd.icon.*
+import antd.switch.*
 import react.*
 import react.dom.*
+import styled.*
 
 fun RBuilder.text() {
-    div("switch-container") {
-        attrs.id = "switch-text"
+    styledDiv {
+        css { +SwitchStyles.text }
         div {
             switch {
                 attrs {
@@ -27,12 +27,8 @@ fun RBuilder.text() {
             br {}
             switch {
                 attrs {
-                    checkedChildren = icon {
-                        attrs.type = "check"
-                    }
-                    unCheckedChildren = icon {
-                        attrs.type = "cross"
-                    }
+                    checkedChildren = checkOutlined {}
+                    unCheckedChildren = closeOutlined {}
                     defaultChecked = true
                 }
             }

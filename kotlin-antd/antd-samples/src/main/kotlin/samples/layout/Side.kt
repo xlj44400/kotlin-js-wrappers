@@ -1,26 +1,22 @@
 package samples.layout
 
-import antd.breadcrumb.breadcrumb
-import antd.breadcrumb.breadcrumbItem
-import antd.icon.icon
-import antd.layout.SiderCollapseType
-import antd.layout.layout
-import antd.layout.header
-import antd.layout.content
+import antd.breadcrumb.*
+import antd.icon.*
+import antd.layout.*
 import antd.layout.footer
-import antd.layout.sider
+import antd.layout.header
 import antd.menu.*
-import kotlinext.js.js
-import kotlinx.html.id
+import kotlinext.js.*
 import react.*
 import react.dom.*
+import styled.*
 
 interface SiderDemoState : RState {
     var collapsed: Boolean
 }
 
 class SiderDemo : RComponent<RProps, SiderDemoState>() {
-    private val handleCollapse = fun (collapsedFlag: Boolean, _: SiderCollapseType) {
+    private val handleCollapse = fun(collapsedFlag: Boolean, _: CollapseType) {
         console.log(collapsedFlag)
 
         setState {
@@ -50,16 +46,12 @@ class SiderDemo : RComponent<RProps, SiderDemoState>() {
                     }
                     menuItem {
                         attrs.key = "1"
-                        icon {
-                            attrs.type = "pie-chart"
-                        }
+                        pieChartOutlined {}
                         span { +"Option 1" }
                     }
                     menuItem {
                         attrs.key = "2"
-                        icon {
-                            attrs.type = "desktop"
-                        }
+                        desktopOutlined {}
                         span { +"Option 2" }
                     }
                     subMenu {
@@ -67,9 +59,7 @@ class SiderDemo : RComponent<RProps, SiderDemoState>() {
                             key = "sub1"
                             title = buildElement {
                                 span {
-                                    icon {
-                                        attrs.type = "user"
-                                    }
+                                    userOutlined {}
                                     span { +"User" }
                                 }
                             }
@@ -92,9 +82,7 @@ class SiderDemo : RComponent<RProps, SiderDemoState>() {
                             key = "sub2"
                             title = buildElement {
                                 span {
-                                    icon {
-                                        attrs.type = "team"
-                                    }
+                                    teamOutlined {}
                                     span { +"Team" }
                                 }
                             }
@@ -110,9 +98,7 @@ class SiderDemo : RComponent<RProps, SiderDemoState>() {
                     }
                     menuItem {
                         attrs.key = "9"
-                        icon {
-                            attrs.type = "file"
-                        }
+                        fileOutlined {}
                         span { +"File" }
                     }
                 }
@@ -152,8 +138,8 @@ class SiderDemo : RComponent<RProps, SiderDemoState>() {
 fun RBuilder.siderDemo() = child(SiderDemo::class) {}
 
 fun RBuilder.side() {
-    div("layout-container") {
-        attrs.id = "layout-side"
+    styledDiv {
+        css { +LayoutStyles.side }
         siderDemo()
     }
 }

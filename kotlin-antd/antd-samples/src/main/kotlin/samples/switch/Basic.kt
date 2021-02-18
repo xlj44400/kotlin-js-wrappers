@@ -1,18 +1,17 @@
 package samples.switch
 
-import antd.switch.switch
-import kotlinx.html.id
-import org.w3c.dom.events.MouseEvent
+import antd.switch.*
+import org.w3c.dom.events.*
 import react.*
-import react.dom.*
+import styled.*
 
 private fun handleChange(checked: Boolean, event: MouseEvent) {
     console.log("switch to $checked")
 }
 
 fun RBuilder.basic() {
-    div("switch-container") {
-        attrs.id = "switch-basic"
+    styledDiv {
+        css { +SwitchStyles.basic }
         switch {
             attrs {
                 defaultChecked = true

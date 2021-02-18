@@ -1,11 +1,9 @@
 package samples.collapse
 
-import antd.collapse.collapse
-import antd.collapse.collapsePanel
-import kotlinx.html.id
-import react.RBuilder
-import react.dom.div
-import react.dom.p
+import antd.collapse.*
+import react.*
+import react.dom.*
+import styled.*
 
 private val text = """
     A dog is a type of domesticated animal. 
@@ -14,8 +12,8 @@ private val text = """
 """.trimIndent()
 
 fun RBuilder.accordion() {
-    div("collapse-container") {
-        attrs.id = "collapse-accordion"
+    styledDiv {
+        css { +CollapseStyles.accordion }
         collapse {
             attrs.accordion = true
             collapsePanel {
